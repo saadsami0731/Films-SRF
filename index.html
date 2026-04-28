@@ -26,7 +26,6 @@
     padding: 2.5rem 2.5rem 2rem;
   }
 
-  /* ── Header ── */
   .header {
     border-bottom: 1.5px solid #e0e0e0;
     padding-bottom: 1.25rem;
@@ -39,13 +38,8 @@
     text-transform: uppercase;
     color: #1a1a1a;
   }
-  .header p {
-    font-size: 12px;
-    color: #888;
-    margin-top: 3px;
-  }
+  .header p { font-size: 12px; color: #888; margin-top: 3px; }
 
-  /* ── Meta fields ── */
   .meta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -55,190 +49,129 @@
   .field-group { display: flex; flex-direction: column; gap: 5px; }
   .field-group .label-row { display: flex; align-items: center; gap: 6px; }
   .field-group label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
+    font-size: 11px; font-weight: 600; color: #666;
+    text-transform: uppercase; letter-spacing: 0.07em;
   }
-  .optional {
-    font-size: 10px;
-    font-weight: 400;
-    color: #aaa;
-    text-transform: none;
-    letter-spacing: 0;
-  }
+  .optional { font-size: 10px; font-weight: 400; color: #aaa; text-transform: none; letter-spacing: 0; }
   .field-group input {
-    font-size: 13px;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fff;
-    color: #1a1a1a;
-    width: 100%;
-    transition: border-color 0.15s;
+    font-size: 13px; padding: 8px 10px; border: 1px solid #ddd;
+    border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s;
   }
-  .field-group input:focus {
-    outline: none;
-    border-color: #555;
-  }
+  .field-group input:focus { outline: none; border-color: #555; }
 
-  /* ── Table ── */
+  /* Desktop table */
   .items-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.25rem;
-    font-size: 13px;
-    table-layout: fixed;
+    width: 100%; border-collapse: collapse; margin-bottom: 1.25rem;
+    font-size: 13px; table-layout: fixed;
   }
-  .items-table colgroup col:nth-child(1) { width: 36px; }
+  .items-table colgroup col:nth-child(1) { width: 32px; }
   .items-table colgroup col:nth-child(2) { width: auto; }
-  .items-table colgroup col:nth-child(3) { width: 110px; }
-  .items-table colgroup col:nth-child(4) { width: 130px; }
-  .items-table colgroup col:nth-child(5) { width: 120px; }
-
+  .items-table colgroup col:nth-child(3) { width: 100px; }
+  .items-table colgroup col:nth-child(4) { width: 120px; }
+  .items-table colgroup col:nth-child(5) { width: 110px; }
   .items-table th {
-    font-size: 10px;
-    font-weight: 600;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 8px 10px;
-    border-bottom: 1.5px solid #e0e0e0;
-    text-align: right;
+    font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase;
+    letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0;
+    text-align: right; white-space: nowrap;
   }
   .items-table th.left { text-align: left; }
   .items-table td {
-    padding: 9px 10px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #1a1a1a;
-    vertical-align: middle;
-    text-align: right;
+    padding: 9px 10px; border-bottom: 1px solid #f0f0f0;
+    color: #1a1a1a; vertical-align: middle; text-align: right;
   }
   .items-table td.left { text-align: left; }
   .item-num { font-size: 11px; color: #aaa; font-weight: 600; }
-  .film-label { font-size: 13px; font-weight: 500; color: #1a1a1a; }
-
+  .film-label { font-size: 13px; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
   .items-table input[type=number] {
-    font-size: 13px;
-    padding: 6px 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fafafa;
-    color: #1a1a1a;
-    text-align: right;
-    width: 100%;
-    transition: border-color 0.15s, background 0.15s;
+    font-size: 13px; padding: 6px 8px; border: 1px solid #ddd; border-radius: 6px;
+    background: #fafafa; color: #1a1a1a; text-align: right; width: 100%;
   }
-  .items-table input[type=number]:focus {
-    outline: none;
-    border-color: #555;
-    background: #fff;
-  }
-  /* hide number spinners */
+  .items-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
+
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   input[type=number] { -moz-appearance: textfield; }
 
-  /* ── Value of sale ── */
+  /* Mobile cards */
+  .mobile-items { display: none; }
+  .item-card {
+    border: 1px solid #e8e8e8; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 10px; background: #fff;
+  }
+  .item-card-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;
+  }
+  .item-card-num { font-size: 11px; color: #aaa; font-weight: 600; min-width: 16px; }
+  .item-card-film { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+  .item-card-fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .item-card-field label {
+    font-size: 10px; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px;
+  }
+  .item-card-field input[type=number] {
+    font-size: 14px; padding: 7px 8px; border: 1px solid #ddd;
+    border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%;
+  }
+  .item-card-field input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
+  .item-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
+
   .value-row {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 14px;
-    padding: 0.9rem 0;
-    border-top: 1.5px solid #e0e0e0;
-    margin-bottom: 1.5rem;
+    display: flex; justify-content: flex-end; align-items: center;
+    gap: 14px; padding: 0.9rem 0; border-top: 1.5px solid #e0e0e0; margin-bottom: 1.5rem;
   }
-  .value-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-  }
-  .value-amount {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
+  .value-label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
+  .value-amount { font-size: 18px; font-weight: 600; color: #1a1a1a; }
 
-  /* ── Signature ── */
-  .sig-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 2rem;
-  }
-  .sig-box {
-    border-bottom: 1.5px solid #bbb;
-    width: 240px;
-    padding-bottom: 5px;
-  }
-  .sig-box span {
-    font-size: 10px;
-    color: #aaa;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    font-weight: 600;
-  }
+  .sig-row { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
+  .sig-box { border-bottom: 1.5px solid #bbb; width: 240px; padding-bottom: 5px; }
+  .sig-box span { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
 
-  /* ── Buttons ── */
-  .btn-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
+  .btn-row { display: flex; justify-content: flex-end; gap: 10px; }
   .btn-clear {
-    font-size: 13px;
-    padding: 9px 20px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    background: transparent;
-    color: #666;
-    cursor: pointer;
-    transition: background 0.15s;
+    font-size: 13px; padding: 9px 20px; border: 1px solid #ccc; border-radius: 7px;
+    background: transparent; color: #666; cursor: pointer; transition: background 0.15s;
   }
   .btn-clear:hover { background: #f4f4f4; }
   .btn-print {
-    font-size: 13px;
-    padding: 9px 22px;
-    border: 1px solid #1a1a1a;
-    border-radius: 7px;
-    background: #1a1a1a;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 600;
-    transition: opacity 0.15s;
+    font-size: 13px; padding: 9px 22px; border: 1px solid #1a1a1a; border-radius: 7px;
+    background: #1a1a1a; color: #fff; cursor: pointer; font-weight: 600; transition: opacity 0.15s;
   }
   .btn-print:hover { opacity: 0.82; }
 
-  /* ── Print styles ── */
+  /* Mobile breakpoint */
+  @media (max-width: 540px) {
+    body { padding: 1rem 0.5rem; }
+    .page { padding: 1.25rem 1rem 1rem; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .desktop-table { display: none; }
+    .mobile-items { display: block; }
+    .sig-box { width: 100%; }
+    .btn-row { flex-direction: column; }
+    .btn-clear, .btn-print { width: 100%; text-align: center; }
+  }
+
+  /* Print */
   @media print {
-    body {
-      background: #fff;
-      padding: 0;
-    }
-    .page {
-      box-shadow: none;
-      border-radius: 0;
-      width: 100%;
-      padding: 1.5rem 2rem;
-    }
+    @page { size: A4; margin: 12mm 14mm; }
+    html, body { height: auto; min-height: unset; background: #fff; padding: 0; margin: 0; display: block; }
+    .page { box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; padding: 0; page-break-after: avoid; page-break-inside: avoid; }
     .btn-row { display: none; }
-    .items-table input[type=number],
-    .field-group input {
-      border: none;
-      border-bottom: 1px solid #ccc;
-      border-radius: 0;
-      background: transparent;
-      padding: 4px 2px;
+    .header p { display: none; }
+    .mobile-items { display: none !important; }
+    .desktop-table { display: table !important; }
+    .items-table input[type=number], .field-group input {
+      border: none; border-bottom: 1px solid #ccc; border-radius: 0; background: transparent; padding: 4px 2px;
     }
     .sig-box { width: 260px; }
+    .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
+    .value-row { padding: 0.5rem 0; margin-bottom: 0.8rem; }
+    .sig-row { margin-bottom: 1rem; }
+    .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; }
   }
 </style>
 </head>
 <body>
-
 <div class="page">
 
   <div class="header">
@@ -264,14 +197,13 @@
         <label>Invoice reference</label>
         <span class="optional">(Optional)</span>
       </div>
-      <input type="text" id="invoice" placeholder="e.g. INV-2026-001" />
+      <input type="text" id="invoice" />
     </div>
   </div>
 
-  <table class="items-table">
-    <colgroup>
-      <col /><col /><col /><col /><col />
-    </colgroup>
+  <!-- Desktop table -->
+  <table class="items-table desktop-table">
+    <colgroup><col /><col /><col /><col /><col /></colgroup>
     <thead>
       <tr>
         <th class="left">#</th>
@@ -281,8 +213,11 @@
         <th>Total ($)</th>
       </tr>
     </thead>
-    <tbody id="items-body"></tbody>
+    <tbody id="items-body-desktop"></tbody>
   </table>
+
+  <!-- Mobile cards -->
+  <div class="mobile-items" id="items-body-mobile"></div>
 
   <div class="value-row">
     <span class="value-label">Value of sale</span>
@@ -290,9 +225,7 @@
   </div>
 
   <div class="sig-row">
-    <div class="sig-box">
-      <span>Salesman signature</span>
-    </div>
+    <div class="sig-box"><span>Salesman signature</span></div>
   </div>
 
   <div class="btn-row">
@@ -301,7 +234,6 @@
   </div>
 
 </div>
-
 <script>
   const ITEMS = [
     { id: 1, film: 'DT5B 14 X 17' },
@@ -311,20 +243,45 @@
   ];
 
   function buildTable() {
-    const tb = document.getElementById('items-body');
+    const tb = document.getElementById('items-body-desktop');
     ITEMS.forEach(item => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td class="left"><span class="item-num">${item.id}</span></td>
         <td class="left"><span class="film-label">${item.film}</span></td>
         <td><input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalc()" /></td>
-        <td><input type="number" id="up-${item.id}"  min="0" step="0.01" placeholder="0.00" oninput="recalc()" /></td>
+        <td><input type="number" id="up-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalc()" /></td>
         <td id="tot-${item.id}" style="font-weight:600">—</td>`;
       tb.appendChild(tr);
     });
-    // default today
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('date').value = today;
+
+    const mb = document.getElementById('items-body-mobile');
+    ITEMS.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML = `
+        <div class="item-card-header">
+          <span class="item-card-num">${item.id}</span>
+          <span class="item-card-film">${item.film}</span>
+        </div>
+        <div class="item-card-fields">
+          <div class="item-card-field">
+            <label>Quantity</label>
+            <input type="number" id="mqty-${item.id}" min="0" placeholder="0" oninput="recalcMobile()" />
+          </div>
+          <div class="item-card-field">
+            <label>Unit price ($)</label>
+            <input type="number" id="mup-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalcMobile()" />
+          </div>
+          <div class="item-card-field">
+            <label>Total ($)</label>
+            <div class="item-card-total" id="mtot-${item.id}">—</div>
+          </div>
+        </div>`;
+      mb.appendChild(card);
+    });
+
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
   }
 
   function recalc() {
@@ -333,8 +290,19 @@
       const qty = parseFloat(document.getElementById('qty-' + item.id).value) || 0;
       const up  = parseFloat(document.getElementById('up-'  + item.id).value) || 0;
       const tot = qty * up;
-      const el  = document.getElementById('tot-' + item.id);
-      el.textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
+      document.getElementById('tot-' + item.id).textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
+      grand += tot;
+    });
+    document.getElementById('grand-total').textContent = '$' + grand.toFixed(2);
+  }
+
+  function recalcMobile() {
+    let grand = 0;
+    ITEMS.forEach(item => {
+      const qty = parseFloat(document.getElementById('mqty-' + item.id).value) || 0;
+      const up  = parseFloat(document.getElementById('mup-'  + item.id).value) || 0;
+      const tot = qty * up;
+      document.getElementById('mtot-' + item.id).textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
       grand += tot;
     });
     document.getElementById('grand-total').textContent = '$' + grand.toFixed(2);
@@ -344,9 +312,12 @@
     ['customer', 'province', 'invoice'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
     ITEMS.forEach(item => {
-      document.getElementById('qty-' + item.id).value = '';
-      document.getElementById('up-'  + item.id).value = '';
-      document.getElementById('tot-' + item.id).textContent = '—';
+      document.getElementById('qty-'  + item.id).value = '';
+      document.getElementById('up-'   + item.id).value = '';
+      document.getElementById('tot-'  + item.id).textContent = '—';
+      document.getElementById('mqty-' + item.id).value = '';
+      document.getElementById('mup-'  + item.id).value = '';
+      document.getElementById('mtot-' + item.id).textContent = '—';
     });
     document.getElementById('grand-total').textContent = '$0.00';
   }
