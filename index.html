@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stock Release Form</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    background: #fff;
+    width: 720px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    padding: 2.5rem 2.5rem 2rem;
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 1.5px solid #e0e0e0;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+  .header p {
+    font-size: 12px;
+    color: #888;
+    margin-top: 3px;
+  }
+
+  /* ── Meta fields ── */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 1.5rem;
+  }
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+  .field-group .label-row { display: flex; align-items: center; gap: 6px; }
+  .field-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .optional {
+    font-size: 10px;
+    font-weight: 400;
+    color: #aaa;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .field-group input {
+    font-size: 13px;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+  .field-group input:focus {
+    outline: none;
+    border-color: #555;
+  }
+
+  /* ── Table ── */
+  .items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+  .items-table colgroup col:nth-child(1) { width: 36px; }
+  .items-table colgroup col:nth-child(2) { width: auto; }
+  .items-table colgroup col:nth-child(3) { width: 110px; }
+  .items-table colgroup col:nth-child(4) { width: 130px; }
+  .items-table colgroup col:nth-child(5) { width: 120px; }
+
+  .items-table th {
+    font-size: 10px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 8px 10px;
+    border-bottom: 1.5px solid #e0e0e0;
+    text-align: right;
+  }
+  .items-table th.left { text-align: left; }
+  .items-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #1a1a1a;
+    vertical-align: middle;
+    text-align: right;
+  }
+  .items-table td.left { text-align: left; }
+  .item-num { font-size: 11px; color: #aaa; font-weight: 600; }
+  .film-label { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+
+  .items-table input[type=number] {
+    font-size: 13px;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+    color: #1a1a1a;
+    text-align: right;
+    width: 100%;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .items-table input[type=number]:focus {
+    outline: none;
+    border-color: #555;
+    background: #fff;
+  }
+  /* hide number spinners */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+
+  /* ── Value of sale ── */
+  .value-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    padding: 0.9rem 0;
+    border-top: 1.5px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+  }
+  .value-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .value-amount {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  /* ── Signature ── */
+  .sig-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+  .sig-box {
+    border-bottom: 1.5px solid #bbb;
+    width: 240px;
+    padding-bottom: 5px;
+  }
+  .sig-box span {
+    font-size: 10px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 600;
+  }
+
+  /* ── Buttons ── */
+  .btn-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .btn-clear {
+    font-size: 13px;
+    padding: 9px 20px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-clear:hover { background: #f4f4f4; }
+  .btn-print {
+    font-size: 13px;
+    padding: 9px 22px;
+    border: 1px solid #1a1a1a;
+    border-radius: 7px;
+    background: #1a1a1a;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .btn-print:hover { opacity: 0.82; }
+
+  /* ── Print styles ── */
+  @media print {
+    body {
+      background: #fff;
+      padding: 0;
+    }
+    .page {
+      box-shadow: none;
+      border-radius: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+    }
+    .btn-row { display: none; }
+    .items-table input[type=number],
+    .field-group input {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      border-radius: 0;
+      background: transparent;
+      padding: 4px 2px;
+    }
+    .sig-box { width: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <h1>Stock Release Form</h1>
+    <p>Fill in all fields then print / save as PDF</p>
+  </div>
+
+  <div class="meta-grid">
+    <div class="field-group" style="grid-column:1/-1">
+      <label>Customer</label>
+      <input type="text" id="customer" placeholder="Enter customer name" />
+    </div>
+    <div class="field-group">
+      <label>Province / City</label>
+      <input type="text" id="province" placeholder="e.g. Baghdad" />
+    </div>
+    <div class="field-group">
+      <label>Date</label>
+      <input type="date" id="date" />
+    </div>
+    <div class="field-group" style="grid-column:1/-1">
+      <div class="label-row">
+        <label>Invoice reference</label>
+        <span class="optional">(Optional)</span>
+      </div>
+      <input type="text" id="invoice" placeholder="e.g. INV-2026-001" />
+    </div>
+  </div>
+
+  <table class="items-table">
+    <colgroup>
+      <col /><col /><col /><col /><col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="left">#</th>
+        <th class="left">Film type</th>
+        <th>Quantity</th>
+        <th>Unit price ($)</th>
+        <th>Total ($)</th>
+      </tr>
+    </thead>
+    <tbody id="items-body"></tbody>
+  </table>
+
+  <div class="value-row">
+    <span class="value-label">Value of sale</span>
+    <span class="value-amount" id="grand-total">$0.00</span>
+  </div>
+
+  <div class="sig-row">
+    <div class="sig-box">
+      <span>Salesman signature</span>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-clear" onclick="clearForm()">Clear</button>
+    <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+</div>
+
+<script>
+  const ITEMS = [
+    { id: 1, film: 'DT5B 14 X 17' },
+    { id: 2, film: 'DT5B 14 X 14' },
+    { id: 3, film: 'DT5B 10 X 12' },
+    { id: 4, film: 'DT5B 8 X 10'  },
+  ];
+
+  function buildTable() {
+    const tb = document.getElementById('items-body');
+    ITEMS.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="left"><span class="item-num">${item.id}</span></td>
+        <td class="left"><span class="film-label">${item.film}</span></td>
+        <td><input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalc()" /></td>
+        <td><input type="number" id="up-${item.id}"  min="0" step="0.01" placeholder="0.00" oninput="recalc()" /></td>
+        <td id="tot-${item.id}" style="font-weight:600">—</td>`;
+      tb.appendChild(tr);
+    });
+    // default today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+  }
+
+  function recalc() {
+    let grand = 0;
+    ITEMS.forEach(item => {
+      const qty = parseFloat(document.getElementById('qty-' + item.id).value) || 0;
+      const up  = parseFloat(document.getElementById('up-'  + item.id).value) || 0;
+      const tot = qty * up;
+      const el  = document.getElementById('tot-' + item.id);
+      el.textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
+      grand += tot;
+    });
+    document.getElementById('grand-total').textContent = '$' + grand.toFixed(2);
+  }
+
+  function clearForm() {
+    ['customer', 'province', 'invoice'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    ITEMS.forEach(item => {
+      document.getElementById('qty-' + item.id).value = '';
+      document.getElementById('up-'  + item.id).value = '';
+      document.getElementById('tot-' + item.id).textContent = '—';
+    });
+    document.getElementById('grand-total').textContent = '$0.00';
+  }
+
+  buildTable();
+</script>
+</body>
+</html>
