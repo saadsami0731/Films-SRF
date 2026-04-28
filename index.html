@@ -282,7 +282,7 @@
       mb.appendChild(card);
     });
 
-    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    const d = new Date(); const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); document.getElementById('date').value = local;
   }
 
   function recalc() {
@@ -311,7 +311,7 @@
 
   function clearForm() {
     ['customer', 'province', 'invoice'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    const d = new Date(); const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); document.getElementById('date').value = local;
     ITEMS.forEach(item => {
       document.getElementById('qty-'  + item.id).value = '';
       document.getElementById('up-'   + item.id).value = '';
