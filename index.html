@@ -32,19 +32,14 @@
     margin-bottom: 1.5rem;
   }
   .header h1 {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #1a1a1a;
+    font-size: 20px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #1a1a1a;
   }
   .header p { font-size: 12px; color: #888; margin-top: 3px; }
 
   .meta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 1.5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin-bottom: 1.5rem;
   }
   .field-group { display: flex; flex-direction: column; gap: 5px; }
   .field-group .label-row { display: flex; align-items: center; gap: 6px; }
@@ -82,11 +77,15 @@
   .items-table td.left { text-align: left; }
   .item-num { font-size: 11px; color: #aaa; font-weight: 600; }
   .film-label { font-size: 13px; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
+
+  /* input shown on screen, print-val hidden on screen */
   .items-table input[type=number] {
     font-size: 13px; padding: 6px 8px; border: 1px solid #ddd; border-radius: 6px;
     background: #fafafa; color: #1a1a1a; text-align: right; width: 100%;
   }
   .items-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
+  .print-val { display: none; }
+  .print-val-field { display: none; }
 
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -160,15 +159,22 @@
     .header p { display: none; }
     .mobile-items { display: none !important; }
     .desktop-table { display: table !important; }
-    .items-table input[type=number], .field-group input {
-      border: none; border-bottom: 1px solid #ccc; border-radius: 0; background: transparent; padding: 4px 2px;
-    }
     .sig-box { width: 260px; }
     .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
     .value-row { padding: 0.5rem 0; margin-bottom: 0.8rem; }
     .sig-row { margin-bottom: 1rem; }
     .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; }
     input::placeholder { color: transparent; }
+
+    /* hide inputs, show plain text values instead */
+    .items-table input[type=number] { display: none; }
+    .field-group input { display: none; }
+    .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
+    .print-val-field {
+      display: block; font-size: 13px; color: #1a1a1a;
+      border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px;
+    }
+    .print-val { display: inline; }
   }
 </style>
 </head>
@@ -183,22 +189,26 @@
   <div class="meta-grid">
     <div class="field-group" style="grid-column:1/-1">
       <label>Customer</label>
-      <input type="text" id="customer" placeholder="Enter customer name" />
+      <input type="text" id="customer" placeholder="Enter customer name" oninput="syncPrint('customer')" />
+      <span class="print-val-field" id="print-customer"></span>
     </div>
     <div class="field-group">
       <label>Province / City</label>
-      <input type="text" id="province" placeholder="e.g. Baghdad" />
+      <input type="text" id="province" placeholder="e.g. Baghdad" oninput="syncPrint('province')" />
+      <span class="print-val-field" id="print-province"></span>
     </div>
     <div class="field-group">
       <label>Date</label>
-      <input type="date" id="date" />
+      <input type="date" id="date" oninput="syncPrint('date')" />
+      <span class="print-val-field" id="print-date"></span>
     </div>
     <div class="field-group" style="grid-column:1/-1">
       <div class="label-row">
         <label>Invoice reference</label>
         <span class="optional">(Optional)</span>
       </div>
-      <input type="text" id="invoice" />
+      <input type="text" id="invoice" oninput="syncPrint('invoice')" />
+      <span class="print-val-field" id="print-invoice"></span>
     </div>
   </div>
 
@@ -210,8 +220,8 @@
         <th class="left">#</th>
         <th class="left">Film type</th>
         <th>Quantity</th>
-        <th>Unit price ($)</th>
-        <th>Total ($)</th>
+        <th>Unit price</th>
+        <th>Total price</th>
       </tr>
     </thead>
     <tbody id="items-body-desktop"></tbody>
@@ -222,7 +232,7 @@
 
   <div class="value-row">
     <span class="value-label">Value of sale</span>
-    <span class="value-amount" id="grand-total">$0.00</span>
+    <span class="value-amount" id="grand-total">0.00</span>
   </div>
 
   <div class="sig-row">
@@ -243,6 +253,12 @@
     { id: 4, film: 'DT5B 8 X 10'  },
   ];
 
+  function syncPrint(fieldId) {
+    const val = document.getElementById(fieldId).value;
+    const el = document.getElementById('print-' + fieldId);
+    if (el) el.textContent = val;
+  }
+
   function buildTable() {
     const tb = document.getElementById('items-body-desktop');
     ITEMS.forEach(item => {
@@ -250,8 +266,14 @@
       tr.innerHTML = `
         <td class="left"><span class="item-num">${item.id}</span></td>
         <td class="left"><span class="film-label">${item.film}</span></td>
-        <td><input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalc()" /></td>
-        <td><input type="number" id="up-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalc()" /></td>
+        <td>
+          <input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalc()" />
+          <span class="print-val" id="print-qty-${item.id}"></span>
+        </td>
+        <td>
+          <input type="number" id="up-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalc()" />
+          <span class="print-val" id="print-up-${item.id}"></span>
+        </td>
         <td id="tot-${item.id}" style="font-weight:600">—</td>`;
       tb.appendChild(tr);
     });
@@ -271,18 +293,21 @@
             <input type="number" id="mqty-${item.id}" min="0" placeholder="0" oninput="recalcMobile()" />
           </div>
           <div class="item-card-field">
-            <label>Unit price ($)</label>
+            <label>Unit price</label>
             <input type="number" id="mup-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalcMobile()" />
           </div>
           <div class="item-card-field">
-            <label>Total ($)</label>
+            <label>Total price</label>
             <div class="item-card-total" id="mtot-${item.id}">—</div>
           </div>
         </div>`;
       mb.appendChild(card);
     });
 
-    const d = new Date(); const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); document.getElementById('date').value = local;
+    const d = new Date();
+    const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    document.getElementById('date').value = local;
+    document.getElementById('print-date').textContent = local;
   }
 
   function recalc() {
@@ -291,10 +316,12 @@
       const qty = parseFloat(document.getElementById('qty-' + item.id).value) || 0;
       const up  = parseFloat(document.getElementById('up-'  + item.id).value) || 0;
       const tot = qty * up;
-      document.getElementById('tot-' + item.id).textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
+      document.getElementById('tot-' + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
+      document.getElementById('print-qty-' + item.id).textContent = qty > 0 ? qty.toLocaleString() : '';
+      document.getElementById('print-up-'  + item.id).textContent = up  > 0 ? Math.round(up).toLocaleString() : '';
       grand += tot;
     });
-    document.getElementById('grand-total').textContent = '$' + grand.toFixed(2);
+    document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
   }
 
   function recalcMobile() {
@@ -303,24 +330,33 @@
       const qty = parseFloat(document.getElementById('mqty-' + item.id).value) || 0;
       const up  = parseFloat(document.getElementById('mup-'  + item.id).value) || 0;
       const tot = qty * up;
-      document.getElementById('mtot-' + item.id).textContent = (qty > 0 || up > 0) ? '$' + tot.toFixed(2) : '—';
+      document.getElementById('mtot-' + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
       grand += tot;
     });
-    document.getElementById('grand-total').textContent = '$' + grand.toFixed(2);
+    document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
   }
 
   function clearForm() {
-    ['customer', 'province', 'invoice'].forEach(id => document.getElementById(id).value = '');
-    const d = new Date(); const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); document.getElementById('date').value = local;
+    ['customer', 'province', 'invoice'].forEach(id => {
+      document.getElementById(id).value = '';
+      const p = document.getElementById('print-' + id);
+      if (p) p.textContent = '';
+    });
+    const d = new Date();
+    const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    document.getElementById('date').value = local;
+    document.getElementById('print-date').textContent = local;
     ITEMS.forEach(item => {
       document.getElementById('qty-'  + item.id).value = '';
       document.getElementById('up-'   + item.id).value = '';
       document.getElementById('tot-'  + item.id).textContent = '—';
+      document.getElementById('print-qty-' + item.id).textContent = '';
+      document.getElementById('print-up-'  + item.id).textContent = '';
       document.getElementById('mqty-' + item.id).value = '';
       document.getElementById('mup-'  + item.id).value = '';
       document.getElementById('mtot-' + item.id).textContent = '—';
     });
-    document.getElementById('grand-total').textContent = '$0.00';
+    document.getElementById('grand-total').textContent = '0';
   }
 
   buildTable();
