@@ -331,6 +331,9 @@
       const up  = parseFloat(document.getElementById('mup-'  + item.id).value) || 0;
       const tot = qty * up;
       document.getElementById('mtot-' + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
+      document.getElementById('tot-'  + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
+      document.getElementById('print-qty-' + item.id).textContent = qty > 0 ? qty.toLocaleString() : '';
+      document.getElementById('print-up-'  + item.id).textContent = up  > 0 ? Math.round(up).toLocaleString() : '';
       grand += tot;
     });
     document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
