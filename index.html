@@ -17,134 +17,131 @@
     padding: 2rem 1rem;
   }
 
-  .page {
-    background: #fff;
-    width: 720px;
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
-    padding: 2.5rem 2.5rem 2rem;
+  /* ── HOME SCREEN ── */
+  #home-screen { width: 480px; max-width: 100%; }
+  .home-header { text-align: center; margin-bottom: 2.5rem; }
+  .home-header h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #1a1a1a; }
+  .home-header p { font-size: 13px; color: #888; margin-top: 6px; }
+  .menu-cards { display: flex; flex-direction: column; gap: 14px; }
+  .menu-card {
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
+    padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 18px;
+    cursor: pointer; transition: box-shadow 0.18s, border-color 0.18s, transform 0.12s;
   }
+  .menu-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.10); border-color: #bbb; transform: translateY(-2px); }
+  .menu-card.inactive { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+  .card-body { flex: 1; }
+  .card-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+  .menu-card.inactive .card-title { color: #aaa; }
+  .card-sub { font-size: 12px; color: #aaa; }
+  .card-arrow { font-size: 18px; color: #888; }
+  .coming-soon { font-size: 10px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.07em; border: 1px solid #ddd; border-radius: 4px; padding: 2px 7px; margin-left: auto; margin-right: 8px; }
 
-  .header {
-    border-bottom: 1.5px solid #e0e0e0;
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-  .header h1 {
-    font-size: 20px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #1a1a1a;
-  }
+  /* ── SHARED FORM STYLES ── */
+  #form-screen, #agfa-form-screen { display: none; width: 100%; max-width: 720px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 1.25rem; background: none; border: none; padding: 0; font-family: inherit; }
+  .back-btn:hover { color: #1a1a1a; }
+  .page { background: #fff; width: 100%; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 2.5rem 2.5rem 2rem; }
+  .header { border-bottom: 1.5px solid #e0e0e0; padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+  .header h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1a1a1a; }
   .header p { font-size: 12px; color: #888; margin-top: 3px; }
-
-  .meta-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 14px; margin-bottom: 1.5rem;
-  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
   .field-group { display: flex; flex-direction: column; gap: 5px; }
   .field-group .label-row { display: flex; align-items: center; gap: 6px; }
-  .field-group label {
-    font-size: 11px; font-weight: 600; color: #666;
-    text-transform: uppercase; letter-spacing: 0.07em;
-  }
+  .field-group label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
   .optional { font-size: 10px; font-weight: 400; color: #aaa; text-transform: none; letter-spacing: 0; }
-  .field-group input {
-    font-size: 13px; padding: 8px 10px; border: 1px solid #ddd;
-    border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s;
-  }
+  .field-group input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s; }
   .field-group input:focus { outline: none; border-color: #555; }
+  .print-val { display: none; }
+  .print-val-field { display: none; }
+  .value-row { display: flex; justify-content: flex-end; align-items: center; gap: 14px; padding: 0.9rem 0; border-top: 1.5px solid #e0e0e0; margin-bottom: 1.5rem; }
+  .value-label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
+  .value-amount { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+  .sig-row { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
+  .sig-box { border-bottom: 1.5px solid #bbb; width: 240px; padding-bottom: 5px; }
+  .sig-box span { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+  .btn-row { display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-clear { font-size: 13px; padding: 9px 20px; border: 1px solid #ccc; border-radius: 7px; background: transparent; color: #666; cursor: pointer; }
+  .btn-clear:hover { background: #f4f4f4; }
+  .btn-print { font-size: 13px; padding: 9px 22px; border: 1px solid #1a1a1a; border-radius: 7px; background: #1a1a1a; color: #fff; cursor: pointer; font-weight: 600; }
+  .btn-print:hover { opacity: 0.82; }
 
-  /* Desktop table */
-  .items-table {
-    width: 100%; border-collapse: collapse; margin-bottom: 1.25rem;
-    font-size: 13px; table-layout: fixed;
-  }
+  /* ── FILMS TABLE ── */
+  .items-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: 13px; table-layout: fixed; }
   .items-table colgroup col:nth-child(1) { width: 32px; }
   .items-table colgroup col:nth-child(2) { width: auto; }
   .items-table colgroup col:nth-child(3) { width: 100px; }
   .items-table colgroup col:nth-child(4) { width: 120px; }
   .items-table colgroup col:nth-child(5) { width: 110px; }
-  .items-table th {
-    font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase;
-    letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0;
-    text-align: right; white-space: nowrap;
-  }
+  .items-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
   .items-table th.left { text-align: left; }
-  .items-table td {
-    padding: 9px 10px; border-bottom: 1px solid #f0f0f0;
-    color: #1a1a1a; vertical-align: middle; text-align: right;
-  }
+  .items-table td { padding: 9px 10px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
   .items-table td.left { text-align: left; }
   .item-num { font-size: 11px; color: #aaa; font-weight: 600; }
   .film-label { font-size: 13px; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
-
-  /* input shown on screen, print-val hidden on screen */
-  .items-table input[type=number] {
-    font-size: 13px; padding: 6px 8px; border: 1px solid #ddd; border-radius: 6px;
-    background: #fafafa; color: #1a1a1a; text-align: right; width: 100%;
-  }
+  .items-table input[type=number] { font-size: 13px; padding: 6px 8px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
   .items-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
-  .print-val { display: none; }
-  .print-val-field { display: none; }
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   input[type=number] { -moz-appearance: textfield; }
 
-  /* Mobile cards */
+  /* Films mobile cards */
   .mobile-items { display: none; }
-  .item-card {
-    border: 1px solid #e8e8e8; border-radius: 8px;
-    padding: 12px 14px; margin-bottom: 10px; background: #fff;
-  }
-  .item-card-header {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;
-  }
+  .item-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+  .item-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
   .item-card-num { font-size: 11px; color: #aaa; font-weight: 600; min-width: 16px; }
   .item-card-film { font-size: 14px; font-weight: 600; color: #1a1a1a; }
   .item-card-fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-  .item-card-field label {
-    font-size: 10px; font-weight: 600; color: #888;
-    text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px;
-  }
-  .item-card-field input[type=number] {
-    font-size: 14px; padding: 7px 8px; border: 1px solid #ddd;
-    border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%;
-  }
+  .item-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  .item-card-field input[type=number] { font-size: 14px; padding: 7px 8px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
   .item-card-field input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
   .item-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
 
-  .value-row {
-    display: flex; justify-content: flex-end; align-items: center;
-    gap: 14px; padding: 0.9rem 0; border-top: 1.5px solid #e0e0e0; margin-bottom: 1.5rem;
-  }
-  .value-label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
-  .value-amount { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+  /* ── AGFA TABLE ── */
+  .agfa-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; table-layout: fixed; }
+  .agfa-table colgroup col:nth-child(1) { width: 32px; }
+  .agfa-table colgroup col:nth-child(2) { width: auto; }
+  .agfa-table colgroup col:nth-child(3) { width: 90px; }
+  .agfa-table colgroup col:nth-child(4) { width: 110px; }
+  .agfa-table colgroup col:nth-child(5) { width: 110px; }
+  .agfa-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
+  .agfa-table th.left { text-align: left; }
+  .agfa-table td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
+  .agfa-table td.left { text-align: left; }
+  .agfa-table input[type=number] { font-size: 13px; padding: 5px 7px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
+  .agfa-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
 
-  .sig-row { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
-  .sig-box { border-bottom: 1.5px solid #bbb; width: 240px; padding-bottom: 5px; }
-  .sig-box span { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+  /* Searchable dropdown */
+  .item-search-wrap { position: relative; }
+  .item-search-input { font-size: 12px; padding: 5px 8px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; width: 100%; }
+  .item-search-input:focus { outline: none; border-color: #555; background: #fff; }
+  .item-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 999; max-height: 200px; overflow-y: auto; display: none; }
+  .item-dropdown.open { display: block; }
+  .item-option { padding: 7px 10px; font-size: 12px; color: #1a1a1a; cursor: pointer; }
+  .item-option:hover { background: #f4f4f4; }
+  .item-option.no-match { color: #aaa; cursor: default; }
 
-  .btn-row { display: flex; justify-content: flex-end; gap: 10px; }
-  .btn-clear {
-    font-size: 13px; padding: 9px 20px; border: 1px solid #ccc; border-radius: 7px;
-    background: transparent; color: #666; cursor: pointer; transition: background 0.15s;
-  }
-  .btn-clear:hover { background: #f4f4f4; }
-  .btn-print {
-    font-size: 13px; padding: 9px 22px; border: 1px solid #1a1a1a; border-radius: 7px;
-    background: #1a1a1a; color: #fff; cursor: pointer; font-weight: 600; transition: opacity 0.15s;
-  }
-  .btn-print:hover { opacity: 0.82; }
+  /* Add row button */
+  .add-row-btn { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #555; background: none; border: 1px dashed #ccc; border-radius: 7px; padding: 8px 16px; cursor: pointer; margin-bottom: 1.25rem; width: 100%; justify-content: center; transition: border-color 0.15s, color 0.15s; }
+  .add-row-btn:hover { border-color: #888; color: #1a1a1a; }
+
+  /* Agfa mobile cards */
+  .agfa-mobile-items { display: none; }
+  .agfa-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+  .agfa-card-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
+  .agfa-card-field { margin-bottom: 8px; }
+  .agfa-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  .agfa-card-nums { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .agfa-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
 
   /* Mobile breakpoint */
   @media (max-width: 540px) {
     body { padding: 1rem 0.5rem; }
     .page { padding: 1.25rem 1rem 1rem; }
     .meta-grid { grid-template-columns: 1fr; }
-    .desktop-table { display: none; }
+    .desktop-table { display: none !important; }
     .mobile-items { display: block; }
+    .agfa-desktop-table { display: none !important; }
+    .agfa-mobile-items { display: block; }
     .sig-box { width: 100%; }
     .btn-row { flex-direction: column; }
     .btn-clear, .btn-print { width: 100%; text-align: center; }
@@ -154,215 +151,480 @@
   @media print {
     @page { size: A4; margin: 12mm 14mm; }
     html, body { height: auto; min-height: unset; background: #fff; padding: 0; margin: 0; display: block; }
+    #home-screen { display: none !important; }
+    .back-btn { display: none !important; }
     .page { box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; padding: 0; page-break-after: avoid; page-break-inside: avoid; }
     .btn-row { display: none; }
+    .add-row-btn { display: none; }
     .header p { display: none; }
     .mobile-items { display: none !important; }
+    .agfa-mobile-items { display: none !important; }
     .desktop-table { display: table !important; }
+    .agfa-desktop-table { display: table !important; }
+    .item-dropdown { display: none !important; }
     .sig-box { width: 260px; }
     .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
     .value-row { padding: 0.5rem 0; margin-bottom: 0.8rem; }
     .sig-row { margin-bottom: 1rem; }
     .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; }
     input::placeholder { color: transparent; }
-
-    /* hide inputs, show plain text values instead */
-    .items-table input[type=number] { display: none; }
+    .items-table input[type=number], .agfa-table input[type=number] { display: none; }
+    .item-search-input { display: none; }
     .field-group input { display: none; }
     .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
-    .print-val-field {
-      display: block; font-size: 13px; color: #1a1a1a;
-      border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px;
-    }
-    .print-val { display: inline; }
+    .print-val-field { display: block; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px; }
+    .agfa-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
   }
+
+  .agfa-print-item { display: none; }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="header">
-    <h1>Stock Release Form</h1>
-    <p>Fill in all fields then print / save as PDF</p>
+<!-- HOME SCREEN -->
+<div id="home-screen">
+  <div class="home-header">
+    <h1>Choose Your Form</h1>
+    <p>Select a category to create a release form</p>
   </div>
-
-  <div class="meta-grid">
-    <div class="field-group" style="grid-column:1/-1">
-      <label>Customer</label>
-      <input type="text" id="customer" placeholder="Enter customer name" oninput="syncPrint('customer')" />
-      <span class="print-val-field" id="print-customer"></span>
-    </div>
-    <div class="field-group">
-      <label>Province / City</label>
-      <input type="text" id="province" placeholder="e.g. Baghdad" oninput="syncPrint('province')" />
-      <span class="print-val-field" id="print-province"></span>
-    </div>
-    <div class="field-group">
-      <label>Date</label>
-      <input type="date" id="date" oninput="syncPrint('date')" />
-      <span class="print-val-field" id="print-date"></span>
-    </div>
-    <div class="field-group" style="grid-column:1/-1">
-      <div class="label-row">
-        <label>Invoice reference</label>
-        <span class="optional">(Optional)</span>
+  <div class="menu-cards">
+    <div class="menu-card" onclick="showScreen('form-screen')">
+      <div class="card-body">
+        <div class="card-title">Films</div>
+        <div class="card-sub">DT5B film stock release form</div>
       </div>
-      <input type="text" id="invoice" oninput="syncPrint('invoice')" />
-      <span class="print-val-field" id="print-invoice"></span>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="menu-card" onclick="showScreen('agfa-form-screen')">
+      <div class="card-body">
+        <div class="card-title">Agfa Equipment</div>
+        <div class="card-sub">Equipment release form</div>
+      </div>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="menu-card inactive">
+      <div class="card-body">
+        <div class="card-title">DRGEM</div>
+        <div class="card-sub">DRGEM release form</div>
+      </div>
+      <span class="coming-soon">Coming soon</span>
     </div>
   </div>
-
-  <!-- Desktop table -->
-  <table class="items-table desktop-table">
-    <colgroup><col /><col /><col /><col /><col /></colgroup>
-    <thead>
-      <tr>
-        <th class="left">#</th>
-        <th class="left">Film type</th>
-        <th>Quantity</th>
-        <th>Unit price</th>
-        <th>Total price</th>
-      </tr>
-    </thead>
-    <tbody id="items-body-desktop"></tbody>
-  </table>
-
-  <!-- Mobile cards -->
-  <div class="mobile-items" id="items-body-mobile"></div>
-
-  <div class="value-row">
-    <span class="value-label">Value of sale</span>
-    <span class="value-amount" id="grand-total">0.00</span>
-  </div>
-
-  <div class="sig-row">
-    <div class="sig-box"><span>Salesman signature</span></div>
-  </div>
-
-  <div class="btn-row">
-    <button class="btn-clear" onclick="clearForm()">Clear</button>
-    <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
-  </div>
-
 </div>
+
+<!-- FILMS FORM SCREEN -->
+<div id="form-screen">
+  <button class="back-btn" onclick="showHome()">← Back</button>
+  <div class="page">
+    <div class="header">
+      <h1>Stock Release Form — Films</h1>
+      <p>Fill in all fields then print / save as PDF</p>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Customer</label>
+        <input type="text" id="customer" placeholder="Enter customer name" oninput="syncPrint('customer')" />
+        <span class="print-val-field" id="print-customer"></span>
+      </div>
+      <div class="field-group">
+        <label>Province / City</label>
+        <input type="text" id="province" placeholder="e.g. Baghdad" oninput="syncPrint('province')" />
+        <span class="print-val-field" id="print-province"></span>
+      </div>
+      <div class="field-group">
+        <label>Date</label>
+        <input type="date" id="date" oninput="syncPrint('date')" />
+        <span class="print-val-field" id="print-date"></span>
+      </div>
+      <div class="field-group" style="grid-column:1/-1">
+        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
+        <input type="text" id="invoice" oninput="syncPrint('invoice')" />
+        <span class="print-val-field" id="print-invoice"></span>
+      </div>
+    </div>
+    <table class="items-table desktop-table">
+      <colgroup><col /><col /><col /><col /><col /></colgroup>
+      <thead><tr><th class="left">#</th><th class="left">Film type</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
+      <tbody id="items-body-desktop"></tbody>
+    </table>
+    <div class="mobile-items" id="items-body-mobile"></div>
+    <div class="value-row">
+      <span class="value-label">Value of sale</span>
+      <span class="value-amount" id="grand-total">0</span>
+    </div>
+    <div class="sig-row"><div class="sig-box"><span>Salesman signature</span></div></div>
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearFilmsForm()">Clear</button>
+      <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- AGFA EQUIPMENT FORM SCREEN -->
+<div id="agfa-form-screen">
+  <button class="back-btn" onclick="showHome()">← Back</button>
+  <div class="page">
+    <div class="header">
+      <h1>Stock Release Form — Agfa Equipment</h1>
+      <p>Fill in all fields then print / save as PDF</p>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Customer</label>
+        <input type="text" id="agfa-customer" placeholder="Enter customer name" oninput="agfaSyncPrint('agfa-customer','agfa-print-customer')" />
+        <span class="print-val-field" id="agfa-print-customer"></span>
+      </div>
+      <div class="field-group">
+        <label>Province / City</label>
+        <input type="text" id="agfa-province" placeholder="e.g. Baghdad" oninput="agfaSyncPrint('agfa-province','agfa-print-province')" />
+        <span class="print-val-field" id="agfa-print-province"></span>
+      </div>
+      <div class="field-group">
+        <label>Date</label>
+        <input type="date" id="agfa-date" oninput="agfaSyncPrint('agfa-date','agfa-print-date')" />
+        <span class="print-val-field" id="agfa-print-date"></span>
+      </div>
+      <div class="field-group" style="grid-column:1/-1">
+        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
+        <input type="text" id="agfa-invoice" oninput="agfaSyncPrint('agfa-invoice','agfa-print-invoice')" />
+        <span class="print-val-field" id="agfa-print-invoice"></span>
+      </div>
+    </div>
+
+    <!-- Agfa desktop table -->
+    <table class="agfa-table agfa-desktop-table">
+      <colgroup><col /><col /><col /><col /><col /></colgroup>
+      <thead><tr><th class="left">#</th><th class="left">Item</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
+      <tbody id="agfa-tbody"></tbody>
+    </table>
+
+    <!-- Agfa mobile cards -->
+    <div class="agfa-mobile-items" id="agfa-mobile-body"></div>
+
+    <button class="add-row-btn" id="add-row-btn" onclick="addAgfaRow()" style="display:none">+ Add item</button>
+
+    <div class="value-row">
+      <span class="value-label">Value of sale</span>
+      <span class="value-amount" id="agfa-grand-total">0</span>
+    </div>
+    <div class="sig-row"><div class="sig-box"><span>Salesman signature</span></div></div>
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearAgfaForm()">Clear</button>
+      <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  const ITEMS = [
-    { id: 1, film: 'DT5B 14 X 17' },
-    { id: 2, film: 'DT5B 14 X 14' },
-    { id: 3, film: 'DT5B 10 X 12' },
-    { id: 4, film: 'DT5B 8 X 10'  },
-  ];
+// ── AGFA ITEMS LIST ──
+const AGFA_ITEMS = ["AGFA CRADLE CHARGER DURALINE (FXRR-01A)","AGFA DR 100 E System","AGFA DR 100 S System","AGFA DR 14 E G DETECTOR SYSTEM","AGFA DR 14 S DETECTOR - PUXIUM SYSTEM","AGFA DR 24 M DETECTOR SYSTEM","AGFA DR14E CESIUM DETECTOR","AGFA DX-D 100+ -DR14 - 40KW-300KHU-230V","AGFA Film  DT5B  10*12","AGFA Film  DT5B  11*14","AGFA Film  DT5B  14*14","AGFA Film  DT5B  14*17","AGFA Film  DT5B  8*10","AGFA FILM Mammo  DT5B  10*12","AGFA VALORY FLOOR X-RAY SYSTEM","AGFA Workstation","Agfa XD14 Detector","Agfa XD14 Detector PLUS","Agfa XD14 Detector USED","Agfa XD17 DETECTOR","BATTERY 14E DETECTOR","BATTERY 14S DETECTOR","BATTERY DX-D30 DETECTOR","BATTERY DX-D40 DETECTOR","BATTERY XD14/17 DETECTOR","CR 10 X","CR 10-X USED","CR 12 X","CR 12-X USED","CR 15 - X USED","CR 15 X","CR ANTISCATTER GRID V2","CR EASYLIFT","CR FULL BODY CASSETTE HOLDER","CR MD 1.0  CASSETTE 14*17","CR MD 1.0  General Set  10*12","CR MD 1.0  General Set  10*12 - USED","CR MD 1.0  General Set  14*17","CR MD 1.0  General Set  14*17 - USED","CR MD 1.0  General Set  15*30CM","CR MD 1.0  General Set  8*10","CR MD 1.0  PLATE  14*17","CR MD 4.0  General Set  10*12","CR MD 4.0  General Set  14*14","CR MD 4.0  General Set  14*17","CR MD 4.0  General Set  15*30CM","CR MD 4.0  General Set  24*30","CR MD 4.0  General Set  8*10","CR MD 4.0 CASSETTE  10*12","CR MD 4.0 CASSETTE  14*14","CR MD 4.0 CASSETTE HR  14*17","CR MD 4.0 PLATE  14*14","CR MD 4.0 PLATE  14*17","CR MD 4.0 PLATE 10*12","CR MD 4.0 R  FLFS  14*17","CR MD 4.0 R  General Set  10*12","CR MD 4.0 R  General Set  14*14","CR MD 4.0 R  General Set  14*17","CR MD 4.0 R  General Set  15*30CM","CR MD 4.0 R  General Set  8*10","CR MD 4.0 R CASSETTE  10*12","CR MD 4.0 R CASSETTE  14*17","CR MD 4.0 R PLATE  14*17","CR MD 4.0 T  CASSETTE  14*17","CR MD 4.0 T  FLFS  14*17","CR MD 4.0 T  FLFS  14*17 - USED","CR MD 4.0 T  FLFS Cover Only  14*17 - USED","CR MD 4.0 T  General Set  10*12","CR MD 4.0 T  General Set  14*14","CR MD 4.0 T  General Set  14*17","CR MD 4.0 T  General Set  15*30CM","CR MD 4.0 T  General Set  8*10","CR MD 4.0 T Cover Only 10*12  - USED","CR MD 4.0 T Cover Only 14*17  - USED","CR MD 4.0 T General Set 10*12  - USED","CR MD 4.0 T General Set 14*14  - USED","CR MD 4.0 T General Set 14*17  - USED","CR MD 4.0 T General Set 8*10  - USED","CR MD 4.1  FLFS  14*17","CR MD1.0 CASSETTE ADAPTER 10*12","Detector Laptop","DRYSTAR 5301","DRYSTAR 5301 - USED","DRYSTAR 5301  WX- CN","DRYSTAR 5302","DRYSTAR 5302 - CN","DRYSTAR 5302 - USED","DRYSTAR AXYS","DRYSTAR AXYS - CN","DRYSTAR AXYS - USED","DUAL SLOT BATTERY CHARGER (NOT CRADLE) FOR XD14/17 DETECTOR","DX-D 100","DX-D 10C","DX-D 10G","DX-D 20G","DX-D 300","DX-D 30C","DX-D 40  C","DX-D 40  G","DX-D 400","DX-D 600","DX-D 800","DX-D40 USED","FLFS System","HUB","HUB - USED","Labor Warranty 1 Year","Labor Warranty 2 Years","Labor Warranty 3 Years","Labor Warranty 4 Years","Labor Warranty 5 Years","Manufacturing Warranty ( Parts ) 1 Year","Manufacturing Warranty ( Parts ) 2 Years","Manufacturing Warranty ( Parts ) 3 Years","Manufacturing Warranty ( Parts ) 4 Years","Manufacturing Warranty ( Parts ) 5 Years","MONITOR - Agfa","MONITOR - LM","MONITOR - USED","NX-MW STARTER KIT Value CPU - WINDOWS LICENSE","PC - LM","PC - USED","POCKET EXTERNAL ACCESS POINT EU – TP LINK","Power Extension Strip","Power Extension Strip - USED","UPS - USED","UPS 1 KV Online","UPS 2 KV Online","UPS 3 KV Online","USB-C CHARGER (VR+HV8042)"];
 
-  function syncPrint(fieldId) {
-    const val = document.getElementById(fieldId).value;
-    const el = document.getElementById('print-' + fieldId);
-    if (el) el.textContent = val;
+const FILMS_ITEMS = [
+  { id: 1, film: 'DT5B 14 X 17' },
+  { id: 2, film: 'DT5B 14 X 14' },
+  { id: 3, film: 'DT5B 10 X 12' },
+  { id: 4, film: 'DT5B 8 X 10'  },
+];
+
+let agfaRowCount = 0;
+let activeDropdown = null;
+
+// ── NAVIGATION ──
+function showScreen(id) {
+  document.getElementById('home-screen').style.display = 'none';
+  document.getElementById('form-screen').style.display = 'none';
+  document.getElementById('agfa-form-screen').style.display = 'none';
+  document.getElementById(id).style.display = 'block';
+}
+function showHome() {
+  document.getElementById('form-screen').style.display = 'none';
+  document.getElementById('agfa-form-screen').style.display = 'none';
+  document.getElementById('home-screen').style.display = 'block';
+}
+
+// ── SHARED ──
+function localDate() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function syncPrint(fieldId) {
+  const val = document.getElementById(fieldId).value;
+  const el = document.getElementById('print-' + fieldId);
+  if (el) el.textContent = val;
+}
+function agfaSyncPrint(inputId, printId) {
+  document.getElementById(printId).textContent = document.getElementById(inputId).value;
+}
+
+// ── FILMS FORM ──
+function buildFilmsTable() {
+  const tb = document.getElementById('items-body-desktop');
+  FILMS_ITEMS.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="left"><span class="item-num">${item.id}</span></td>
+      <td class="left"><span class="film-label">${item.film}</span></td>
+      <td><input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalcFilms()" /><span class="print-val" id="print-qty-${item.id}"></span></td>
+      <td><input type="number" id="up-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalcFilms()" /><span class="print-val" id="print-up-${item.id}"></span></td>
+      <td id="tot-${item.id}" style="font-weight:600">—</td>`;
+    tb.appendChild(tr);
+  });
+  const mb = document.getElementById('items-body-mobile');
+  FILMS_ITEMS.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.innerHTML = `
+      <div class="item-card-header"><span class="item-card-num">${item.id}</span><span class="item-card-film">${item.film}</span></div>
+      <div class="item-card-fields">
+        <div class="item-card-field"><label>Quantity</label><input type="number" id="mqty-${item.id}" min="0" placeholder="0" oninput="recalcFilmsMobile()" /></div>
+        <div class="item-card-field"><label>Unit price</label><input type="number" id="mup-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalcFilmsMobile()" /></div>
+        <div class="item-card-field"><label>Total price</label><div class="item-card-total" id="mtot-${item.id}">—</div></div>
+      </div>`;
+    mb.appendChild(card);
+  });
+  document.getElementById('date').value = localDate();
+  document.getElementById('print-date').textContent = localDate();
+}
+
+function recalcFilms() {
+  let grand = 0;
+  FILMS_ITEMS.forEach(item => {
+    const qty = parseFloat(document.getElementById('qty-'+item.id).value)||0;
+    const up  = parseFloat(document.getElementById('up-' +item.id).value)||0;
+    const tot = qty*up;
+    document.getElementById('tot-'+item.id).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('print-qty-'+item.id).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('print-up-' +item.id).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
+  });
+  document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
+}
+
+function recalcFilmsMobile() {
+  let grand = 0;
+  FILMS_ITEMS.forEach(item => {
+    const qty = parseFloat(document.getElementById('mqty-'+item.id).value)||0;
+    const up  = parseFloat(document.getElementById('mup-' +item.id).value)||0;
+    const tot = qty*up;
+    document.getElementById('mtot-'+item.id).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('tot-' +item.id).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('print-qty-'+item.id).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('print-up-' +item.id).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
+  });
+  document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
+}
+
+function clearFilmsForm() {
+  ['customer','province','invoice'].forEach(id => { document.getElementById(id).value=''; document.getElementById('print-'+id).textContent=''; });
+  document.getElementById('date').value = localDate();
+  document.getElementById('print-date').textContent = localDate();
+  FILMS_ITEMS.forEach(item => {
+    document.getElementById('qty-'+item.id).value=''; document.getElementById('up-'+item.id).value='';
+    document.getElementById('tot-'+item.id).textContent='—';
+    document.getElementById('print-qty-'+item.id).textContent=''; document.getElementById('print-up-'+item.id).textContent='';
+    document.getElementById('mqty-'+item.id).value=''; document.getElementById('mup-'+item.id).value='';
+    document.getElementById('mtot-'+item.id).textContent='—';
+  });
+  document.getElementById('grand-total').textContent='0';
+}
+
+// ── AGFA FORM ──
+function buildAgfaForm() {
+  document.getElementById('agfa-date').value = localDate();
+  document.getElementById('agfa-print-date').textContent = localDate();
+  agfaRowCount = 0;
+  for (let i = 0; i < 10; i++) addAgfaRow();
+  checkAddBtn();
+}
+
+function addAgfaRow() {
+  agfaRowCount++;
+  const n = agfaRowCount;
+
+  // Desktop row
+  const tb = document.getElementById('agfa-tbody');
+  const tr = document.createElement('tr');
+  tr.id = 'agfa-row-'+n;
+  tr.innerHTML = `
+    <td class="left"><span class="item-num">${n}</span></td>
+    <td class="left">
+      <div class="item-search-wrap">
+        <input class="item-search-input" id="agfa-item-${n}" placeholder="Search or type item..." oninput="filterDropdown(${n})" onfocus="openDropdown(${n})" autocomplete="off" />
+        <div class="item-dropdown" id="agfa-dd-${n}"></div>
+      </div>
+      <span class="agfa-print-item" id="agfa-print-item-${n}"></span>
+    </td>
+    <td><input type="number" id="agfa-qty-${n}" min="0" placeholder="0" oninput="recalcAgfa()" /><span class="print-val" id="agfa-pqty-${n}"></span></td>
+    <td><input type="number" id="agfa-up-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcAgfa()" /><span class="print-val" id="agfa-pup-${n}"></span></td>
+    <td id="agfa-tot-${n}" style="font-weight:600">—</td>`;
+  tb.appendChild(tr);
+
+  // Mobile card
+  const mb = document.getElementById('agfa-mobile-body');
+  const card = document.createElement('div');
+  card.className = 'agfa-card'; card.id = 'agfa-mcard-'+n;
+  card.innerHTML = `
+    <div class="agfa-card-num">${n}</div>
+    <div class="agfa-card-field">
+      <label>Item</label>
+      <div class="item-search-wrap">
+        <input class="item-search-input" id="agfa-mitem-${n}" placeholder="Search or type item..." oninput="filterMobileDropdown(${n})" onfocus="openMobileDropdown(${n})" autocomplete="off" />
+        <div class="item-dropdown" id="agfa-mdd-${n}"></div>
+      </div>
+    </div>
+    <div class="agfa-card-nums">
+      <div class="agfa-card-field"><label>Quantity</label><input type="number" id="agfa-mqty-${n}" min="0" placeholder="0" oninput="recalcAgfaMobile()" /></div>
+      <div class="agfa-card-field"><label>Unit price</label><input type="number" id="agfa-mup-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcAgfaMobile()" /></div>
+      <div class="agfa-card-field"><label>Total price</label><div class="agfa-card-total" id="agfa-mtot-${n}">—</div></div>
+    </div>`;
+  mb.appendChild(card);
+
+  checkAddBtn();
+}
+
+function checkAddBtn() {
+  // Show + button only when all 6 initial rows have an item selected
+  const btn = document.getElementById('add-row-btn');
+  let allFilled = agfaRowCount >= 6;
+  if (allFilled) {
+    for (let i = 1; i <= agfaRowCount; i++) {
+      const el = document.getElementById('agfa-item-'+i);
+      if (el && !el.value.trim()) { allFilled = false; break; }
+    }
   }
+  btn.style.display = allFilled ? 'flex' : 'none';
+}
 
-  function buildTable() {
-    const tb = document.getElementById('items-body-desktop');
-    ITEMS.forEach(item => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="left"><span class="item-num">${item.id}</span></td>
-        <td class="left"><span class="film-label">${item.film}</span></td>
-        <td>
-          <input type="number" id="qty-${item.id}" min="0" placeholder="0" oninput="recalc()" />
-          <span class="print-val" id="print-qty-${item.id}"></span>
-        </td>
-        <td>
-          <input type="number" id="up-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalc()" />
-          <span class="print-val" id="print-up-${item.id}"></span>
-        </td>
-        <td id="tot-${item.id}" style="font-weight:600">—</td>`;
-      tb.appendChild(tr);
+function buildDropdownOptions(n, query, isMobile) {
+  const ddId = isMobile ? 'agfa-mdd-'+n : 'agfa-dd-'+n;
+  const dd = document.getElementById(ddId);
+  dd.innerHTML = '';
+  const q = query.toLowerCase();
+  const keywords = q.split(/\s+/).filter(k => k.length > 0);
+  const matches = AGFA_ITEMS.filter(i => keywords.every(k => i.toLowerCase().includes(k)));
+  if (matches.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'item-option no-match';
+    div.textContent = 'No match — your typed text will be used';
+    dd.appendChild(div);
+  } else {
+    matches.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item-option';
+      div.textContent = item;
+      div.onmousedown = () => selectItem(n, item, isMobile);
+      dd.appendChild(div);
     });
-
-    const mb = document.getElementById('items-body-mobile');
-    ITEMS.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'item-card';
-      card.innerHTML = `
-        <div class="item-card-header">
-          <span class="item-card-num">${item.id}</span>
-          <span class="item-card-film">${item.film}</span>
-        </div>
-        <div class="item-card-fields">
-          <div class="item-card-field">
-            <label>Quantity</label>
-            <input type="number" id="mqty-${item.id}" min="0" placeholder="0" oninput="recalcMobile()" />
-          </div>
-          <div class="item-card-field">
-            <label>Unit price</label>
-            <input type="number" id="mup-${item.id}" min="0" step="0.01" placeholder="0.00" oninput="recalcMobile()" />
-          </div>
-          <div class="item-card-field">
-            <label>Total price</label>
-            <div class="item-card-total" id="mtot-${item.id}">—</div>
-          </div>
-        </div>`;
-      mb.appendChild(card);
-    });
-
-    const d = new Date();
-    const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-    document.getElementById('date').value = local;
-    document.getElementById('print-date').textContent = local;
   }
+  dd.classList.add('open');
+}
 
-  function recalc() {
-    let grand = 0;
-    ITEMS.forEach(item => {
-      const qty = parseFloat(document.getElementById('qty-' + item.id).value) || 0;
-      const up  = parseFloat(document.getElementById('up-'  + item.id).value) || 0;
-      const tot = qty * up;
-      document.getElementById('tot-' + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
-      document.getElementById('print-qty-' + item.id).textContent = qty > 0 ? qty.toLocaleString() : '';
-      document.getElementById('print-up-'  + item.id).textContent = up  > 0 ? Math.round(up).toLocaleString() : '';
-      grand += tot;
-    });
-    document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
+function openDropdown(n) { buildDropdownOptions(n, document.getElementById('agfa-item-'+n).value, false); }
+function openMobileDropdown(n) { buildDropdownOptions(n, document.getElementById('agfa-mitem-'+n).value, true); }
+function filterDropdown(n) {
+  buildDropdownOptions(n, document.getElementById('agfa-item-'+n).value, false);
+  syncDesktopToMobile(n);
+  document.getElementById('agfa-print-item-'+n).textContent = document.getElementById('agfa-item-'+n).value;
+  checkAddBtn();
+}
+function filterMobileDropdown(n) {
+  buildDropdownOptions(n, document.getElementById('agfa-mitem-'+n).value, true);
+  syncMobileToDesktop(n);
+}
+
+function selectItem(n, item, isMobile) {
+  if (isMobile) {
+    document.getElementById('agfa-mitem-'+n).value = item;
+    document.getElementById('agfa-item-'+n).value = item;
+  } else {
+    document.getElementById('agfa-item-'+n).value = item;
+    if (document.getElementById('agfa-mitem-'+n)) document.getElementById('agfa-mitem-'+n).value = item;
   }
+  document.getElementById('agfa-print-item-'+n).textContent = item;
+  const ddD = document.getElementById('agfa-dd-'+n);
+  const ddM = document.getElementById('agfa-mdd-'+n);
+  if (ddD) ddD.classList.remove('open');
+  if (ddM) ddM.classList.remove('open');
+  // Auto-set quantity to 1 if empty
+  const qtyD = document.getElementById('agfa-qty-'+n);
+  const qtyM = document.getElementById('agfa-mqty-'+n);
+  if (qtyD && !qtyD.value) { qtyD.value = 1; }
+  if (qtyM && !qtyM.value) { qtyM.value = 1; }
+  recalcAgfa();
+  checkAddBtn();
+}
 
-  function recalcMobile() {
-    let grand = 0;
-    ITEMS.forEach(item => {
-      const qty = parseFloat(document.getElementById('mqty-' + item.id).value) || 0;
-      const up  = parseFloat(document.getElementById('mup-'  + item.id).value) || 0;
-      const tot = qty * up;
-      document.getElementById('mtot-' + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
-      document.getElementById('tot-'  + item.id).textContent = (qty > 0 || up > 0) ? Math.round(tot).toLocaleString() : '—';
-      document.getElementById('print-qty-' + item.id).textContent = qty > 0 ? qty.toLocaleString() : '';
-      document.getElementById('print-up-'  + item.id).textContent = up  > 0 ? Math.round(up).toLocaleString() : '';
-      grand += tot;
-    });
-    document.getElementById('grand-total').textContent = Math.round(grand).toLocaleString();
+function syncDesktopToMobile(n) {
+  const m = document.getElementById('agfa-mitem-'+n);
+  if (m) m.value = document.getElementById('agfa-item-'+n).value;
+}
+function syncMobileToDesktop(n) {
+  const d = document.getElementById('agfa-item-'+n);
+  if (d) { d.value = document.getElementById('agfa-mitem-'+n).value; document.getElementById('agfa-print-item-'+n).textContent = d.value; }
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('.item-search-wrap')) {
+    document.querySelectorAll('.item-dropdown').forEach(dd => dd.classList.remove('open'));
   }
+});
 
-  function clearForm() {
-    ['customer', 'province', 'invoice'].forEach(id => {
-      document.getElementById(id).value = '';
-      const p = document.getElementById('print-' + id);
-      if (p) p.textContent = '';
-    });
-    const d = new Date();
-    const local = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-    document.getElementById('date').value = local;
-    document.getElementById('print-date').textContent = local;
-    ITEMS.forEach(item => {
-      document.getElementById('qty-'  + item.id).value = '';
-      document.getElementById('up-'   + item.id).value = '';
-      document.getElementById('tot-'  + item.id).textContent = '—';
-      document.getElementById('print-qty-' + item.id).textContent = '';
-      document.getElementById('print-up-'  + item.id).textContent = '';
-      document.getElementById('mqty-' + item.id).value = '';
-      document.getElementById('mup-'  + item.id).value = '';
-      document.getElementById('mtot-' + item.id).textContent = '—';
-    });
-    document.getElementById('grand-total').textContent = '0';
+function recalcAgfa() {
+  let grand = 0;
+  for (let i = 1; i <= agfaRowCount; i++) {
+    const qty = parseFloat(document.getElementById('agfa-qty-'+i)?.value)||0;
+    const up  = parseFloat(document.getElementById('agfa-up-' +i)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('agfa-tot-'+i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('agfa-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('agfa-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
   }
+  document.getElementById('agfa-grand-total').textContent = Math.round(grand).toLocaleString();
+}
 
-  buildTable();
+function recalcAgfaMobile() {
+  let grand = 0;
+  for (let i = 1; i <= agfaRowCount; i++) {
+    const qty = parseFloat(document.getElementById('agfa-mqty-'+i)?.value)||0;
+    const up  = parseFloat(document.getElementById('agfa-mup-' +i)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('agfa-mtot-'+i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('agfa-tot-' +i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('agfa-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('agfa-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
+  }
+  document.getElementById('agfa-grand-total').textContent = Math.round(grand).toLocaleString();
+}
+
+function clearAgfaForm() {
+  ['agfa-customer','agfa-province','agfa-invoice'].forEach(id => {
+    document.getElementById(id).value='';
+    const pid = 'agfa-print-'+id.replace('agfa-','');
+    if (document.getElementById(pid)) document.getElementById(pid).textContent='';
+  });
+  document.getElementById('agfa-date').value = localDate();
+  document.getElementById('agfa-print-date').textContent = localDate();
+  document.getElementById('agfa-tbody').innerHTML = '';
+  document.getElementById('agfa-mobile-body').innerHTML = '';
+  agfaRowCount = 0;
+  for (let i = 0; i < 10; i++) addAgfaRow();
+  document.getElementById('agfa-grand-total').textContent = '0';
+  checkAddBtn();
+}
+
+// ── PRINT ──
+function triggerPrint() {
+  // Small delay ensures print-val spans are populated before dialog opens
+  setTimeout(() => { window.print(); }, 80);
+}
+
+// ── INIT ──
+buildFilmsTable();
+buildAgfaForm();
 </script>
 </body>
 </html>
