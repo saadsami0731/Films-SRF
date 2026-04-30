@@ -434,7 +434,7 @@ function buildAgfaForm() {
   document.getElementById('agfa-date').value = localDate();
   document.getElementById('agfa-print-date').textContent = localDate();
   agfaRowCount = 0;
-  for (let i = 0; i < 10; i++) addAgfaRow();
+  for (let i = 0; i < 1; i++) addAgfaRow();
   checkAddBtn();
 }
 
@@ -484,16 +484,7 @@ function addAgfaRow() {
 }
 
 function checkAddBtn() {
-  // Show + button only when all 6 initial rows have an item selected
-  const btn = document.getElementById('add-row-btn');
-  let allFilled = agfaRowCount >= 6;
-  if (allFilled) {
-    for (let i = 1; i <= agfaRowCount; i++) {
-      const el = document.getElementById('agfa-item-'+i);
-      if (el && !el.value.trim()) { allFilled = false; break; }
-    }
-  }
-  btn.style.display = allFilled ? 'flex' : 'none';
+  document.getElementById('add-row-btn').style.display = 'flex';
 }
 
 function buildDropdownOptions(n, query, isMobile) {
@@ -611,7 +602,7 @@ function clearAgfaForm() {
   document.getElementById('agfa-tbody').innerHTML = '';
   document.getElementById('agfa-mobile-body').innerHTML = '';
   agfaRowCount = 0;
-  for (let i = 0; i < 10; i++) addAgfaRow();
+  for (let i = 0; i < 1; i++) addAgfaRow();
   document.getElementById('agfa-grand-total').textContent = '0';
   checkAddBtn();
 }
