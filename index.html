@@ -469,9 +469,8 @@ function addAgfaRow() {
   const card = document.createElement('div');
   card.className = 'agfa-card'; card.id = 'agfa-mcard-'+n;
   card.innerHTML = `
-    <div class="agfa-card-num">${n}</div>
     <div class="agfa-card-field">
-      <label>Item</label>
+      <label>Item ${n}</label>
       <div class="item-search-wrap">
         <input class="item-search-input" id="agfa-mitem-${n}" placeholder="Search or type item..." oninput="filterMobileDropdown(${n})" onfocus="openMobileDropdown(${n})" autocomplete="off" />
         <div class="item-dropdown" id="agfa-mdd-${n}"></div>
