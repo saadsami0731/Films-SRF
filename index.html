@@ -38,7 +38,7 @@
   .coming-soon { font-size: 10px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.07em; border: 1px solid #ddd; border-radius: 4px; padding: 2px 7px; margin-left: auto; margin-right: 8px; }
 
   /* ── SHARED FORM STYLES ── */
-  #form-screen, #agfa-form-screen { display: none; width: 100%; max-width: 720px; }
+  #form-screen, #agfa-form-screen, #drgem-form-screen { display: none; width: 100%; max-width: 720px; }
   .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 1.25rem; background: none; border: none; padding: 0; font-family: inherit; }
   .back-btn:hover { color: #1a1a1a; }
   .page { background: #fff; width: 100%; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 2.5rem 2.5rem 2rem; }
@@ -58,6 +58,10 @@
   .value-label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
   .value-amount { font-size: 18px; font-weight: 600; color: #1a1a1a; }
   .sig-row { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
+  .sig-name-input { font-size: 13px; padding: 6px 0; border: none; background: transparent; color: #1a1a1a; width: 100%; outline: none; text-align: left; margin-bottom: 4px; }
+  .sig-name-input:focus { background: transparent; }
+  .sig-print-name { display: none; }
+
   .sig-box { border-bottom: 1.5px solid #bbb; width: 240px; padding-bottom: 5px; }
   .sig-box span { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
   .btn-row { display: flex; justify-content: flex-end; gap: 10px; }
@@ -96,19 +100,19 @@
   .item-card-field input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
   .item-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
 
-  /* ── AGFA TABLE ── */
-  .agfa-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; table-layout: fixed; }
-  .agfa-table colgroup col:nth-child(1) { width: 32px; }
-  .agfa-table colgroup col:nth-child(2) { width: auto; }
-  .agfa-table colgroup col:nth-child(3) { width: 90px; }
-  .agfa-table colgroup col:nth-child(4) { width: 110px; }
-  .agfa-table colgroup col:nth-child(5) { width: 110px; }
-  .agfa-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
-  .agfa-table th.left { text-align: left; }
-  .agfa-table td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
-  .agfa-table td.left { text-align: left; }
-  .agfa-table input[type=number] { font-size: 13px; padding: 5px 7px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
-  .agfa-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
+  /* ── EQUIPMENT TABLE (Agfa & DRGEM) ── */
+  .agfa-table, .drgem-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; table-layout: fixed; }
+  .agfa-table colgroup col:nth-child(1), .drgem-table colgroup col:nth-child(1) { width: 32px; }
+  .agfa-table colgroup col:nth-child(2), .drgem-table colgroup col:nth-child(2) { width: auto; }
+  .agfa-table colgroup col:nth-child(3), .drgem-table colgroup col:nth-child(3) { width: 90px; }
+  .agfa-table colgroup col:nth-child(4), .drgem-table colgroup col:nth-child(4) { width: 110px; }
+  .agfa-table colgroup col:nth-child(5), .drgem-table colgroup col:nth-child(5) { width: 110px; }
+  .agfa-table th, .drgem-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
+  .agfa-table th.left, .drgem-table th.left { text-align: left; }
+  .agfa-table td, .drgem-table td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
+  .agfa-table td.left, .drgem-table td.left { text-align: left; }
+  .agfa-table input[type=number], .drgem-table input[type=number] { font-size: 13px; padding: 5px 7px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
+  .agfa-table input[type=number]:focus, .drgem-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
 
   /* Searchable dropdown */
   .item-search-wrap { position: relative; }
@@ -124,14 +128,14 @@
   .add-row-btn { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #555; background: none; border: 1px dashed #ccc; border-radius: 7px; padding: 8px 16px; cursor: pointer; margin-bottom: 1.25rem; width: 100%; justify-content: center; transition: border-color 0.15s, color 0.15s; }
   .add-row-btn:hover { border-color: #888; color: #1a1a1a; }
 
-  /* Agfa mobile cards */
-  .agfa-mobile-items { display: none; }
-  .agfa-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
-  .agfa-card-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
-  .agfa-card-field { margin-bottom: 8px; }
-  .agfa-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
-  .agfa-card-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-  .agfa-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
+  /* Equipment mobile cards (Agfa & DRGEM) */
+  .agfa-mobile-items, .drgem-mobile-items { display: none; }
+  .agfa-card, .drgem-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+  .agfa-card-num, .drgem-card-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
+  .agfa-card-field, .drgem-card-field { margin-bottom: 8px; }
+  .agfa-card-field label, .drgem-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  .agfa-card-nums, .drgem-card-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .agfa-card-total, .drgem-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
 
   /* Mobile breakpoint */
   @media (max-width: 540px) {
@@ -140,14 +144,14 @@
     .meta-grid { grid-template-columns: 1fr; }
     .desktop-table { display: none !important; }
     .mobile-items { display: block; }
-    .agfa-desktop-table { display: none !important; }
-    .agfa-mobile-items { display: block; }
+    .agfa-desktop-table, .drgem-desktop-table { display: none !important; }
+    .agfa-mobile-items, .drgem-mobile-items { display: block; }
     .sig-box { width: 100%; }
     .btn-row { flex-direction: column; }
     .btn-clear, .btn-print { width: 100%; text-align: center; }
-    .agfa-card { overflow: hidden; }
-    .agfa-card-nums { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
-    .agfa-card-field input[type=number] { min-width: 0; max-width: 100%; }
+    .agfa-card, .drgem-card { overflow: hidden; }
+    .agfa-card-nums, .drgem-card-nums { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+    .agfa-card-field input[type=number], .drgem-card-field input[type=number] { min-width: 0; max-width: 100%; }
     .item-search-input { min-width: 0; max-width: 100%; }
   }
 
@@ -162,9 +166,9 @@
     .add-row-btn { display: none; }
     .header p { display: none; }
     .mobile-items { display: none !important; }
-    .agfa-mobile-items { display: none !important; }
+    .agfa-mobile-items, .drgem-mobile-items { display: none !important; }
     table.desktop-table { display: table !important; }
-    table.agfa-desktop-table { display: table !important; }
+    table.agfa-desktop-table, table.drgem-desktop-table { display: table !important; }
     .item-dropdown { display: none !important; }
     .sig-box { width: 260px; }
     .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
@@ -172,15 +176,17 @@
     .sig-row { margin-bottom: 1rem; }
     .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; }
     input::placeholder { color: transparent; }
-    .items-table input[type=number], .agfa-table input[type=number] { display: none; }
+    .items-table input[type=number], .agfa-table input[type=number], .drgem-table input[type=number] { display: none; }
     .item-search-input { display: none; }
     .field-group input { display: none; }
+    .sig-name-input { display: none; }
+    .sig-print-name { display: block !important; font-size: 13px; color: #1a1a1a; padding: 4px 0; min-height: 22px; border: none; }
     .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
     .print-val-field { display: block; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px; }
-    .agfa-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
+    .agfa-print-item, .drgem-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
   }
 
-  .agfa-print-item { display: none; }
+  .agfa-print-item, .drgem-print-item { display: none; }
 </style>
 </head>
 <body>
@@ -206,12 +212,12 @@
       </div>
       <div class="card-arrow">›</div>
     </div>
-    <div class="menu-card inactive">
+    <div class="menu-card" onclick="showScreen('drgem-form-screen')">
       <div class="card-body">
         <div class="card-title">DRGEM</div>
         <div class="card-sub">DRGEM release form</div>
       </div>
-      <span class="coming-soon">Coming soon</span>
+      <div class="card-arrow">›</div>
     </div>
   </div>
 </div>
@@ -225,6 +231,11 @@
       <p>Fill in all fields then print / save as PDF</p>
     </div>
     <div class="meta-grid">
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Salesman name</label>
+        <input type="text" id="salesman-name" placeholder="Enter your name" oninput="syncPrint('salesman-name')" />
+        <span class="print-val-field" id="print-salesman-name"></span>
+      </div>
       <div class="field-group" style="grid-column:1/-1">
         <label>Customer</label>
         <input type="text" id="customer" placeholder="Enter customer name" oninput="syncPrint('customer')" />
@@ -256,7 +267,7 @@
       <span class="value-label">Value of sale</span>
       <span class="value-amount" id="grand-total">0</span>
     </div>
-    <div class="sig-row"><div class="sig-box"><span>Salesman signature</span></div></div>
+    
     <div class="btn-row">
       <button class="btn-clear" onclick="clearFilmsForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
@@ -273,6 +284,11 @@
       <p>Fill in all fields then print / save as PDF</p>
     </div>
     <div class="meta-grid">
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Salesman name</label>
+        <input type="text" id="agfa-salesman-name" placeholder="Enter your name" oninput="agfaSyncPrint('agfa-salesman-name','agfa-print-salesman-name')" />
+        <span class="print-val-field" id="agfa-print-salesman-name"></span>
+      </div>
       <div class="field-group" style="grid-column:1/-1">
         <label>Customer</label>
         <input type="text" id="agfa-customer" placeholder="Enter customer name" oninput="agfaSyncPrint('agfa-customer','agfa-print-customer')" />
@@ -311,9 +327,67 @@
       <span class="value-label">Value of sale</span>
       <span class="value-amount" id="agfa-grand-total">0</span>
     </div>
-    <div class="sig-row"><div class="sig-box"><span>Salesman signature</span></div></div>
+    
     <div class="btn-row">
       <button class="btn-clear" onclick="clearAgfaForm()">Clear</button>
+      <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- DRGEM EQUIPMENT FORM SCREEN -->
+<div id="drgem-form-screen">
+  <button class="back-btn" onclick="showHome()">← Back</button>
+  <div class="page">
+    <div class="header">
+      <h1>Stock Release Form — DRGEM</h1>
+      <p>Fill in all fields then print / save as PDF</p>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Salesman name</label>
+        <input type="text" id="drgem-salesman-name" placeholder="Enter your name" oninput="drgemSyncPrint('drgem-salesman-name','drgem-print-salesman-name')" />
+        <span class="print-val-field" id="drgem-print-salesman-name"></span>
+      </div>
+      <div class="field-group" style="grid-column:1/-1">
+        <label>Customer</label>
+        <input type="text" id="drgem-customer" placeholder="Enter customer name" oninput="drgemSyncPrint('drgem-customer','drgem-print-customer')" />
+        <span class="print-val-field" id="drgem-print-customer"></span>
+      </div>
+      <div class="field-group">
+        <label>Province / City</label>
+        <input type="text" id="drgem-province" placeholder="e.g. Baghdad" oninput="drgemSyncPrint('drgem-province','drgem-print-province')" />
+        <span class="print-val-field" id="drgem-print-province"></span>
+      </div>
+      <div class="field-group">
+        <label>Date</label>
+        <input type="date" id="drgem-date" oninput="drgemSyncPrint('drgem-date','drgem-print-date')" />
+        <span class="print-val-field" id="drgem-print-date"></span>
+      </div>
+      <div class="field-group" style="grid-column:1/-1">
+        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
+        <input type="text" id="drgem-invoice" oninput="drgemSyncPrint('drgem-invoice','drgem-print-invoice')" />
+        <span class="print-val-field" id="drgem-print-invoice"></span>
+      </div>
+    </div>
+
+    <table class="drgem-table drgem-desktop-table">
+      <colgroup><col /><col /><col /><col /><col /></colgroup>
+      <thead><tr><th class="left">#</th><th class="left">Item</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
+      <tbody id="drgem-tbody"></tbody>
+    </table>
+
+    <div class="drgem-mobile-items" id="drgem-mobile-body"></div>
+
+    <button class="add-row-btn" id="drgem-add-row-btn" onclick="addDrgemRow()" style="display:none">+ Add item</button>
+
+    <div class="value-row">
+      <span class="value-label">Value of sale</span>
+      <span class="value-amount" id="drgem-grand-total">0</span>
+    </div>
+    
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearDrgemForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
     </div>
   </div>
@@ -322,6 +396,9 @@
 <script>
 // ── AGFA ITEMS LIST ──
 const AGFA_ITEMS = ["AGFA CRADLE CHARGER DURALINE (FXRR-01A)","AGFA DR 100 E System","AGFA DR 100 S System","AGFA DR 14 E G DETECTOR SYSTEM","AGFA DR 14 S DETECTOR - PUXIUM SYSTEM","AGFA DR 24 M DETECTOR SYSTEM","AGFA DR14E CESIUM DETECTOR","AGFA DX-D 100+ -DR14 - 40KW-300KHU-230V","AGFA Film  DT5B  10*12","AGFA Film  DT5B  11*14","AGFA Film  DT5B  14*14","AGFA Film  DT5B  14*17","AGFA Film  DT5B  8*10","AGFA FILM Mammo  DT5B  10*12","AGFA VALORY FLOOR X-RAY SYSTEM","AGFA Workstation","Agfa XD14 Detector","Agfa XD14 Detector PLUS","Agfa XD14 Detector USED","Agfa XD17 DETECTOR","BATTERY 14E DETECTOR","BATTERY 14S DETECTOR","BATTERY DX-D30 DETECTOR","BATTERY DX-D40 DETECTOR","BATTERY XD14/17 DETECTOR","CR 10 X","CR 10-X USED","CR 12 X","CR 12-X USED","CR 15 - X USED","CR 15 X","CR ANTISCATTER GRID V2","CR EASYLIFT","CR FULL BODY CASSETTE HOLDER","CR MD 1.0  CASSETTE 14*17","CR MD 1.0  General Set  10*12","CR MD 1.0  General Set  10*12 - USED","CR MD 1.0  General Set  14*17","CR MD 1.0  General Set  14*17 - USED","CR MD 1.0  General Set  15*30CM","CR MD 1.0  General Set  8*10","CR MD 1.0  PLATE  14*17","CR MD 4.0  General Set  10*12","CR MD 4.0  General Set  14*14","CR MD 4.0  General Set  14*17","CR MD 4.0  General Set  15*30CM","CR MD 4.0  General Set  24*30","CR MD 4.0  General Set  8*10","CR MD 4.0 CASSETTE  10*12","CR MD 4.0 CASSETTE  14*14","CR MD 4.0 CASSETTE HR  14*17","CR MD 4.0 PLATE  14*14","CR MD 4.0 PLATE  14*17","CR MD 4.0 PLATE 10*12","CR MD 4.0 R  FLFS  14*17","CR MD 4.0 R  General Set  10*12","CR MD 4.0 R  General Set  14*14","CR MD 4.0 R  General Set  14*17","CR MD 4.0 R  General Set  15*30CM","CR MD 4.0 R  General Set  8*10","CR MD 4.0 R CASSETTE  10*12","CR MD 4.0 R CASSETTE  14*17","CR MD 4.0 R PLATE  14*17","CR MD 4.0 T  CASSETTE  14*17","CR MD 4.0 T  FLFS  14*17","CR MD 4.0 T  FLFS  14*17 - USED","CR MD 4.0 T  FLFS Cover Only  14*17 - USED","CR MD 4.0 T  General Set  10*12","CR MD 4.0 T  General Set  14*14","CR MD 4.0 T  General Set  14*17","CR MD 4.0 T  General Set  15*30CM","CR MD 4.0 T  General Set  8*10","CR MD 4.0 T Cover Only 10*12  - USED","CR MD 4.0 T Cover Only 14*17  - USED","CR MD 4.0 T General Set 10*12  - USED","CR MD 4.0 T General Set 14*14  - USED","CR MD 4.0 T General Set 14*17  - USED","CR MD 4.0 T General Set 8*10  - USED","CR MD 4.1  FLFS  14*17","CR MD1.0 CASSETTE ADAPTER 10*12","Detector Laptop","DRYSTAR 5301","DRYSTAR 5301 - USED","DRYSTAR 5301  WX- CN","DRYSTAR 5302","DRYSTAR 5302 - CN","DRYSTAR 5302 - USED","DRYSTAR AXYS","DRYSTAR AXYS - CN","DRYSTAR AXYS - USED","DUAL SLOT BATTERY CHARGER (NOT CRADLE) FOR XD14/17 DETECTOR","DX-D 100","DX-D 10C","DX-D 10G","DX-D 20G","DX-D 300","DX-D 30C","DX-D 40  C","DX-D 40  G","DX-D 400","DX-D 600","DX-D 800","DX-D40 USED","FLFS System","HUB","HUB - USED","Labor Warranty 1 Year","Labor Warranty 2 Years","Labor Warranty 3 Years","Labor Warranty 4 Years","Labor Warranty 5 Years","Manufacturing Warranty ( Parts ) 1 Year","Manufacturing Warranty ( Parts ) 2 Years","Manufacturing Warranty ( Parts ) 3 Years","Manufacturing Warranty ( Parts ) 4 Years","Manufacturing Warranty ( Parts ) 5 Years","MONITOR - Agfa","MONITOR - LM","MONITOR - USED","NX-MW STARTER KIT Value CPU - WINDOWS LICENSE","PC - LM","PC - USED","POCKET EXTERNAL ACCESS POINT EU – TP LINK","Power Extension Strip","Power Extension Strip - USED","UPS - USED","UPS 1 KV Online","UPS 2 KV Online","UPS 3 KV Online","USB-C CHARGER (VR+HV8042)"];
+
+
+const DRGEM_ITEMS = ["DRGEM - ECONOMY LINE 40 X-RAY SYSTEM","DRGEM ACCESS POINT & LAN CARD","DRGEM DIAMOND X-RAY SYSTEM","DRGEM GXR-40 X-RAY SYSTEM CEILING FLOOR MOUNTED","DRGEM GXR40C - GENERATOR & CONSOLE","DRGEM GXR-40S X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-52 X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-C40S X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-E40S Plus - Economy X-Ray System Floor Mounted","DRGEM GXR-EC40S Plus - Economy Capacitor X-Ray System Floor Mounted","DRGEM MANO 4336W DETECTOR","DRGEM MANO 4343W DETECTOR","DRGEM Portable X-Ray DR - TOPAZ","Lithium Polymer Battery - DRGEM","Monitor for DRGEM","PC for DRGEM"];
 
 const FILMS_ITEMS = [
   { id: 1, film: 'DT5B 14 X 17' },
@@ -338,11 +415,13 @@ function showScreen(id) {
   document.getElementById('home-screen').style.display = 'none';
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('agfa-form-screen').style.display = 'none';
+  document.getElementById('drgem-form-screen').style.display = 'none';
   document.getElementById(id).style.display = 'block';
 }
 function showHome() {
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('agfa-form-screen').style.display = 'none';
+  document.getElementById('drgem-form-screen').style.display = 'none';
   document.getElementById('home-screen').style.display = 'block';
 }
 
@@ -420,7 +499,7 @@ function recalcFilmsMobile() {
 }
 
 function clearFilmsForm() {
-  ['customer','province','invoice'].forEach(id => { document.getElementById(id).value=''; document.getElementById('print-'+id).textContent=''; });
+  ['customer','province','invoice','salesman-name'].forEach(id => { document.getElementById(id).value=''; const p=document.getElementById('print-'+id); if(p) p.textContent=''; });
   document.getElementById('date').value = localDate();
   document.getElementById('print-date').textContent = localDate();
   FILMS_ITEMS.forEach(item => {
@@ -595,7 +674,7 @@ function recalcAgfaMobile() {
 }
 
 function clearAgfaForm() {
-  ['agfa-customer','agfa-province','agfa-invoice'].forEach(id => {
+  ['agfa-customer','agfa-province','agfa-invoice','agfa-salesman-name'].forEach(id => {
     document.getElementById(id).value='';
     const pid = 'agfa-print-'+id.replace('agfa-','');
     if (document.getElementById(pid)) document.getElementById(pid).textContent='';
@@ -610,6 +689,180 @@ function clearAgfaForm() {
   checkAddBtn();
 }
 
+
+// ── DRGEM FORM ──
+let drgemRowCount = 0;
+
+function buildDrgemForm() {
+  document.getElementById('drgem-date').value = localDate();
+  document.getElementById('drgem-print-date').textContent = localDate();
+  drgemRowCount = 0;
+  for (let i = 0; i < 1; i++) addDrgemRow();
+  checkDrgemAddBtn();
+}
+
+function drgemSyncPrint(inputId, printId) {
+  document.getElementById(printId).textContent = document.getElementById(inputId).value;
+}
+
+function addDrgemRow() {
+  drgemRowCount++;
+  const n = drgemRowCount;
+
+  const tb = document.getElementById('drgem-tbody');
+  const tr = document.createElement('tr');
+  tr.id = 'drgem-row-'+n;
+  tr.innerHTML = `
+    <td class="left"><span class="item-num">${n}</span></td>
+    <td class="left">
+      <div class="item-search-wrap">
+        <input class="item-search-input" id="drgem-item-${n}" placeholder="Search or type item..." oninput="filterDrgemDropdown(${n})" onfocus="openDrgemDropdown(${n})" autocomplete="off" />
+        <div class="item-dropdown" id="drgem-dd-${n}"></div>
+      </div>
+      <span class="drgem-print-item" id="drgem-print-item-${n}"></span>
+    </td>
+    <td><input type="number" id="drgem-qty-${n}" min="0" placeholder="0" oninput="recalcDrgem()" /><span class="print-val" id="drgem-pqty-${n}"></span></td>
+    <td><input type="number" id="drgem-up-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcDrgem()" /><span class="print-val" id="drgem-pup-${n}"></span></td>
+    <td id="drgem-tot-${n}" style="font-weight:600">—</td>`;
+  tb.appendChild(tr);
+
+  const mb = document.getElementById('drgem-mobile-body');
+  const card = document.createElement('div');
+  card.className = 'drgem-card'; card.id = 'drgem-mcard-'+n;
+  card.innerHTML = `
+    <div class="drgem-card-field">
+      <label>Item ${n}</label>
+      <div class="item-search-wrap">
+        <input class="item-search-input" id="drgem-mitem-${n}" placeholder="Search or type item..." oninput="filterDrgemMobileDropdown(${n})" onfocus="openDrgemMobileDropdown(${n})" autocomplete="off" />
+        <div class="item-dropdown" id="drgem-mdd-${n}"></div>
+      </div>
+    </div>
+    <div class="drgem-card-nums">
+      <div class="drgem-card-field"><label>Quantity</label><input type="number" id="drgem-mqty-${n}" min="0" placeholder="0" oninput="recalcDrgemMobile()" /></div>
+      <div class="drgem-card-field"><label>Unit price</label><input type="number" id="drgem-mup-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcDrgemMobile()" /></div>
+      <div class="drgem-card-field"><label>Total price</label><div class="drgem-card-total" id="drgem-mtot-${n}">—</div></div>
+    </div>`;
+  mb.appendChild(card);
+
+  checkDrgemAddBtn();
+}
+
+function checkDrgemAddBtn() {
+  document.getElementById('drgem-add-row-btn').style.display = 'flex';
+}
+
+function buildDrgemDropdownOptions(n, query, isMobile) {
+  const ddId = isMobile ? 'drgem-mdd-'+n : 'drgem-dd-'+n;
+  const dd = document.getElementById(ddId);
+  dd.innerHTML = '';
+  const q = query.toLowerCase();
+  const keywords = q.split(/\s+/).filter(k => k.length > 0);
+  const matches = DRGEM_ITEMS.filter(i => keywords.every(k => i.toLowerCase().includes(k)));
+  if (matches.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'item-option no-match';
+    div.textContent = 'No match — your typed text will be used';
+    dd.appendChild(div);
+  } else {
+    matches.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item-option';
+      div.textContent = item;
+      div.onmousedown = () => selectDrgemItem(n, item, isMobile);
+      dd.appendChild(div);
+    });
+  }
+  dd.classList.add('open');
+}
+
+function openDrgemDropdown(n) { buildDrgemDropdownOptions(n, document.getElementById('drgem-item-'+n).value, false); }
+function openDrgemMobileDropdown(n) { buildDrgemDropdownOptions(n, document.getElementById('drgem-mitem-'+n).value, true); }
+function filterDrgemDropdown(n) {
+  buildDrgemDropdownOptions(n, document.getElementById('drgem-item-'+n).value, false);
+  syncDrgemDesktopToMobile(n);
+  document.getElementById('drgem-print-item-'+n).textContent = document.getElementById('drgem-item-'+n).value;
+  checkDrgemAddBtn();
+}
+function filterDrgemMobileDropdown(n) {
+  buildDrgemDropdownOptions(n, document.getElementById('drgem-mitem-'+n).value, true);
+  syncDrgemMobileToDesktop(n);
+}
+
+function selectDrgemItem(n, item, isMobile) {
+  if (isMobile) {
+    document.getElementById('drgem-mitem-'+n).value = item;
+    document.getElementById('drgem-item-'+n).value = item;
+  } else {
+    document.getElementById('drgem-item-'+n).value = item;
+    if (document.getElementById('drgem-mitem-'+n)) document.getElementById('drgem-mitem-'+n).value = item;
+  }
+  document.getElementById('drgem-print-item-'+n).textContent = item;
+  const ddD = document.getElementById('drgem-dd-'+n);
+  const ddM = document.getElementById('drgem-mdd-'+n);
+  if (ddD) ddD.classList.remove('open');
+  if (ddM) ddM.classList.remove('open');
+  const qtyD = document.getElementById('drgem-qty-'+n);
+  const qtyM = document.getElementById('drgem-mqty-'+n);
+  if (qtyD && !qtyD.value) { qtyD.value = 1; }
+  if (qtyM && !qtyM.value) { qtyM.value = 1; }
+  recalcDrgem();
+  checkDrgemAddBtn();
+}
+
+function syncDrgemDesktopToMobile(n) {
+  const m = document.getElementById('drgem-mitem-'+n);
+  if (m) m.value = document.getElementById('drgem-item-'+n).value;
+}
+function syncDrgemMobileToDesktop(n) {
+  const d = document.getElementById('drgem-item-'+n);
+  if (d) { d.value = document.getElementById('drgem-mitem-'+n).value; document.getElementById('drgem-print-item-'+n).textContent = d.value; }
+}
+
+function recalcDrgem() {
+  let grand = 0;
+  for (let i = 1; i <= drgemRowCount; i++) {
+    const qty = parseFloat(document.getElementById('drgem-qty-'+i)?.value)||0;
+    const up  = parseFloat(document.getElementById('drgem-up-' +i)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('drgem-tot-'+i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('drgem-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('drgem-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
+  }
+  document.getElementById('drgem-grand-total').textContent = Math.round(grand).toLocaleString();
+}
+
+function recalcDrgemMobile() {
+  let grand = 0;
+  for (let i = 1; i <= drgemRowCount; i++) {
+    const qty = parseFloat(document.getElementById('drgem-mqty-'+i)?.value)||0;
+    const up  = parseFloat(document.getElementById('drgem-mup-' +i)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('drgem-mtot-'+i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('drgem-tot-' +i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
+    document.getElementById('drgem-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('drgem-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    grand += tot;
+  }
+  document.getElementById('drgem-grand-total').textContent = Math.round(grand).toLocaleString();
+}
+
+function clearDrgemForm() {
+  ['drgem-customer','drgem-province','drgem-invoice','drgem-salesman-name'].forEach(id => {
+    document.getElementById(id).value='';
+    const pid = 'drgem-print-'+id.replace('drgem-','');
+    if (document.getElementById(pid)) document.getElementById(pid).textContent='';
+  });
+  document.getElementById('drgem-date').value = localDate();
+  document.getElementById('drgem-print-date').textContent = localDate();
+  document.getElementById('drgem-tbody').innerHTML = '';
+  document.getElementById('drgem-mobile-body').innerHTML = '';
+  drgemRowCount = 0;
+  for (let i = 0; i < 1; i++) addDrgemRow();
+  document.getElementById('drgem-grand-total').textContent = '0';
+  checkDrgemAddBtn();
+}
+
 // ── PRINT ──
 function triggerPrint() {
   // Small delay ensures print-val spans are populated before dialog opens
@@ -619,6 +872,7 @@ function triggerPrint() {
 // ── INIT ──
 buildFilmsTable();
 buildAgfaForm();
+buildDrgemForm();
 </script>
 </body>
 </html>
