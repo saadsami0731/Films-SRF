@@ -42,7 +42,7 @@
   .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 1.25rem; background: none; border: none; padding: 0; font-family: inherit; }
   .back-btn:hover { color: #1a1a1a; }
   .page { background: #fff; width: 100%; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 2.5rem 2.5rem 2rem; }
-  .header { border-bottom: 1.5px solid #e0e0e0; padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+  .header { border-bottom: 1.5px solid #e0e0e0; padding-bottom: 1.25rem; margin-bottom: 1.5rem; text-align: center; }
   .header h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1a1a1a; }
   .header p { font-size: 12px; color: #888; margin-top: 3px; }
   .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
@@ -50,7 +50,17 @@
   .field-group .label-row { display: flex; align-items: center; gap: 6px; }
   .field-group label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
   .optional { font-size: 10px; font-weight: 400; color: #aaa; text-transform: none; letter-spacing: 0; }
-  .field-group input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s; }
+  .field-group input, .field-group select { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s; font-family: inherit; }
+  .field-group select:focus { outline: none; border-color: #555; }
+  .city-search-wrap { position: relative; }
+  .city-search-input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; font-family: inherit; }
+  .city-search-input:focus { outline: none; border-color: #555; }
+  .city-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 999; max-height: 220px; overflow-y: auto; display: none; margin-top: 2px; }
+  .city-dropdown.open { display: block; }
+  .city-option { padding: 8px 12px; font-size: 13px; color: #1a1a1a; cursor: pointer; }
+  .city-option:hover { background: #f4f4f4; }
+  .city-option.no-match { color: #aaa; cursor: default; padding: 8px 12px; font-size: 12px; }
+
   .field-group input:focus { outline: none; border-color: #555; }
   .print-val { display: none; }
   .print-val-field { display: none; }
@@ -59,6 +69,13 @@
   .value-amount { font-size: 18px; font-weight: 600; color: #1a1a1a; }
   .sig-row { display: flex; justify-content: flex-end; margin-bottom: 2rem; }
   .sig-name-input { font-size: 13px; padding: 6px 0; border: none; background: transparent; color: #1a1a1a; width: 100%; outline: none; text-align: left; margin-bottom: 4px; }
+  .print-salesman-bottom { display: none; }
+  .print-customer-combined { display: none; }
+  .remarks-input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; font-family: inherit; resize: vertical; min-height: 50px; }
+  .remarks-input:focus { outline: none; border-color: #555; }
+  .remarks-print { display: none; }
+
+  .print-header-bar { display: none; }
   .sig-name-input:focus { background: transparent; }
   .sig-print-name { display: none; }
 
@@ -163,7 +180,7 @@
     .back-btn { display: none !important; }
     .page { box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; padding: 0; page-break-after: avoid; page-break-inside: avoid; }
     .btn-row { display: none; }
-    .add-row-btn { display: none; }
+    .add-row-btn { display: none !important; }
     .header p { display: none; }
     .mobile-items { display: none !important; }
     .agfa-mobile-items, .drgem-mobile-items { display: none !important; }
@@ -174,13 +191,36 @@
     .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
     .value-row { padding: 0.5rem 0; margin-bottom: 0.8rem; }
     .sig-row { margin-bottom: 1rem; }
-    .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; }
+    .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; text-align: center; }
+    .header h1 { text-align: center; }
     input::placeholder { color: transparent; }
     .items-table input[type=number], .agfa-table input[type=number], .drgem-table input[type=number] { display: none; }
     .item-search-input { display: none; }
-    .field-group input { display: none; }
+    .field-group input, .field-group select { display: none; }
+    .remarks-input { display: none !important; }
+    .remarks-group label { display: block; font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+    .remarks-print { display: block !important; font-size: 13px; color: #1a1a1a; padding: 8px 10px; background: #ffd6d6; min-height: 30px; border-radius: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; white-space: pre-wrap; }
+    .remarks-print:empty::before { content: ""; }
     .sig-name-input { display: none; }
     .sig-print-name { display: block !important; font-size: 13px; color: #1a1a1a; padding: 4px 0; min-height: 22px; border: none; }
+    /* Hide top salesman name on print */
+    #salesman-top-films, #salesman-top-agfa, #salesman-top-drgem { display: none !important; }
+    /* Hide Customer, City, Date field groups — replaced with header bar */
+    #customer-group-films, #customer-group-agfa, #customer-group-drgem,
+    #province-group-films, #province-group-agfa, #province-group-drgem,
+    #date-group-films, #date-group-agfa, #date-group-drgem { display: none !important; }
+    .print-customer-combined { display: none !important; }
+    /* Print header bar: Customer (highlighted, big) on left, Date on right */
+    .print-header-bar { display: flex !important; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; gap: 12px; }
+    .print-header-bar .phb-customer { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .print-header-bar .phb-label { font-size: 10px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
+    .print-header-bar .phb-name { font-size: 18px; font-weight: 600; color: #1a1a1a; background: #fff59d; padding: 4px 8px; display: inline-block; align-self: flex-start; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-header-bar .phb-date { font-size: 18px; font-weight: 600; color: #1a1a1a; padding: 4px 0; white-space: nowrap; align-self: flex-end; }
+    .print-header-bar .phb-date-label { font-weight: 600; color: #1a1a1a; }
+    /* Show bottom salesman name on print */
+    .print-salesman-bottom { display: flex !important; justify-content: flex-end; margin-top: 1.2rem; padding-top: 0.8rem; border-top: 0.5px solid #e0e0e0; gap: 14px; align-items: baseline; }
+    .print-salesman-bottom .ps-label { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; }
+    .print-salesman-bottom .ps-name { font-size: 14px; font-weight: 600; color: #1a1a1a; min-width: 200px; border-bottom: 1px solid #ccc; padding: 2px 6px; }
     .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
     .print-val-field { display: block; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px; }
     .agfa-print-item, .drgem-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
@@ -231,32 +271,31 @@
       <p>Fill in all fields then print / save as PDF</p>
     </div>
     <div class="meta-grid">
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="salesman-top-films" style="grid-column:1/-1">
         <label>Salesman name</label>
-        <input type="text" id="salesman-name" placeholder="Enter your name" oninput="syncPrint('salesman-name')" />
+        <input type="text" id="salesman-name" placeholder="Enter your name" oninput="updateSalesmanFilms()" />
         <span class="print-val-field" id="print-salesman-name"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="customer-group-films" style="grid-column:1/-1">
         <label>Customer</label>
-        <input type="text" id="customer" placeholder="Enter customer name" oninput="syncPrint('customer')" />
+        <input type="text" id="customer" placeholder="Enter customer name" oninput="updateCustomerCombinedFilms()" />
         <span class="print-val-field" id="print-customer"></span>
       </div>
-      <div class="field-group">
-        <label>Province / City</label>
-        <input type="text" id="province" placeholder="e.g. Baghdad" oninput="syncPrint('province')" />
+      <div class="field-group" id="province-group-films">
+        <label>City</label>
+        <div class="city-search-wrap">
+          <input type="text" class="city-search-input" id="province" placeholder="Search city..." oninput="filterCityDropdown('films')" onfocus="openCityDropdown('films')" autocomplete="off" />
+          <div class="city-dropdown" id="city-dd-films"></div>
+        </div>
         <span class="print-val-field" id="print-province"></span>
       </div>
-      <div class="field-group">
+      <div class="field-group" id="date-group-films">
         <label>Date</label>
-        <input type="date" id="date" oninput="syncPrint('date')" />
+        <input type="date" id="date" oninput="updateDateFilms()" />
         <span class="print-val-field" id="print-date"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
-        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
-        <input type="text" id="invoice" oninput="syncPrint('invoice')" />
-        <span class="print-val-field" id="print-invoice"></span>
-      </div>
     </div>
+    <div class="print-header-bar"><div class="phb-customer"><span class="phb-label">Customer</span><span class="phb-name" id="pcc-films"></span></div><div class="phb-date"><span class="phb-date-label">Date:</span> <span id="phd-films"></span></div></div>
     <table class="items-table desktop-table">
       <colgroup><col /><col /><col /><col /><col /></colgroup>
       <thead><tr><th class="left">#</th><th class="left">Film type</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
@@ -267,7 +306,18 @@
       <span class="value-label">Value of sale</span>
       <span class="value-amount" id="grand-total">0</span>
     </div>
-    
+
+    <div class="field-group remarks-group" style="margin-bottom: 1.25rem;">
+      <label>Remarks</label>
+      <textarea id="remarks-films" class="remarks-input" placeholder="Type any notes here..." rows="2" oninput="updateRemarksFilms()"></textarea>
+      <span class="print-val-field remarks-print" id="print-remarks-films"></span>
+    </div>
+
+    <div class="print-salesman-bottom">
+      <span class="ps-label">Salesman name</span>
+      <span class="ps-name" id="ps-name-films"></span>
+    </div>
+
     <div class="btn-row">
       <button class="btn-clear" onclick="clearFilmsForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
@@ -284,32 +334,31 @@
       <p>Fill in all fields then print / save as PDF</p>
     </div>
     <div class="meta-grid">
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="salesman-top-agfa" style="grid-column:1/-1">
         <label>Salesman name</label>
-        <input type="text" id="agfa-salesman-name" placeholder="Enter your name" oninput="agfaSyncPrint('agfa-salesman-name','agfa-print-salesman-name')" />
+        <input type="text" id="agfa-salesman-name" placeholder="Enter your name" oninput="updateSalesmanAgfa()" />
         <span class="print-val-field" id="agfa-print-salesman-name"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="customer-group-agfa" style="grid-column:1/-1">
         <label>Customer</label>
-        <input type="text" id="agfa-customer" placeholder="Enter customer name" oninput="agfaSyncPrint('agfa-customer','agfa-print-customer')" />
+        <input type="text" id="agfa-customer" placeholder="Enter customer name" oninput="updateCustomerCombinedAgfa()" />
         <span class="print-val-field" id="agfa-print-customer"></span>
       </div>
-      <div class="field-group">
-        <label>Province / City</label>
-        <input type="text" id="agfa-province" placeholder="e.g. Baghdad" oninput="agfaSyncPrint('agfa-province','agfa-print-province')" />
+      <div class="field-group" id="province-group-agfa">
+        <label>City</label>
+        <div class="city-search-wrap">
+          <input type="text" class="city-search-input" id="agfa-province" placeholder="Search city..." oninput="filterCityDropdown('agfa')" onfocus="openCityDropdown('agfa')" autocomplete="off" />
+          <div class="city-dropdown" id="city-dd-agfa"></div>
+        </div>
         <span class="print-val-field" id="agfa-print-province"></span>
       </div>
-      <div class="field-group">
+      <div class="field-group" id="date-group-agfa">
         <label>Date</label>
-        <input type="date" id="agfa-date" oninput="agfaSyncPrint('agfa-date','agfa-print-date')" />
+        <input type="date" id="agfa-date" oninput="updateDateAgfa()" />
         <span class="print-val-field" id="agfa-print-date"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
-        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
-        <input type="text" id="agfa-invoice" oninput="agfaSyncPrint('agfa-invoice','agfa-print-invoice')" />
-        <span class="print-val-field" id="agfa-print-invoice"></span>
-      </div>
     </div>
+    <div class="print-header-bar"><div class="phb-customer"><span class="phb-label">Customer</span><span class="phb-name" id="pcc-agfa"></span></div><div class="phb-date"><span class="phb-date-label">Date:</span> <span id="phd-agfa"></span></div></div>
 
     <!-- Agfa desktop table -->
     <table class="agfa-table agfa-desktop-table">
@@ -327,7 +376,18 @@
       <span class="value-label">Value of sale</span>
       <span class="value-amount" id="agfa-grand-total">0</span>
     </div>
-    
+
+    <div class="field-group remarks-group" style="margin-bottom: 1.25rem;">
+      <label>Remarks</label>
+      <textarea id="remarks-agfa" class="remarks-input" placeholder="Type any notes here..." rows="2" oninput="updateRemarksAgfa()"></textarea>
+      <span class="print-val-field remarks-print" id="print-remarks-agfa"></span>
+    </div>
+
+    <div class="print-salesman-bottom">
+      <span class="ps-label">Salesman name</span>
+      <span class="ps-name" id="ps-name-agfa"></span>
+    </div>
+
     <div class="btn-row">
       <button class="btn-clear" onclick="clearAgfaForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
@@ -344,33 +404,31 @@
       <p>Fill in all fields then print / save as PDF</p>
     </div>
     <div class="meta-grid">
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="salesman-top-drgem" style="grid-column:1/-1">
         <label>Salesman name</label>
-        <input type="text" id="drgem-salesman-name" placeholder="Enter your name" oninput="drgemSyncPrint('drgem-salesman-name','drgem-print-salesman-name')" />
+        <input type="text" id="drgem-salesman-name" placeholder="Enter your name" oninput="updateSalesmanDrgem()" />
         <span class="print-val-field" id="drgem-print-salesman-name"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
+      <div class="field-group" id="customer-group-drgem" style="grid-column:1/-1">
         <label>Customer</label>
-        <input type="text" id="drgem-customer" placeholder="Enter customer name" oninput="drgemSyncPrint('drgem-customer','drgem-print-customer')" />
+        <input type="text" id="drgem-customer" placeholder="Enter customer name" oninput="updateCustomerCombinedDrgem()" />
         <span class="print-val-field" id="drgem-print-customer"></span>
       </div>
-      <div class="field-group">
-        <label>Province / City</label>
-        <input type="text" id="drgem-province" placeholder="e.g. Baghdad" oninput="drgemSyncPrint('drgem-province','drgem-print-province')" />
+      <div class="field-group" id="province-group-drgem">
+        <label>City</label>
+        <div class="city-search-wrap">
+          <input type="text" class="city-search-input" id="drgem-province" placeholder="Search city..." oninput="filterCityDropdown('drgem')" onfocus="openCityDropdown('drgem')" autocomplete="off" />
+          <div class="city-dropdown" id="city-dd-drgem"></div>
+        </div>
         <span class="print-val-field" id="drgem-print-province"></span>
       </div>
-      <div class="field-group">
+      <div class="field-group" id="date-group-drgem">
         <label>Date</label>
-        <input type="date" id="drgem-date" oninput="drgemSyncPrint('drgem-date','drgem-print-date')" />
+        <input type="date" id="drgem-date" oninput="updateDateDrgem()" />
         <span class="print-val-field" id="drgem-print-date"></span>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
-        <div class="label-row"><label>Invoice reference</label><span class="optional">(Optional)</span></div>
-        <input type="text" id="drgem-invoice" oninput="drgemSyncPrint('drgem-invoice','drgem-print-invoice')" />
-        <span class="print-val-field" id="drgem-print-invoice"></span>
       </div>
-    </div>
-
+    <div class="print-header-bar"><div class="phb-customer"><span class="phb-label">Customer</span><span class="phb-name" id="pcc-drgem"></span></div><div class="phb-date"><span class="phb-date-label">Date:</span> <span id="phd-drgem"></span></div></div>
     <table class="drgem-table drgem-desktop-table">
       <colgroup><col /><col /><col /><col /><col /></colgroup>
       <thead><tr><th class="left">#</th><th class="left">Item</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
@@ -385,7 +443,18 @@
       <span class="value-label">Value of sale</span>
       <span class="value-amount" id="drgem-grand-total">0</span>
     </div>
-    
+
+    <div class="field-group remarks-group" style="margin-bottom: 1.25rem;">
+      <label>Remarks</label>
+      <textarea id="remarks-drgem" class="remarks-input" placeholder="Type any notes here..." rows="2" oninput="updateRemarksDrgem()"></textarea>
+      <span class="print-val-field remarks-print" id="print-remarks-drgem"></span>
+    </div>
+
+    <div class="print-salesman-bottom">
+      <span class="ps-label">Salesman name</span>
+      <span class="ps-name" id="ps-name-drgem"></span>
+    </div>
+
     <div class="btn-row">
       <button class="btn-clear" onclick="clearDrgemForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
@@ -399,6 +468,61 @@ const AGFA_ITEMS = ["AGFA CRADLE CHARGER DURALINE (FXRR-01A)","AGFA DR 100 E Sys
 
 
 const DRGEM_ITEMS = ["DRGEM - ECONOMY LINE 40 X-RAY SYSTEM","DRGEM ACCESS POINT & LAN CARD","DRGEM DIAMOND X-RAY SYSTEM","DRGEM GXR-40 X-RAY SYSTEM CEILING FLOOR MOUNTED","DRGEM GXR40C - GENERATOR & CONSOLE","DRGEM GXR-40S X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-52 X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-C40S X-RAY SYSTEM FLOOR MOUNTED","DRGEM GXR-E40S Plus - Economy X-Ray System Floor Mounted","DRGEM GXR-EC40S Plus - Economy Capacitor X-Ray System Floor Mounted","DRGEM MANO 4336W DETECTOR","DRGEM MANO 4343W DETECTOR","DRGEM Portable X-Ray DR - TOPAZ","Lithium Polymer Battery - DRGEM","Monitor for DRGEM","PC for DRGEM"];
+
+
+const CITIES = ["Anbar","Baghdad","Basra","Diwanya","Dyala","Hilla","Karbala","Misan","Musil","Muthana","Najaf","Nasria","Salah Al Deen","Wasit"];
+
+function buildCityDropdown(form, query) {
+  const dd = document.getElementById('city-dd-' + form);
+  dd.innerHTML = '';
+  const q = (query || '').toLowerCase().trim();
+  const matches = q === '' ? CITIES : CITIES.filter(c => c.toLowerCase().includes(q));
+  if (matches.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'city-option no-match';
+    div.textContent = 'No matching city';
+    dd.appendChild(div);
+  } else {
+    matches.forEach(city => {
+      const div = document.createElement('div');
+      div.className = 'city-option';
+      div.textContent = city;
+      div.onmousedown = () => selectCity(form, city);
+      dd.appendChild(div);
+    });
+  }
+  dd.classList.add('open');
+}
+
+function openCityDropdown(form) {
+  const inputId = form === 'films' ? 'province' : form + '-province';
+  buildCityDropdown(form, document.getElementById(inputId).value);
+}
+
+function filterCityDropdown(form) {
+  const inputId = form === 'films' ? 'province' : form + '-province';
+  buildCityDropdown(form, document.getElementById(inputId).value);
+  // Trigger combined update too
+  if (form === 'films') updateCustomerCombinedFilms();
+  if (form === 'agfa')  updateCustomerCombinedAgfa();
+  if (form === 'drgem') updateCustomerCombinedDrgem();
+}
+
+function selectCity(form, city) {
+  const inputId = form === 'films' ? 'province' : form + '-province';
+  document.getElementById(inputId).value = city;
+  document.getElementById('city-dd-' + form).classList.remove('open');
+  if (form === 'films') updateCustomerCombinedFilms();
+  if (form === 'agfa')  updateCustomerCombinedAgfa();
+  if (form === 'drgem') updateCustomerCombinedDrgem();
+}
+
+// Close city dropdowns on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('.city-search-wrap')) {
+    document.querySelectorAll('.city-dropdown').forEach(dd => dd.classList.remove('open'));
+  }
+});
 
 const FILMS_ITEMS = [
   { id: 1, film: 'DT5B 14 X 17' },
@@ -430,6 +554,72 @@ function localDate() {
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
+
+
+function updateCustomerCombinedFilms() {
+  const c = document.getElementById('customer').value;
+  const p = document.getElementById('province').value;
+  document.getElementById('print-customer').textContent = c;
+  document.getElementById('print-province').textContent = p;
+  document.getElementById('pcc-films').textContent = c + (p ? ' - ' + p : '');
+}
+function updateDateFilms() {
+  const d = document.getElementById('date').value;
+  document.getElementById('print-date').textContent = d;
+  document.getElementById('phd-films').textContent = d;
+}
+function updateCustomerCombinedAgfa() {
+  const c = document.getElementById('agfa-customer').value;
+  const p = document.getElementById('agfa-province').value;
+  document.getElementById('agfa-print-customer').textContent = c;
+  document.getElementById('agfa-print-province').textContent = p;
+  document.getElementById('pcc-agfa').textContent = c + (p ? ' - ' + p : '');
+}
+function updateDateAgfa() {
+  const d = document.getElementById('agfa-date').value;
+  document.getElementById('agfa-print-date').textContent = d;
+  document.getElementById('phd-agfa').textContent = d;
+}
+function updateCustomerCombinedDrgem() {
+  const c = document.getElementById('drgem-customer').value;
+  const p = document.getElementById('drgem-province').value;
+  document.getElementById('drgem-print-customer').textContent = c;
+  document.getElementById('drgem-print-province').textContent = p;
+  document.getElementById('pcc-drgem').textContent = c + (p ? ' - ' + p : '');
+}
+function updateDateDrgem() {
+  const d = document.getElementById('drgem-date').value;
+  document.getElementById('drgem-print-date').textContent = d;
+  document.getElementById('phd-drgem').textContent = d;
+}
+
+
+function updateRemarksFilms() {
+  document.getElementById('print-remarks-films').textContent = document.getElementById('remarks-films').value;
+}
+function updateRemarksAgfa() {
+  document.getElementById('print-remarks-agfa').textContent = document.getElementById('remarks-agfa').value;
+}
+function updateRemarksDrgem() {
+  document.getElementById('print-remarks-drgem').textContent = document.getElementById('remarks-drgem').value;
+}
+
+function updateSalesmanFilms() {
+  const v = document.getElementById('salesman-name').value;
+  document.getElementById('print-salesman-name').textContent = v;
+  document.getElementById('ps-name-films').textContent = v;
+}
+function updateSalesmanAgfa() {
+  const v = document.getElementById('agfa-salesman-name').value;
+  document.getElementById('agfa-print-salesman-name').textContent = v;
+  document.getElementById('ps-name-agfa').textContent = v;
+}
+function updateSalesmanDrgem() {
+  const v = document.getElementById('drgem-salesman-name').value;
+  document.getElementById('drgem-print-salesman-name').textContent = v;
+  document.getElementById('ps-name-drgem').textContent = v;
+}
+
 function syncPrint(fieldId) {
   const val = document.getElementById(fieldId).value;
   const el = document.getElementById('print-' + fieldId);
@@ -467,6 +657,7 @@ function buildFilmsTable() {
   });
   document.getElementById('date').value = localDate();
   document.getElementById('print-date').textContent = localDate();
+  document.getElementById('phd-films').textContent = localDate();
 }
 
 function recalcFilms() {
@@ -499,9 +690,10 @@ function recalcFilmsMobile() {
 }
 
 function clearFilmsForm() {
-  ['customer','province','invoice','salesman-name'].forEach(id => { document.getElementById(id).value=''; const p=document.getElementById('print-'+id); if(p) p.textContent=''; });
+  ['customer','province','salesman-name'].forEach(id => { document.getElementById(id).value=''; const p=document.getElementById('print-'+id); if(p) p.textContent=''; }); document.getElementById('ps-name-films').textContent=''; document.getElementById('pcc-films').textContent=''; document.getElementById('remarks-films').value=''; document.getElementById('print-remarks-films').textContent='';
   document.getElementById('date').value = localDate();
   document.getElementById('print-date').textContent = localDate();
+  document.getElementById('phd-films').textContent = localDate();
   FILMS_ITEMS.forEach(item => {
     document.getElementById('qty-'+item.id).value=''; document.getElementById('up-'+item.id).value='';
     document.getElementById('tot-'+item.id).textContent='—';
@@ -516,6 +708,7 @@ function clearFilmsForm() {
 function buildAgfaForm() {
   document.getElementById('agfa-date').value = localDate();
   document.getElementById('agfa-print-date').textContent = localDate();
+  document.getElementById('phd-agfa').textContent = localDate();
   agfaRowCount = 0;
   for (let i = 0; i < 1; i++) addAgfaRow();
   checkAddBtn();
@@ -674,13 +867,15 @@ function recalcAgfaMobile() {
 }
 
 function clearAgfaForm() {
-  ['agfa-customer','agfa-province','agfa-invoice','agfa-salesman-name'].forEach(id => {
+  ['agfa-customer','agfa-province','agfa-salesman-name'].forEach(id => {
     document.getElementById(id).value='';
     const pid = 'agfa-print-'+id.replace('agfa-','');
     if (document.getElementById(pid)) document.getElementById(pid).textContent='';
   });
+  document.getElementById('ps-name-agfa').textContent=''; document.getElementById('pcc-agfa').textContent=''; document.getElementById('remarks-agfa').value=''; document.getElementById('print-remarks-agfa').textContent='';
   document.getElementById('agfa-date').value = localDate();
   document.getElementById('agfa-print-date').textContent = localDate();
+  document.getElementById('phd-agfa').textContent = localDate();
   document.getElementById('agfa-tbody').innerHTML = '';
   document.getElementById('agfa-mobile-body').innerHTML = '';
   agfaRowCount = 0;
@@ -696,6 +891,7 @@ let drgemRowCount = 0;
 function buildDrgemForm() {
   document.getElementById('drgem-date').value = localDate();
   document.getElementById('drgem-print-date').textContent = localDate();
+  document.getElementById('phd-drgem').textContent = localDate();
   drgemRowCount = 0;
   for (let i = 0; i < 1; i++) addDrgemRow();
   checkDrgemAddBtn();
@@ -848,13 +1044,15 @@ function recalcDrgemMobile() {
 }
 
 function clearDrgemForm() {
-  ['drgem-customer','drgem-province','drgem-invoice','drgem-salesman-name'].forEach(id => {
+  ['drgem-customer','drgem-province','drgem-salesman-name'].forEach(id => {
     document.getElementById(id).value='';
     const pid = 'drgem-print-'+id.replace('drgem-','');
     if (document.getElementById(pid)) document.getElementById(pid).textContent='';
   });
+  document.getElementById('ps-name-drgem').textContent=''; document.getElementById('pcc-drgem').textContent=''; document.getElementById('remarks-drgem').value=''; document.getElementById('print-remarks-drgem').textContent='';
   document.getElementById('drgem-date').value = localDate();
   document.getElementById('drgem-print-date').textContent = localDate();
+  document.getElementById('phd-drgem').textContent = localDate();
   document.getElementById('drgem-tbody').innerHTML = '';
   document.getElementById('drgem-mobile-body').innerHTML = '';
   drgemRowCount = 0;
