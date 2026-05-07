@@ -227,6 +227,7 @@
     .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
     .print-val-field { display: block; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px; }
     .agfa-print-item, .drgem-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
+    tr.row-empty { display: none !important; }
   }
 
   .agfa-print-item, .drgem-print-item { display: none; }
@@ -713,7 +714,7 @@ function buildAgfaForm() {
   document.getElementById('agfa-print-date').textContent = localDate();
   document.getElementById('phd-agfa').textContent = localDate();
   agfaRowCount = 0;
-  for (let i = 0; i < 1; i++) addAgfaRow();
+  for (let i = 0; i < 4; i++) addAgfaRow();
   checkAddBtn();
 }
 
@@ -882,7 +883,7 @@ function clearAgfaForm() {
   document.getElementById('agfa-tbody').innerHTML = '';
   document.getElementById('agfa-mobile-body').innerHTML = '';
   agfaRowCount = 0;
-  for (let i = 0; i < 1; i++) addAgfaRow();
+  for (let i = 0; i < 4; i++) addAgfaRow();
   document.getElementById('agfa-grand-total').textContent = '0';
   checkAddBtn();
 }
@@ -896,7 +897,7 @@ function buildDrgemForm() {
   document.getElementById('drgem-print-date').textContent = localDate();
   document.getElementById('phd-drgem').textContent = localDate();
   drgemRowCount = 0;
-  for (let i = 0; i < 1; i++) addDrgemRow();
+  for (let i = 0; i < 4; i++) addDrgemRow();
   checkDrgemAddBtn();
 }
 
@@ -1059,13 +1060,36 @@ function clearDrgemForm() {
   document.getElementById('drgem-tbody').innerHTML = '';
   document.getElementById('drgem-mobile-body').innerHTML = '';
   drgemRowCount = 0;
-  for (let i = 0; i < 1; i++) addDrgemRow();
+  for (let i = 0; i < 4; i++) addDrgemRow();
   document.getElementById('drgem-grand-total').textContent = '0';
   checkDrgemAddBtn();
 }
 
+
+function markEmptyRows() {
+  // Agfa
+  for (let i = 1; i <= agfaRowCount; i++) {
+    const tr = document.getElementById('agfa-row-' + i);
+    const inp = document.getElementById('agfa-item-' + i);
+    if (tr && inp) {
+      if (!inp.value.trim()) tr.classList.add('row-empty');
+      else tr.classList.remove('row-empty');
+    }
+  }
+  // Drgem
+  for (let i = 1; i <= drgemRowCount; i++) {
+    const tr = document.getElementById('drgem-row-' + i);
+    const inp = document.getElementById('drgem-item-' + i);
+    if (tr && inp) {
+      if (!inp.value.trim()) tr.classList.add('row-empty');
+      else tr.classList.remove('row-empty');
+    }
+  }
+}
+
 // ── PRINT ──
 function triggerPrint() {
+  markEmptyRows();
   // Small delay ensures print-val spans are populated before dialog opens
   setTimeout(() => { window.print(); }, 80);
 }
