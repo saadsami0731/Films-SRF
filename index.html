@@ -32,6 +32,17 @@
   .menu-card .card-body { flex: none; text-align: center; }
   .menu-card .card-arrow { display: none; }
   .menu-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.10); border-color: #bbb; transform: translateY(-2px); }
+
+  #detectors-home-card {
+    background: linear-gradient(135deg, #ffe259 0%, #ffa751 100%);
+    border-color: #f5c518;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #detectors-home-card .card-title { color: #1a1a1a; }
+  #detectors-home-card .card-sub { color: #7a5500; }
+  #detectors-home-card:hover { box-shadow: 0 4px 18px rgba(255, 167, 81, 0.45); border-color: #f5a000; transform: translateY(-2px); }
+
   .menu-card.inactive { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
   .card-body { flex: 1; }
   .card-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
@@ -41,7 +52,7 @@
   .coming-soon { font-size: 10px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.07em; border: 1px solid #ddd; border-radius: 4px; padding: 2px 7px; margin-left: auto; margin-right: 8px; }
 
   /* ── SHARED FORM STYLES ── */
-  #form-screen, #agfa-form-screen, #drgem-form-screen { display: none; width: 100%; max-width: 720px; }
+  #form-screen, #agfa-form-screen, #drgem-form-screen, #detectors-form-screen { display: none; width: 100%; max-width: 720px; }
   .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 1.25rem; background: none; border: none; padding: 0; font-family: inherit; }
   .back-btn:hover { color: #1a1a1a; }
   .page { background: #fff; width: 100%; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 2.5rem 2.5rem 2rem; }
@@ -55,12 +66,54 @@
   .optional { font-size: 10px; font-weight: 400; color: #aaa; text-transform: none; letter-spacing: 0; }
   .field-group input, .field-group select { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; transition: border-color 0.15s; font-family: inherit; }
   .field-group select:focus { outline: none; border-color: #555; }
+
+  .cat-bar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+
+  #detectors-screen-header { display: none; }
+  @media print { #detectors-screen-header { display: block !important; } }
+
+  .cat-prompt {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .currency-btn {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 9px;
+    border: 1px solid #1a1a1a;
+    border-radius: 5px;
+    background: #1a1a1a;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.04em;
+    transition: opacity 0.12s;
+    white-space: nowrap;
+  }
+  .currency-btn:hover { opacity: 0.85; }
+
+  .cat-btn { font-size: 12px; font-weight: 600; padding: 7px 14px; border: none; border-radius: 7px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; cursor: pointer; transition: all 0.18s; font-family: inherit; box-shadow: 0 2px 5px rgba(102, 126, 234, 0.25); -webkit-print-color-adjust: exact; print-color-adjust: exact; letter-spacing: 0.02em; }
+  .cat-btn:hover { transform: translateY(-1px); box-shadow: 0 3px 9px rgba(102, 126, 234, 0.4); opacity: 0.94; }
+  .cat-btn.active { background: #1a1a1a; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
   .city-search-wrap { position: relative; }
   .city-search-input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; font-family: inherit; }
   .city-search-input:focus { outline: none; border-color: #555; }
   .city-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 999; max-height: 220px; overflow-y: auto; display: none; margin-top: 2px; }
   .city-dropdown.open { display: block; }
   .city-option { padding: 8px 12px; font-size: 13px; color: #1a1a1a; cursor: pointer; }
+  .city-option.highlighted { background: #e8eeff; font-weight: 600; }
   .city-option:hover { background: #f4f4f4; }
   .city-option.no-match { color: #aaa; cursor: default; padding: 8px 12px; font-size: 12px; }
 
@@ -74,6 +127,70 @@
   .sig-name-input { font-size: 13px; padding: 6px 0; border: none; background: transparent; color: #1a1a1a; width: 100%; outline: none; text-align: left; margin-bottom: 4px; }
   .print-salesman-bottom { display: none; }
   .print-customer-combined { display: none; }
+
+  .add-warranty-btn,
+  .add-accessories-btn {
+    align-self: flex-start;
+    width: auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+    transition: all 0.18s;
+    margin-bottom: 12px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .add-warranty-btn:hover, .add-accessories-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4); opacity: 0.94; }
+  .add-warranty-btn.open, .add-accessories-btn.open { background: #1a1a1a; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+  .warranty-picker-box {
+    display: none;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    max-height: 260px;
+    overflow-y: auto;
+    margin-top: 8px;
+  }
+  .warranty-picker-box.open { display: block; }
+  .warranty-picker-box .item-option { padding: 9px 12px; font-size: 13px; color: #1a1a1a; cursor: pointer; }
+  .warranty-picker-box .item-option:hover { background: #f4f4f4; }
+  .warranty-selected-box {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .warranty-selected-box.show { display: flex !important; }
+  .warranty-selected-text { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+  .warranty-remove-btn { background: none; border: 1px solid #ddd; border-radius: 6px; color: #999; font-size: 13px; cursor: pointer; padding: 4px 10px; }
+
+  .checklist-section { margin-bottom: 1.25rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; margin-top: 1.25rem; }
+  .checklist-section-title { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #e0e0e0; }
+  .checklist-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-checkbox { width: 18px; height: 18px; flex-shrink: 0; accent-color: #1a1a1a; cursor: pointer; }
+  .checklist-label { flex: 1; font-size: 13px; color: #1a1a1a; cursor: pointer; }
+  .checklist-qty-wrap { display: flex; align-items: center; gap: 6px; }
+  .checklist-qty-label { font-size: 10px; color: #888; font-weight: 600; text-transform: uppercase; }
+  .checklist-qty { width: 70px; font-size: 13px; padding: 5px 8px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; }
+  .checklist-qty:focus { outline: none; border-color: #555; background: #fff; }
+  .checklist-qty:disabled { background: #f4f4f4; color: #ccc; cursor: not-allowed; }
+  .print-checklist { display: none; }
+
   .remarks-input { font-size: 13px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #1a1a1a; width: 100%; font-family: inherit; resize: vertical; min-height: 50px; }
   .remarks-input:focus { outline: none; border-color: #555; }
   .remarks-print { display: none; }
@@ -120,19 +237,19 @@
   .item-card-field input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
   .item-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
 
-  /* ── EQUIPMENT TABLE (Agfa & DRGEM) ── */
-  .agfa-table, .drgem-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; table-layout: fixed; }
-  .agfa-table colgroup col:nth-child(1), .drgem-table colgroup col:nth-child(1) { width: 32px; }
-  .agfa-table colgroup col:nth-child(2), .drgem-table colgroup col:nth-child(2) { width: auto; }
-  .agfa-table colgroup col:nth-child(3), .drgem-table colgroup col:nth-child(3) { width: 90px; }
-  .agfa-table colgroup col:nth-child(4), .drgem-table colgroup col:nth-child(4) { width: 110px; }
-  .agfa-table colgroup col:nth-child(5), .drgem-table colgroup col:nth-child(5) { width: 110px; }
-  .agfa-table th, .drgem-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
-  .agfa-table th.left, .drgem-table th.left { text-align: left; }
-  .agfa-table td, .drgem-table td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
-  .agfa-table td.left, .drgem-table td.left { text-align: left; }
-  .agfa-table input[type=number], .drgem-table input[type=number] { font-size: 13px; padding: 5px 7px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
-  .agfa-table input[type=number]:focus, .drgem-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
+  /* ── EQUIPMENT TABLE (Agfa & DRGEM & Detectors) ── */
+  .agfa-table, .drgem-table, .detectors-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; table-layout: fixed; }
+  .agfa-table colgroup col:nth-child(1), .drgem-table colgroup col:nth-child(1), .detectors-table colgroup col:nth-child(1) { width: 32px; }
+  .agfa-table colgroup col:nth-child(2), .drgem-table colgroup col:nth-child(2), .detectors-table colgroup col:nth-child(2) { width: auto; }
+  .agfa-table colgroup col:nth-child(3), .drgem-table colgroup col:nth-child(3), .detectors-table colgroup col:nth-child(3) { width: 90px; }
+  .agfa-table colgroup col:nth-child(4), .drgem-table colgroup col:nth-child(4), .detectors-table colgroup col:nth-child(4) { width: 110px; }
+  .agfa-table colgroup col:nth-child(5), .drgem-table colgroup col:nth-child(5), .detectors-table colgroup col:nth-child(5) { width: 110px; }
+  .agfa-table th, .drgem-table th, .detectors-table th { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 10px; border-bottom: 1.5px solid #e0e0e0; text-align: right; white-space: nowrap; }
+  .agfa-table th.left, .drgem-table th.left, .detectors-table th.left { text-align: left; }
+  .agfa-table td, .drgem-table td, .detectors-table td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; text-align: right; }
+  .agfa-table td.left, .drgem-table td.left, .detectors-table td.left { text-align: left; }
+  .agfa-table input[type=number], .drgem-table input[type=number], .detectors-table input[type=number] { font-size: 13px; padding: 5px 7px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a; text-align: right; width: 100%; }
+  .agfa-table input[type=number]:focus, .drgem-table input[type=number]:focus, .detectors-table input[type=number]:focus { outline: none; border-color: #555; background: #fff; }
 
   /* Searchable dropdown */
   .item-search-wrap { position: relative; }
@@ -149,13 +266,25 @@
   .add-row-btn:hover { border-color: #888; color: #1a1a1a; }
 
   /* Equipment mobile cards (Agfa & DRGEM) */
-  .agfa-mobile-items, .drgem-mobile-items { display: none; }
-  .agfa-card, .drgem-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
-  .agfa-card-num, .drgem-card-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
-  .agfa-card-field, .drgem-card-field { margin-bottom: 8px; }
-  .agfa-card-field label, .drgem-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
-  .agfa-card-nums, .drgem-card-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-  .agfa-card-total, .drgem-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
+  .agfa-mobile-items, .drgem-mobile-items, .detectors-mobile-items { display: none; }
+  .agfa-card, .drgem-card, .detectors-card { border: 1px solid #e8e8e8; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+  .agfa-card-num, .drgem-card-num, .detectors-card-num { font-size: 11px; color: #aaa; font-weight: 600; margin-bottom: 8px; }
+  .agfa-card-field, .drgem-card-field, .detectors-card-field { margin-bottom: 8px; }
+  .agfa-card-field label, .drgem-card-field label, .detectors-card-field label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  .agfa-card-nums, .drgem-card-nums, .detectors-card-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .agfa-card-total, .drgem-card-total, .detectors-card-total { font-size: 14px; font-weight: 600; color: #1a1a1a; padding-top: 6px; text-align: right; }
+  .detectors-table td .film-label { white-space: normal !important; word-wrap: break-word; overflow-wrap: break-word; display: block; }
+  .detectors-table { table-layout: fixed; }
+  .detectors-table colgroup col:nth-child(1) { width: 32px; }
+  .detectors-table colgroup col:nth-child(2) { width: auto; }
+  .detectors-table colgroup col:nth-child(3) { width: 70px; }
+  .detectors-table colgroup col:nth-child(4) { width: 145px; }
+  .detectors-table colgroup col:nth-child(5) { width: 145px; }
+  .detectors-table colgroup col:nth-child(6) { width: 36px; }
+  .detectors-table td.remove-cell, .detectors-table th.remove-cell { padding-left: 2px; padding-right: 2px; text-align: center; }
+
+  .detectors-table td.left { word-break: break-word; }
+
 
   /* Mobile breakpoint */
   @media (max-width: 540px) {
@@ -164,15 +293,85 @@
     .meta-grid { grid-template-columns: 1fr; }
     .desktop-table { display: none !important; }
     .mobile-items { display: block; }
-    .agfa-desktop-table, .drgem-desktop-table { display: none !important; }
-    .agfa-mobile-items, .drgem-mobile-items { display: block; }
+    .agfa-desktop-table, .drgem-desktop-table, .detectors-desktop-table { display: none !important; }
+    .agfa-mobile-items, .drgem-mobile-items, .detectors-mobile-items { display: block; }
     .sig-box { width: 100%; }
     .btn-row { flex-direction: column; }
     .btn-clear, .btn-print { width: 100%; text-align: center; }
-    .agfa-card, .drgem-card { overflow: hidden; }
-    .agfa-card-nums, .drgem-card-nums { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
-    .agfa-card-field input[type=number], .drgem-card-field input[type=number] { min-width: 0; max-width: 100%; }
+    .agfa-card, .drgem-card, .detectors-card { overflow: hidden; }
+    .agfa-card-nums, .drgem-card-nums, .detectors-card-nums { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+    .agfa-card-field input[type=number], .drgem-card-field input[type=number], .detectors-card-field input[type=number] { min-width: 0; max-width: 100%; }
     .item-search-input { min-width: 0; max-width: 100%; }
+  }
+
+
+  /* ── DETECTORS FORM MOBILE ── */
+  @media (max-width: 600px) {
+
+    /* Page padding */
+    body { padding: 0.75rem 0.4rem; }
+    .page { padding: 1rem 0.85rem 1rem; border-radius: 8px; }
+
+    /* Customer info section */
+    .cat-prompt { font-size: 13px; padding: 10px 14px; border-radius: 8px; }
+
+    /* Meta grid single column */
+    #detectors-form-screen .meta-grid { grid-template-columns: 1fr; gap: 10px; }
+
+    /* Full width inputs */
+    #detectors-form-screen .field-group input,
+    #detectors-form-screen .city-search-input { font-size: 15px; padding: 10px 12px; }
+
+    /* Category buttons — wrap nicely */
+    #detectors-cat-bar { gap: 6px; }
+    #detectors-cat-bar .cat-btn { font-size: 13px; padding: 9px 14px; border-radius: 8px; flex: 1 1 auto; text-align: center; }
+
+    /* Category dropdown full width */
+    #detectors-cat-dd { max-height: 260px; }
+    #detectors-cat-dd .item-option { font-size: 14px; padding: 12px 14px; }
+
+    /* Hide desktop table on mobile */
+    #detectors-table-wrap { display: none !important; }
+
+    /* Mobile cards full width */
+    #detectors-mobile-body { display: block; }
+    .detectors-card { border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+    .detectors-card-field label { font-size: 11px; }
+    .detectors-card-field input[type=number] { font-size: 15px; padding: 9px 10px; min-width: 0; max-width: 100%; }
+    .detectors-card-nums { gap: 10px; }
+    .detectors-card-total { font-size: 15px; }
+
+    /* Checklist items */
+    .checklist-item { padding: 10px 0; gap: 10px; }
+    .checklist-checkbox { width: 22px; height: 22px; }
+    .checklist-label { font-size: 14px; }
+    .checklist-qty { font-size: 15px; padding: 7px 10px; width: 80px; }
+    .checklist-qty-label { font-size: 11px; }
+
+    /* Add Accessories / Warranty buttons */
+    .add-accessories-btn { font-size: 14px; padding: 12px 18px; width: 100%; border-radius: 9px; }
+    .warranty-selected-box { flex-wrap: wrap; gap: 8px; }
+    .warranty-selected-text { font-size: 14px; }
+    .warranty-remove-btn { font-size: 14px; padding: 6px 14px; }
+
+    /* Warranty picker dropdown */
+    .warranty-picker-box .item-option { font-size: 14px; padding: 12px 14px; }
+
+    /* Value of sale */
+    .value-row { padding: 1rem 0; }
+    .value-label { font-size: 12px; }
+    .value-amount { font-size: 20px; }
+
+    /* Remarks */
+    .remarks-input { font-size: 14px; padding: 10px 12px; min-height: 70px; }
+
+    /* Buttons */
+    #detectors-form-screen .btn-row { flex-direction: column; gap: 10px; }
+    #detectors-form-screen .btn-clear,
+    #detectors-form-screen .btn-print { width: 100%; font-size: 14px; padding: 13px; text-align: center; }
+
+    /* City dropdown */
+    .city-dropdown .city-option { font-size: 15px; padding: 12px 14px; }
   }
 
   /* Print */
@@ -184,11 +383,18 @@
     .page { box-shadow: none; border-radius: 0; width: 100%; max-width: 100%; padding: 0; page-break-after: avoid; page-break-inside: avoid; }
     .btn-row { display: none; }
     .add-row-btn { display: none !important; }
+  
+  #detectors-screen-header { display: none; }
+  @media print { #detectors-screen-header { display: block !important; } }
+
+  .cat-prompt { display: none !important; }
+    .cat-bar { display: none !important; }
+    .remove-cell { display: none !important; }
     .header p { display: none; }
     .mobile-items { display: none !important; }
-    .agfa-mobile-items, .drgem-mobile-items { display: none !important; }
+    .agfa-mobile-items, .drgem-mobile-items, .detectors-mobile-items { display: none !important; }
     table.desktop-table { display: table !important; }
-    table.agfa-desktop-table, table.drgem-desktop-table { display: table !important; }
+    table.agfa-desktop-table, table.drgem-desktop-table, table.detectors-desktop-table { display: table !important; }
     .item-dropdown { display: none !important; }
     .sig-box { width: 260px; }
     .meta-grid { margin-bottom: 0.8rem; gap: 8px; }
@@ -197,7 +403,7 @@
     .header { margin-bottom: 0.8rem; padding-bottom: 0.6rem; text-align: center; }
     .header h1 { text-align: center; }
     input::placeholder { color: transparent; }
-    .items-table input[type=number], .agfa-table input[type=number], .drgem-table input[type=number] { display: none; }
+    .items-table input[type=number], .agfa-table input[type=number], .drgem-table input[type=number], .detectors-table input[type=number] { display: none; }
     .item-search-input { display: none; }
     .field-group input, .field-group select { display: none; }
     .remarks-input { display: none !important; }
@@ -207,11 +413,11 @@
     .sig-name-input { display: none; }
     .sig-print-name { display: block !important; font-size: 13px; color: #1a1a1a; padding: 4px 0; min-height: 22px; border: none; }
     /* Hide top salesman name on print */
-    #salesman-top-films, #salesman-top-agfa, #salesman-top-drgem { display: none !important; }
+    #salesman-top-films, #salesman-top-agfa, #salesman-top-drgem, #salesman-top-detectors { display: none !important; }
     /* Hide Customer, City, Date field groups — replaced with header bar */
-    #customer-group-films, #customer-group-agfa, #customer-group-drgem,
-    #province-group-films, #province-group-agfa, #province-group-drgem,
-    #date-group-films, #date-group-agfa, #date-group-drgem { display: none !important; }
+    #customer-group-films, #customer-group-agfa, #customer-group-drgem, #customer-group-detectors,
+    #province-group-films, #province-group-agfa, #province-group-drgem, #province-group-detectors,
+    #date-group-films, #date-group-agfa, #date-group-drgem, #date-group-detectors { display: none !important; }
     .print-customer-combined { display: none !important; }
     /* Print header bar: Customer (highlighted, big) on left, Date on right */
     .print-header-bar { display: flex !important; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; gap: 12px; }
@@ -226,11 +432,28 @@
     .print-salesman-bottom .ps-name { font-size: 14px; font-weight: 600; color: #1a1a1a; min-width: 200px; border-bottom: 1px solid #ccc; padding: 2px 6px; }
     .print-val { display: inline; font-size: 13px; color: #1a1a1a; }
     .print-val-field { display: block; font-size: 13px; color: #1a1a1a; border-bottom: 1px solid #ccc; padding: 4px 2px; min-height: 22px; }
-    .agfa-print-item, .drgem-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
+    .agfa-print-item, .drgem-print-item, .detectors-print-item { display: block !important; font-size: 12px; color: #1a1a1a; }
+    .checklist-section { display: none; }
+    .add-warranty-btn,
+  .add-accessories-btn {
+    align-self: flex-start;
+    width: auto; display: none !important; }
+    .print-checklist { display: none !important; }
+    .print-checklist-title { font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+    .print-checklist-item { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; color: #1a1a1a; border-bottom: 1px solid #f0f0f0; }
+    .print-checklist-item:last-child { border-bottom: none; }
+    /* Print checklist table — mirror items table column widths */
+    .print-checklist-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .print-checklist-table td { padding: 6px 8px; border-bottom: 1px solid #f0f0f0; color: #1a1a1a; vertical-align: middle; }
+    .print-checklist-table td.pcl-num { text-align: left; }
+    .print-checklist-table td.pcl-item { text-align: left; font-weight: 500; }
+    .print-checklist-table td.pcl-qty { text-align: right; }
+    .print-checklist-table td.pcl-up, .print-checklist-table td.pcl-tot { text-align: right; }
+
     tr.row-empty { display: none !important; }
   }
 
-  .agfa-print-item, .drgem-print-item { display: none; }
+  .agfa-print-item, .drgem-print-item, .detectors-print-item { display: none !important; }
 </style>
 </head>
 <body>
@@ -253,6 +476,13 @@
       <div class="card-body">
         <div class="card-title">Agfa Equipment</div>
         <div class="card-sub">Equipment release form</div>
+      </div>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="menu-card" id="detectors-home-card" onclick="showScreen('detectors-form-screen')">
+      <div class="card-body">
+        <div class="card-title">Agfa Equipment تجريبي</div>
+        <div class="card-sub">Equipment Release Form</div>
       </div>
       <div class="card-arrow">›</div>
     </div>
@@ -288,7 +518,7 @@
       <div class="field-group" id="province-group-films">
         <label>City</label>
         <div class="city-search-wrap">
-          <input type="text" class="city-search-input" id="province" placeholder="Search city..." oninput="filterCityDropdown('films')" onfocus="openCityDropdown('films')" autocomplete="off" />
+          <input type="text" class="city-search-input" id="province" placeholder="Search city..." oninput="filterCityDropdown('films')" onfocus="openCityDropdown('films')" onkeydown="cityHandleKeydown(event,'films')" autocomplete="off" />
           <div class="city-dropdown" id="city-dd-films"></div>
         </div>
         <span class="print-val-field" id="print-province"></span>
@@ -351,7 +581,7 @@
       <div class="field-group" id="province-group-agfa">
         <label>City</label>
         <div class="city-search-wrap">
-          <input type="text" class="city-search-input" id="agfa-province" placeholder="Search city..." oninput="filterCityDropdown('agfa')" onfocus="openCityDropdown('agfa')" autocomplete="off" />
+          <input type="text" class="city-search-input" id="agfa-province" placeholder="Search city..." oninput="filterCityDropdown('agfa')" onfocus="openCityDropdown('agfa')" onkeydown="cityHandleKeydown(event,'agfa')" autocomplete="off" />
           <div class="city-dropdown" id="city-dd-agfa"></div>
         </div>
         <span class="print-val-field" id="agfa-print-province"></span>
@@ -399,6 +629,97 @@
   </div>
 </div>
 
+
+<!-- AGFA DETECTORS FORM SCREEN -->
+<div id="detectors-form-screen">
+  <button class="back-btn" onclick="showHome()">← Back</button>
+  <div class="page">
+    <div class="header" id="detectors-screen-header">
+      <h1>AGFA EQUEPMENT SRF</h1>
+      <p>Fill in all fields then print / save as PDF</p>
+    </div>
+    <div class="cat-prompt">You and Your Customer's information</div>
+    <div class="meta-grid">
+      <div class="field-group" id="salesman-top-detectors" style="grid-column:1/-1">
+        <label>Salesman name</label>
+        <input type="text" id="detectors-salesman-name" placeholder="Enter your name" oninput="updateSalesmanDetectors()" />
+        <span class="print-val-field" id="detectors-print-salesman-name"></span>
+      </div>
+      <div class="field-group" id="customer-group-detectors" style="grid-column:1/-1">
+        <label>Customer</label>
+        <input type="text" id="detectors-customer" placeholder="Enter customer name" oninput="updateCustomerCombinedDetectors()" />
+        <span class="print-val-field" id="detectors-print-customer"></span>
+      </div>
+      <div class="field-group" id="province-group-detectors">
+        <label>City</label>
+        <div class="city-search-wrap">
+          <input type="text" class="city-search-input" id="detectors-province" placeholder="Search city..." oninput="filterCityDropdown('detectors')" onfocus="openCityDropdown('detectors')" onkeydown="cityHandleKeydown(event,'detectors')" autocomplete="off" />
+          <div class="city-dropdown" id="city-dd-detectors"></div>
+        </div>
+        <span class="print-val-field" id="detectors-print-province"></span>
+      </div>
+      <div class="field-group" id="date-group-detectors" style="display:none;">
+        <label>Date</label>
+        <input type="date" id="detectors-date" oninput="updateDateDetectors()" />
+        <span class="print-val-field" id="detectors-print-date"></span>
+      </div>
+    </div>
+    <div class="print-header-bar"><div class="phb-customer"><span class="phb-label">Customer</span><span class="phb-name" id="pcc-detectors"></span></div><div class="phb-date"><span class="phb-date-label">Date:</span> <span id="phd-detectors"></span></div></div>
+
+    <div class="cat-prompt">What can you sell today?</div><div class="cat-bar" id="detectors-cat-bar" style="margin-bottom: 10px;"></div>
+    <div class="item-dropdown" id="detectors-cat-dd" style="position: relative; max-height: 220px;"></div>
+
+    <table class="detectors-table detectors-desktop-table" id="detectors-table-wrap" style="display:none;">
+      <colgroup><col /><col /><col /><col /><col /><col /></colgroup>
+      <thead><tr><th class="left">#</th><th class="left">Item</th><th>Quantity</th><th>Unit price</th><th>Total price</th><th class="remove-cell"></th></tr></thead>
+      <tbody id="detectors-tbody"></tbody>
+    </table>
+
+    <div class="detectors-mobile-items" id="detectors-mobile-body"></div>
+
+    <div class="checklist-section">
+      <button type="button" class="add-accessories-btn" id="add-accessories-btn" onclick="toggleAccessoriesList()">+ Add Accessories</button>
+      <div id="detectors-checklist" style="display:none;"></div>
+      <hr style="border:none; border-top:1px solid #e0e0e0; margin: 14px 0;">
+      <button type="button" class="add-accessories-btn" id="add-warranty-condition-btn" onclick="openWarrantyConditionPicker()">+ Add Warranty Condition</button>
+      <div id="warranty-cond-picker-dd" class="warranty-picker-box"></div>
+      <div id="warranty-cond-selected-display" class="warranty-selected-box">
+        <span class="warranty-selected-text" id="warranty-cond-selected-text"></span>
+        <button type="button" onclick="clearWarrantyCondition()" class="warranty-remove-btn" title="Remove">✕</button>
+      </div>
+      <span class="print-val-field" id="detectors-print-warranty-cond"></span>
+    </div>
+
+    <div class="print-checklist">
+      <div class="print-checklist-title">Add Accessories</div>
+      <div id="detectors-print-checklist"></div>
+    </div>
+
+    
+
+    <div class="value-row">
+      <span class="value-label">Value of sale</span>
+      <span class="value-amount" id="detectors-grand-total">0</span>
+    </div>
+
+    <div class="field-group remarks-group" style="margin-bottom: 1.25rem;">
+      <label>Remarks</label>
+      <textarea id="remarks-detectors" class="remarks-input" placeholder="Type any notes here..." rows="2" oninput="updateRemarksDetectors()"></textarea>
+      <span class="print-val-field remarks-print" id="print-remarks-detectors"></span>
+    </div>
+
+    <div class="print-salesman-bottom">
+      <span class="ps-label">Salesman name</span>
+      <span class="ps-name" id="ps-name-detectors"></span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearDetectorsForm()">Clear</button>
+      <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
 <!-- DRGEM EQUIPMENT FORM SCREEN -->
 <div id="drgem-form-screen">
   <button class="back-btn" onclick="showHome()">← Back</button>
@@ -421,7 +742,7 @@
       <div class="field-group" id="province-group-drgem">
         <label>City</label>
         <div class="city-search-wrap">
-          <input type="text" class="city-search-input" id="drgem-province" placeholder="Search city..." oninput="filterCityDropdown('drgem')" onfocus="openCityDropdown('drgem')" autocomplete="off" />
+          <input type="text" class="city-search-input" id="drgem-province" placeholder="Search city..." oninput="filterCityDropdown('drgem')" onfocus="openCityDropdown('drgem')" onkeydown="cityHandleKeydown(event,'drgem')" autocomplete="off" />
           <div class="city-dropdown" id="city-dd-drgem"></div>
         </div>
         <span class="print-val-field" id="drgem-print-province"></span>
@@ -468,6 +789,32 @@
 
 <script>
 // ── AGFA ITEMS LIST ──
+
+const AGFA_CATEGORIES = {
+  "Detector": ["Agfa XD14 Detector"],
+  "X-Ray Machine": ["AGFA VALORY FLOOR X-RAY SYSTEM", "AGFA DR 100 E System"],
+  "CR": ["CR 10 X", "CR 12 X", "CR 15 X"],
+  "Printer": ["DRYSTAR 5301", "DRYSTAR 5301 - CN", "DRYSTAR 5302", "DRYSTAR 5302 - CN", "DRYSTAR AXYS", "DRYSTAR AXYS - CN"],
+  "Others": [
+    "USB-C CHARGER (VR+HV8042)",
+    "AGFA CRADLE CHARGER DURALINE (FXRR-01A)",
+    "DUAL SLOT BATTERY CHARGER (NOT CRADLE) FOR XD14/17 DETECTOR",
+    "BATTERY 14E DETECTOR",
+    "BATTERY 14S DETECTOR",
+    "BATTERY DX-D30 DETECTOR",
+    "BATTERY DX-D40 DETECTOR",
+    "BATTERY XD14/17 DETECTOR",
+    "Detector Laptop",
+    "FLFS System"
+  ]
+};
+const DETECTORS_CATEGORIES = ["Detector","X-Ray Machine","CR","Printer","Cassettes","Others"];
+const CASSETTE_TYPES = ["MD 1.0","MD 4.0","MD 4.0 T","MD 4.0 R","MM 3.0","MM 3.0 R","MM 3.0 T"];
+const CASSETTE_DEFAULT_SIZES = ["14X17","14X14","10X12","8X10"];
+const CASSETTE_MM_SIZES = ["10X12","8X10"];
+function _cassetteSizesFor(type) { return type.startsWith("MM") ? CASSETTE_MM_SIZES : CASSETTE_DEFAULT_SIZES; }
+
+
 const AGFA_ITEMS = ["AGFA CRADLE CHARGER DURALINE (FXRR-01A)", "AGFA DR 100 E System", "AGFA DR 100 S System", "AGFA DR 14 E G DETECTOR SYSTEM", "AGFA DR 14 S DETECTOR - PUXIUM SYSTEM", "AGFA DR 24 M DETECTOR SYSTEM", "AGFA DR14E CESIUM DETECTOR", "AGFA DX-D 100+ -DR14 - 40KW-300KHU-230V", "AGFA VALORY FLOOR X-RAY SYSTEM", "AGFA Workstation", "Agfa XD14 Detector", "BATTERY 14E DETECTOR", "BATTERY 14S DETECTOR", "BATTERY DX-D30 DETECTOR", "BATTERY DX-D40 DETECTOR", "BATTERY XD14/17 DETECTOR", "CR 10 X", "CR 12 X", "CR 15 X", "CR MD 1.0  General Set  10*12", "CR MD 1.0  General Set  14*17", "CR MD 1.0  General Set  15*30CM", "CR MD 1.0  General Set  8*10", "CR MD 4.0  General Set  10*12", "CR MD 4.0  General Set  14*14", "CR MD 4.0  General Set  14*17", "CR MD 4.0  General Set  15*30CM", "CR MD 4.0  General Set  24*30", "CR MD 4.0  General Set  8*10", "CR MD 4.0 CASSETTE  10*12", "CR MD 4.0 CASSETTE  14*14", "CR MD 4.0 CASSETTE HR  14*17", "CR MD 4.0 R  FLFS  14*17", "CR MD 4.0 R  General Set  10*12", "CR MD 4.0 R  General Set  14*14", "CR MD 4.0 R  General Set  14*17", "CR MD 4.0 R  General Set  15*30CM", "CR MD 4.0 R  General Set  8*10", "CR MD 4.0 T  FLFS  14*17", "CR MD 4.0 T  General Set  10*12", "CR MD 4.0 T  General Set  14*14", "CR MD 4.0 T  General Set  14*17", "CR MD 4.0 T  General Set  15*30CM", "CR MD 4.0 T  General Set  8*10", "CR MD1.0 CASSETTE ADAPTER 10*12", "Detector Laptop", "DRYSTAR 5301", "DRYSTAR 5301 - CN", "DRYSTAR 5302", "DRYSTAR 5302 - CN", "DRYSTAR AXYS", "DRYSTAR AXYS - CN", "DUAL SLOT BATTERY CHARGER (NOT CRADLE) FOR XD14/17 DETECTOR", "DX-D 100", "DX-D 10C", "DX-D 10G", "DX-D 20G", "DX-D 300", "DX-D 30C", "DX-D 40  C", "DX-D 40  G", "DX-D 400", "DX-D 600", "DX-D 800", "DX-D40 USED", "FLFS System", "HUB", "Labor Warranty 1 Year", "Labor Warranty 2 Years", "Labor Warranty 3 Years", "Labor Warranty 4 Years", "Labor Warranty 5 Years", "Manufacturing Warranty ( Parts ) 1 Year", "Manufacturing Warranty ( Parts ) 2 Years", "Manufacturing Warranty ( Parts ) 3 Years", "Manufacturing Warranty ( Parts ) 4 Years", "Manufacturing Warranty ( Parts ) 5 Years", "MONITOR - Agfa", "MONITOR - LM", "NX-MW STARTER KIT Value CPU - WINDOWS LICENSE", "PC - LM", "POCKET EXTERNAL ACCESS POINT EU \u2013 TP LINK", "Power Extension Strip", "UPS 1 KV Online", "UPS 2 KV Online", "UPS 3 KV Online", "USB-C CHARGER (VR+HV8042)"];
 
 
@@ -476,9 +823,13 @@ const DRGEM_ITEMS = ["DRGEM - ECONOMY LINE 40 X-RAY SYSTEM","DRGEM ACCESS POINT 
 
 const CITIES = ["Anbar","Baghdad","Basra","Diwanya","Dyala","Hilla","Karbala","Misan","Musil","Muthana","Najaf","Nasria","Salah Al Deen","Wasit"];
 
+// Track highlighted index per form
+const cityHighlightIndex = {};
+
 function buildCityDropdown(form, query) {
   const dd = document.getElementById('city-dd-' + form);
   dd.innerHTML = '';
+  cityHighlightIndex[form] = -1;
   const q = (query || '').toLowerCase().trim();
   const matches = q === '' ? CITIES : CITIES.filter(c => c.toLowerCase().includes(q));
   if (matches.length === 0) {
@@ -496,6 +847,33 @@ function buildCityDropdown(form, query) {
     });
   }
   dd.classList.add('open');
+}
+
+function cityHandleKeydown(e, form) {
+  const dd = document.getElementById('city-dd-' + form);
+  if (!dd.classList.contains('open')) return;
+  const options = dd.querySelectorAll('.city-option:not(.no-match)');
+  if (options.length === 0) return;
+
+  if (e.key === 'Tab') {
+    e.preventDefault(); // prevent focus from moving
+    // Move highlight down (Tab) or up (Shift+Tab)
+    if (e.shiftKey) {
+      cityHighlightIndex[form] = (cityHighlightIndex[form] <= 0) ? options.length - 1 : cityHighlightIndex[form] - 1;
+    } else {
+      cityHighlightIndex[form] = (cityHighlightIndex[form] >= options.length - 1) ? 0 : cityHighlightIndex[form] + 1;
+    }
+    options.forEach((opt, i) => opt.classList.toggle('highlighted', i === cityHighlightIndex[form]));
+    options[cityHighlightIndex[form]].scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'Enter') {
+    if (cityHighlightIndex[form] >= 0 && options[cityHighlightIndex[form]]) {
+      e.preventDefault();
+      selectCity(form, options[cityHighlightIndex[form]].textContent);
+    }
+  } else if (e.key === 'Escape') {
+    dd.classList.remove('open');
+    cityHighlightIndex[form] = -1;
+  }
 }
 
 function openCityDropdown(form) {
@@ -544,12 +922,14 @@ function showScreen(id) {
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('agfa-form-screen').style.display = 'none';
   document.getElementById('drgem-form-screen').style.display = 'none';
+  document.getElementById('detectors-form-screen').style.display = 'none';
   document.getElementById(id).style.display = 'block';
 }
 function showHome() {
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('agfa-form-screen').style.display = 'none';
   document.getElementById('drgem-form-screen').style.display = 'none';
+  document.getElementById('detectors-form-screen').style.display = 'none';
   document.getElementById('home-screen').style.display = 'block';
 }
 
@@ -1087,17 +1467,595 @@ function markEmptyRows() {
   }
 }
 
+
+
+// ── AGFA DETECTORS FORM ──
+const CHECKLIST_ITEMS = ["PC Agfa","Monitor Agfa","PC - LM","Monitor - LM","TP-Link","Power Extension Strip","UPS 1 KV","UPS 2 KV","UPS 3 KV","Hub ( for CR only )"];
+
+let detectorsRowCount = 0;
+let detectorsRowsData = [];
+let detectorsCurrency = 'IQD';
+
+function formatPrice(num) {
+  const n = Math.round(num).toLocaleString();
+  return detectorsCurrency === 'USD' ? '$' + n : n + ' IQD';
+}
+
+function toggleDetectorsCurrency() {
+  detectorsCurrency = detectorsCurrency === 'IQD' ? 'USD' : 'IQD';
+  // Update all currency buttons
+  document.querySelectorAll('.currency-btn').forEach(b => b.textContent = detectorsCurrency);
+  recalcDetectors();
+}
+
+function buildDetectorsForm() {
+  document.getElementById('detectors-date').value = localDate();
+  document.getElementById('detectors-print-date').textContent = localDate();
+  document.getElementById('phd-detectors').textContent = localDate();
+
+  const catBar = document.getElementById('detectors-cat-bar');
+  catBar.innerHTML = '';
+  DETECTORS_CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cat-btn';
+    btn.textContent = cat;
+    btn.onclick = (e) => { e.stopPropagation(); openCategoryPicker(cat, btn); };
+    catBar.appendChild(btn);
+  });
+
+  const cl = document.getElementById('detectors-checklist');
+  cl.innerHTML = '';
+  CHECKLIST_ITEMS.forEach((item, idx) => {
+    const i = idx + 1;
+    const row = document.createElement('div');
+    row.className = 'checklist-item';
+    row.innerHTML = `
+      <input type="checkbox" class="checklist-checkbox" id="cl-chk-${i}" onchange="toggleChecklistItem(${i})" />
+      <label class="checklist-label" for="cl-chk-${i}">${item}</label>
+      <div class="checklist-qty-wrap">
+        <span class="checklist-qty-label">Qty</span>
+        <input type="number" class="checklist-qty" id="cl-qty-${i}" min="0" value="" placeholder="0" disabled oninput="updateChecklistPrint()" />
+      </div>`;
+    cl.appendChild(row);
+  });
+  updateChecklistPrint();
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#detectors-cat-dd') && !e.target.closest('#detectors-cat-bar')) {
+      const dd = document.getElementById('detectors-cat-dd');
+      if (dd) dd.classList.remove('open');
+    }
+  });
+}
+
+function openCategoryPicker(cat, btnEl) {
+  const dd = document.getElementById('detectors-cat-dd');
+
+  // If same button clicked again while open → close it
+  if (dd.classList.contains('open') && btnEl && btnEl.classList.contains('active')) {
+    dd.classList.remove('open');
+    dd.innerHTML = '';
+    btnEl.classList.remove('active');
+    return;
+  }
+
+  dd.innerHTML = '';
+  dd.style.position = 'relative';
+
+  document.querySelectorAll('#detectors-cat-bar .cat-btn').forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+
+  if (cat === 'Cassettes') {
+    // Step 1 of 2: show cassette types
+    renderCassetteTypePicker(dd);
+  } else {
+    const items = AGFA_CATEGORIES[cat] || [];
+    if (items.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'item-option no-match';
+      empty.textContent = 'No items in this category';
+      dd.appendChild(empty);
+    } else {
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item-option';
+        div.textContent = item;
+        div.onclick = (e) => { e.stopPropagation(); addDetectorsItem(item); };
+        dd.appendChild(div);
+      });
+    }
+  }
+  dd.classList.add('open');
+}
+
+function renderCassetteTypePicker(dd) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0;';
+  header.textContent = 'Step 1: Choose cassette type';
+  dd.appendChild(header);
+  CASSETTE_TYPES.forEach(type => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = type;
+    div.onclick = (e) => { e.stopPropagation(); renderCassetteSizePicker(dd, type); };
+    dd.appendChild(div);
+  });
+}
+
+function renderCassetteSizePicker(dd, type) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;';
+  header.innerHTML = '<span>Step 2: Choose size for ' + type + '</span><button type="button" style="font-size: 11px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; color: #666; cursor: pointer;" onclick="renderCassetteTypePicker(document.getElementById(\'detectors-cat-dd\'))">← Back</button>';
+  dd.appendChild(header);
+  const sizes = _cassetteSizesFor(type);
+  sizes.forEach(size => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = size;
+    div.onclick = (e) => {
+      e.stopPropagation();
+      const combined = type + ' ' + size + ' General Set';
+      addDetectorsItem(combined);
+    };
+    dd.appendChild(div);
+  });
+}
+
+function addDetectorsItem(itemText) {
+  document.getElementById('detectors-cat-dd').classList.remove('open');
+  document.querySelectorAll('#detectors-cat-bar .cat-btn').forEach(b => b.classList.remove('active'));
+
+  detectorsRowCount++;
+  const n = detectorsRowCount;
+  detectorsRowsData.push({id: n, item: itemText, qty: 1, up: 0});
+
+  if (window.innerWidth > 600) document.getElementById('detectors-table-wrap').style.display = 'table';
+
+  const tb = document.getElementById('detectors-tbody');
+  const tr = document.createElement('tr');
+  tr.id = 'detectors-row-' + n;
+  tr.innerHTML = `
+    <td class="left"><span class="item-num">${detectorsRowsData.length}</span></td>
+    <td class="left">
+      <span class="film-label">${itemText}</span>
+      <span class="detectors-print-item" id="detectors-print-item-${n}">${itemText}</span>
+    </td>
+    <td><input type="number" id="detectors-qty-${n}" min="0" value="1" placeholder="0" oninput="recalcDetectors()" /><span class="print-val" id="detectors-pqty-${n}">1</span></td>
+    <td>
+      <div style="display:flex; gap:4px; align-items:center;">
+        <input type="number" id="detectors-up-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcDetectors()" style="flex:1;" />
+        ${detectorsRowsData.length === 1 ? '<button type="button" class="currency-btn" onclick="toggleDetectorsCurrency()" title="Toggle currency">' + detectorsCurrency + '</button>' : ''}
+      </div>
+      <span class="print-val" id="detectors-pup-${n}"></span>
+    </td>
+    <td id="detectors-tot-${n}" style="font-weight:600">—</td>
+    <td class="remove-cell"><button type="button" onclick="removeDetectorsItem(${n})" style="background:none;border:none;color:#999;font-size:16px;cursor:pointer;padding:4px 8px;" title="Remove">✕</button></td>`;
+  tb.appendChild(tr);
+
+  const mb = document.getElementById('detectors-mobile-body');
+  const card = document.createElement('div');
+  card.className = 'detectors-card';
+  card.id = 'detectors-mcard-' + n;
+  card.innerHTML = `
+    <div class="detectors-card-field" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+      <div style="flex:1;">
+        <label>Item ${detectorsRowsData.length}</label>
+        <div style="font-size: 14px; font-weight: 600; color: #1a1a1a; margin-top: 2px;">${itemText}</div>
+      </div>
+      <button type="button" onclick="removeDetectorsItem(${n})" style="background:none;border:1px solid #ddd;border-radius:6px;color:#999;font-size:14px;cursor:pointer;padding:4px 10px;" title="Remove">✕</button>
+    </div>
+    <div class="detectors-card-nums">
+      <div class="detectors-card-field"><label>Quantity</label><input type="number" id="detectors-mqty-${n}" min="0" value="1" placeholder="0" oninput="recalcDetectorsMobile()" /></div>
+      <div class="detectors-card-field"><label>Unit price</label>
+        <div style="display:flex; gap:4px; align-items:center;">
+          <input type="number" id="detectors-mup-${n}" min="0" step="0.01" placeholder="0.00" oninput="recalcDetectorsMobile()" style="flex:1;" />
+          ${detectorsRowsData.length === 1 ? '<button type="button" class="currency-btn" onclick="toggleDetectorsCurrency()" title="Toggle currency">' + detectorsCurrency + '</button>' : ''}
+        </div></div>
+      <div class="detectors-card-field"><label>Total price</label><div class="detectors-card-total" id="detectors-mtot-${n}">—</div></div>
+    </div>`;
+  mb.appendChild(card);
+
+  recalcDetectors();
+  updateChecklistPrint();
+}
+
+function removeDetectorsItem(n) {
+  detectorsRowsData = detectorsRowsData.filter(r => r.id !== n);
+  const tr = document.getElementById('detectors-row-'+n);
+  if (tr) tr.remove();
+  const card = document.getElementById('detectors-mcard-'+n);
+  if (card) card.remove();
+  renumberDetectorsRows();
+  if (detectorsRowsData.length === 0) {
+    document.getElementById('detectors-table-wrap').style.display = 'none';
+  }
+  recalcDetectors();
+  updateChecklistPrint();
+}
+
+function renumberDetectorsRows() {
+  detectorsRowsData.forEach((row, idx) => {
+    const num = idx + 1;
+    const tr = document.getElementById('detectors-row-' + row.id);
+    if (tr) {
+      const numCell = tr.querySelector('.item-num');
+      if (numCell) numCell.textContent = num;
+    }
+    const card = document.getElementById('detectors-mcard-' + row.id);
+    if (card) {
+      const lbl = card.querySelector('label');
+      if (lbl) lbl.textContent = 'Item ' + num;
+    }
+  });
+}
+
+function toggleChecklistItem(i) {
+  const chk = document.getElementById('cl-chk-' + i);
+  const qty = document.getElementById('cl-qty-' + i);
+  if (chk.checked) {
+    qty.disabled = false;
+    if (!qty.value) qty.value = 1;
+  } else {
+    qty.disabled = true;
+    qty.value = '';
+  }
+  updateChecklistPrint();
+}
+
+function updateChecklistPrint() {
+  // Remove any previously appended checklist rows from the main table
+  const tb = document.getElementById('detectors-tbody');
+  if (tb) {
+    const oldRows = tb.querySelectorAll('tr.checklist-print-row');
+    oldRows.forEach(r => r.remove());
+  }
+
+  // Count current item rows for numbering
+  const existingRows = tb ? tb.querySelectorAll('tr:not(.checklist-print-row)').length : 0;
+  let rowNum = existingRows + 1;
+
+  CHECKLIST_ITEMS.forEach((item, idx) => {
+    const i = idx + 1;
+    const chk = document.getElementById('cl-chk-' + i);
+    if (chk && chk.checked) {
+      const qty = document.getElementById('cl-qty-' + i).value || 1;
+      // Add to main table as a continuation row
+      if (tb) {
+        const tr = document.createElement('tr');
+        tr.className = 'checklist-print-row';
+        tr.id = 'cl-print-row-' + i;
+        tr.innerHTML = `
+          <td class="left"><span class="item-num">${rowNum}</span></td>
+          <td class="left"><span class="film-label">${item}</span><span class="detectors-print-item">${item}</span></td>
+          <td style="text-align:right"><span class="print-val" id="cl-pqty-${i}">${qty}</span><input type="number" style="display:none" value="${qty}" /></td>
+          <td style="text-align:right"><span class="print-val" id="cl-pup-${i}"></span></td>
+          <td style="text-align:right; font-weight:600" id="cl-ptot-${i}">—</td>
+          <td class="remove-cell"></td>`;
+        tb.appendChild(tr);
+        rowNum++;
+      }
+    }
+  });
+
+  // Renumber all visible rows (items + checklist) sequentially
+  renumberAllDetectorsRows();
+}
+
+function renumberAllDetectorsRows() {
+  const tb = document.getElementById('detectors-tbody');
+  if (!tb) return;
+  const allRows = tb.querySelectorAll('tr');
+  let num = 1;
+  allRows.forEach(row => {
+    const numCell = row.querySelector('.item-num');
+    if (numCell) { numCell.textContent = num; num++; }
+  });
+}
+
+function updateSalesmanDetectors() {
+  const v = document.getElementById('detectors-salesman-name').value;
+  document.getElementById('detectors-print-salesman-name').textContent = v;
+  document.getElementById('ps-name-detectors').textContent = v;
+}
+
+function updateCustomerCombinedDetectors() {
+  const c = document.getElementById('detectors-customer').value;
+  const p = document.getElementById('detectors-province').value;
+  document.getElementById('detectors-print-customer').textContent = c;
+  document.getElementById('detectors-print-province').textContent = p;
+  document.getElementById('pcc-detectors').textContent = c + (p ? ' - ' + p : '');
+}
+
+function updateDateDetectors() {
+  const d = document.getElementById('detectors-date').value;
+  document.getElementById('detectors-print-date').textContent = d;
+  document.getElementById('phd-detectors').textContent = d;
+}
+
+function updateRemarksDetectors() {
+  document.getElementById('print-remarks-detectors').textContent = document.getElementById('remarks-detectors').value;
+}
+
+function recalcDetectors() {
+  let grand = 0;
+  detectorsRowsData.forEach(row => {
+    const n = row.id;
+    const qty = parseFloat(document.getElementById('detectors-qty-'+n)?.value)||0;
+    const up  = parseFloat(document.getElementById('detectors-up-' +n)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('detectors-tot-'+n).textContent = (qty>0||up>0) ? formatPrice(tot) : '—';
+    document.getElementById('detectors-pqty-'+n).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('detectors-pup-' +n).textContent = up>0  ? formatPrice(up) : '';
+    grand += tot;
+  });
+  document.getElementById('detectors-grand-total').textContent = formatPrice(grand);
+}
+
+function recalcDetectorsMobile() {
+  let grand = 0;
+  detectorsRowsData.forEach(row => {
+    const n = row.id;
+    const qty = parseFloat(document.getElementById('detectors-mqty-'+n)?.value)||0;
+    const up  = parseFloat(document.getElementById('detectors-mup-' +n)?.value)||0;
+    const tot = qty*up;
+    document.getElementById('detectors-mtot-'+n).textContent = (qty>0||up>0) ? formatPrice(tot) : '—';
+    document.getElementById('detectors-tot-' +n).textContent = (qty>0||up>0) ? formatPrice(tot) : '—';
+    if (document.getElementById('detectors-qty-'+n)) document.getElementById('detectors-qty-'+n).value = qty || '';
+    if (document.getElementById('detectors-up-'+n)) document.getElementById('detectors-up-'+n).value = up || '';
+    document.getElementById('detectors-pqty-'+n).textContent = qty>0 ? qty.toLocaleString() : '';
+    document.getElementById('detectors-pup-' +n).textContent = up>0  ? formatPrice(up) : '';
+    grand += tot;
+  });
+  document.getElementById('detectors-grand-total').textContent = formatPrice(grand);
+}
+
+
+function openWarrantyPicker() {
+  const dd = document.getElementById('warranty-picker-dd');
+  const btn = document.getElementById('add-warranty-btn');
+  if (dd.classList.contains('open')) {
+    dd.classList.remove('open');
+    dd.innerHTML = '';
+    btn.classList.remove('open');
+    return;
+  }
+  btn.classList.add('open');
+  renderWarrantyTypePicker(dd);
+  dd.classList.add('open');
+}
+
+function renderWarrantyTypePicker(dd) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0;';
+  header.textContent = 'Step 1: Choose warranty type';
+  dd.appendChild(header);
+  ['Labor Only','Labor and Spare Parts'].forEach(type => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = type;
+    div.onclick = (e) => { e.stopPropagation(); renderWarrantyYearsPicker(dd, type); };
+    dd.appendChild(div);
+  });
+}
+
+function renderWarrantyYearsPicker(dd, type) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;';
+  header.innerHTML = '<span>Step 2: How many years for ' + type + '?</span><button type="button" style="font-size: 11px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; color: #666; cursor: pointer;" onclick="renderWarrantyTypePicker(document.getElementById(\'warranty-picker-dd\'))">← Back</button>';
+  dd.appendChild(header);
+  ['1 Year','2 Years','3 Years','4 Years','5 Years'].forEach(y => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = y;
+    div.onclick = (e) => {
+      e.stopPropagation();
+      selectWarranty(type, y);
+    };
+    dd.appendChild(div);
+  });
+}
+
+function selectWarranty(type, years) {
+  const combined = type + ' — ' + years;
+  document.getElementById('warranty-selected-text').textContent = combined;
+  document.getElementById('warranty-selected-display').classList.add('show');
+  document.getElementById('detectors-print-warranty').textContent = combined;
+  const dd = document.getElementById('warranty-picker-dd');
+  dd.classList.remove('open');
+  dd.innerHTML = '';
+  document.getElementById('add-warranty-btn').style.display = 'none';
+}
+
+function clearWarrantySelection() {
+  document.getElementById('warranty-selected-display').classList.remove('show');
+  document.getElementById('warranty-selected-text').textContent = '';
+  document.getElementById('detectors-print-warranty').textContent = '';
+  document.getElementById('add-warranty-btn').style.display = '';
+  document.getElementById('add-warranty-btn').classList.remove('open');
+}
+
+function toggleAccessoriesList() {
+  const list = document.getElementById('detectors-checklist');
+  const btn = document.getElementById('add-accessories-btn');
+  if (list.style.display === 'none') {
+    list.style.display = 'block';
+    btn.classList.add('open');
+    btn.textContent = '− Hide Accessories';
+  } else {
+    list.style.display = 'none';
+    btn.classList.remove('open');
+    btn.textContent = '+ Add Accessories';
+  }
+}
+
+
+function openWarrantyConditionPicker() {
+  const dd = document.getElementById('warranty-cond-picker-dd');
+  const btn = document.getElementById('add-warranty-condition-btn');
+  if (dd.classList.contains('open')) {
+    dd.classList.remove('open');
+    dd.innerHTML = '';
+    btn.classList.remove('open');
+    return;
+  }
+  btn.classList.add('open');
+  renderWarrantyCondTypePicker(dd);
+  dd.classList.add('open');
+}
+
+function renderWarrantyCondTypePicker(dd) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0;';
+  header.textContent = 'Step 1: Choose warranty type';
+  dd.appendChild(header);
+  ['Labor Only','Labor and Spare Parts'].forEach(type => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = type;
+    div.onclick = (e) => { e.stopPropagation(); renderWarrantyCondYearsPicker(dd, type); };
+    dd.appendChild(div);
+  });
+}
+
+function renderWarrantyCondYearsPicker(dd, type) {
+  dd.innerHTML = '';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding: 6px 10px; font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;';
+  header.innerHTML = '<span>Step 2: How many years for ' + type + '?</span><button type="button" style="font-size: 11px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; color: #666; cursor: pointer;" onclick="renderWarrantyCondTypePicker(document.getElementById(\'warranty-cond-picker-dd\'))">← Back</button>';
+  dd.appendChild(header);
+  ['1 Year','2 Years','3 Years','4 Years','5 Years'].forEach(y => {
+    const div = document.createElement('div');
+    div.className = 'item-option';
+    div.textContent = y;
+    div.onclick = (e) => {
+      e.stopPropagation();
+      selectWarrantyCondition(type, y);
+    };
+    dd.appendChild(div);
+  });
+}
+
+function selectWarrantyCondition(type, years) {
+  const combined = type + ' — ' + years;
+  document.getElementById('warranty-cond-selected-text').textContent = combined;
+  document.getElementById('warranty-cond-selected-display').classList.add('show');
+  document.getElementById('detectors-print-warranty-cond').textContent = combined;
+  const dd = document.getElementById('warranty-cond-picker-dd');
+  dd.classList.remove('open');
+  dd.innerHTML = '';
+  document.getElementById('add-warranty-condition-btn').style.display = 'none';
+  // Add warranty as a row in the print table
+  addWarrantyPrintRow(combined);
+}
+
+function addWarrantyPrintRow(text) {
+  removeWarrantyPrintRow(); // remove old if exists
+  const tb = document.getElementById('detectors-tbody');
+  if (!tb) return;
+  const tr = document.createElement('tr');
+  tr.id = 'warranty-print-row';
+  tr.className = 'warranty-print-row';
+  tr.innerHTML = `
+    <td class="left"><span class="item-num">—</span></td>
+    <td class="left"><span class="film-label">${text}</span><span class="detectors-print-item">${text}</span></td>
+    <td></td>
+    <td></td>
+    <td style="text-align:right; font-weight:600">—</td>
+    <td class="remove-cell"></td>`;
+  tb.appendChild(tr);
+  renumberAllDetectorsRows();
+}
+
+function removeWarrantyPrintRow() {
+  const existing = document.getElementById('warranty-print-row');
+  if (existing) existing.remove();
+  renumberAllDetectorsRows();
+}
+
+function clearWarrantyCondition() {
+  document.getElementById('warranty-cond-selected-display').classList.remove('show');
+  document.getElementById('warranty-cond-selected-text').textContent = '';
+  document.getElementById('detectors-print-warranty-cond').textContent = '';
+  document.getElementById('add-warranty-condition-btn').style.display = '';
+  document.getElementById('add-warranty-condition-btn').classList.remove('open');
+  removeWarrantyPrintRow();
+}
+
+function clearDetectorsForm() {
+  ['detectors-customer','detectors-province','detectors-salesman-name'].forEach(id => {
+    document.getElementById(id).value='';
+    const pid = 'detectors-print-'+id.replace('detectors-','');
+    if (document.getElementById(pid)) document.getElementById(pid).textContent='';
+  });
+  document.getElementById('detectors-date').value = localDate();
+  document.getElementById('detectors-print-date').textContent = localDate();
+  document.getElementById('phd-detectors').textContent = localDate();
+  document.getElementById('ps-name-detectors').textContent = '';
+  document.getElementById('pcc-detectors').textContent = '';
+  document.getElementById('remarks-detectors').value = '';
+  document.getElementById('print-remarks-detectors').textContent = '';
+  document.getElementById('detectors-tbody').innerHTML = '';
+  document.getElementById('detectors-mobile-body').innerHTML = '';
+  document.getElementById('detectors-table-wrap').style.display = 'none';
+  detectorsRowsData = [];
+  detectorsRowCount = 0;
+  detectorsCurrency = 'IQD';
+  document.getElementById('detectors-grand-total').textContent = formatPrice(0);
+  clearWarrantyCondition();
+  // Reset accessories button state
+  const list = document.getElementById('detectors-checklist');
+  const btn = document.getElementById('add-accessories-btn');
+  if (list && btn) { list.style.display = 'none'; btn.classList.remove('open'); btn.textContent = '+ Add Accessories'; }
+  
+  CHECKLIST_ITEMS.forEach((item, idx) => {
+    const i = idx + 1;
+    document.getElementById('cl-chk-'+i).checked = false;
+    document.getElementById('cl-qty-'+i).value = '';
+    document.getElementById('cl-qty-'+i).disabled = true;
+  });
+  updateChecklistPrint();
+}
+
+
 // ── PRINT ──
 function triggerPrint() {
   markEmptyRows();
-  // Small delay ensures print-val spans are populated before dialog opens
-  setTimeout(() => { window.print(); }, 80);
+  // Hide currency button before printing, restore after
+  const currencyBtns = document.querySelectorAll('.currency-btn');
+  currencyBtns.forEach(b => b.style.display = 'none');
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => {
+      currencyBtns.forEach(b => b.style.display = '');
+    }, 500);
+  }, 80);
 }
 
 // ── INIT ──
+
+// Close warranty condition picker when clicking outside
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('warranty-cond-picker-dd');
+  const btn = document.getElementById('add-warranty-condition-btn');
+  if (dd && dd.classList.contains('open')) {
+    if (!e.target.closest('#warranty-cond-picker-dd') && !e.target.closest('#add-warranty-condition-btn')) {
+      dd.classList.remove('open');
+      dd.innerHTML = '';
+      if (btn) btn.classList.remove('open');
+    }
+  }
+});
+
 buildFilmsTable();
 buildAgfaForm();
 buildDrgemForm();
+buildDetectorsForm();
 </script>
 </body>
 </html>
