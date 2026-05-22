@@ -2024,17 +2024,22 @@ function clearDetectorsForm() {
 
 
 // ── PRINT ──
+// Handle currency button hiding for ALL print methods (button click, Ctrl+P, mobile share)
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.currency-btn').forEach(b => {
+    b.setAttribute('data-display', b.style.display);
+    b.style.setProperty('display', 'none', 'important');
+  });
+});
+window.addEventListener('afterprint', () => {
+  document.querySelectorAll('.currency-btn').forEach(b => {
+    b.style.display = b.getAttribute('data-display') || '';
+  });
+});
+
 function triggerPrint() {
   markEmptyRows();
-  // Hide currency button before printing, restore after
-  const currencyBtns = document.querySelectorAll('.currency-btn');
-  currencyBtns.forEach(b => b.style.display = 'none');
-  setTimeout(() => {
-    window.print();
-    setTimeout(() => {
-      currencyBtns.forEach(b => b.style.display = '');
-    }, 500);
-  }, 80);
+  setTimeout(() => { window.print(); }, 80);
 }
 
 // ── INIT ──
