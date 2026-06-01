@@ -1230,6 +1230,10 @@ function recalcAgfa() {
     document.getElementById('agfa-tot-'+i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
     document.getElementById('agfa-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
     document.getElementById('agfa-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    // Bug 1 fix: sync item name to print span on desktop
+    const ditem = document.getElementById('agfa-item-'+i);
+    const pitem = document.getElementById('agfa-print-item-'+i);
+    if (ditem && pitem && ditem.value.trim()) pitem.textContent = ditem.value.trim();
     grand += tot;
   }
   document.getElementById('agfa-grand-total').textContent = Math.round(grand).toLocaleString();
@@ -1245,6 +1249,10 @@ function recalcAgfaMobile() {
     document.getElementById('agfa-tot-' +i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
     document.getElementById('agfa-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
     document.getElementById('agfa-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    // Sync item name from mobile input to print span
+    const mitem = document.getElementById('agfa-mitem-'+i);
+    const pitem = document.getElementById('agfa-print-item-'+i);
+    if (mitem && pitem && mitem.value.trim()) pitem.textContent = mitem.value.trim();
     grand += tot;
   }
   document.getElementById('agfa-grand-total').textContent = Math.round(grand).toLocaleString();
@@ -1422,6 +1430,10 @@ function recalcDrgemMobile() {
     document.getElementById('drgem-tot-' +i).textContent = (qty>0||up>0) ? Math.round(tot).toLocaleString() : '—';
     document.getElementById('drgem-pqty-'+i).textContent = qty>0 ? qty.toLocaleString() : '';
     document.getElementById('drgem-pup-' +i).textContent = up>0  ? Math.round(up).toLocaleString() : '';
+    // Sync item name from mobile input to print span
+    const mitem = document.getElementById('drgem-mitem-'+i);
+    const pitem = document.getElementById('drgem-print-item-'+i);
+    if (mitem && pitem && mitem.value.trim()) pitem.textContent = mitem.value.trim();
     grand += tot;
   }
   document.getElementById('drgem-grand-total').textContent = Math.round(grand).toLocaleString();
@@ -2026,16 +2038,64 @@ function clearDetectorsForm() {
 // ── PRINT ──
 // Handle currency button hiding for ALL print methods (button click, Ctrl+P, mobile share)
 window.addEventListener('beforeprint', () => {
+  // Hide currency buttons
   document.querySelectorAll('.currency-btn').forEach(b => {
     b.setAttribute('data-display', b.style.display);
     b.style.setProperty('display', 'none', 'important');
   });
+
+  // NUCLEAR FIX: force all item name print spans to be visible and populated
+  // We do this by injecting an inline style directly on each span element
+  // This bypasses all CSS class conflicts completely
+
+  // Agfa Equipment
+  for (let i = 1; i <= agfaRowCount; i++) {
+    const dInp = document.getElementById('agfa-item-' + i);
+    const mInp = document.getElementById('agfa-mitem-' + i);
+    const span = document.getElementById('agfa-print-item-' + i);
+    if (span) {
+      const val = (dInp && dInp.value.trim()) ? dInp.value.trim()
+                : (mInp && mInp.value.trim()) ? mInp.value.trim() : '';
+      if (val) {
+        span.textContent = val;
+        span.style.setProperty('display', 'block', 'important');
+        span.style.setProperty('visibility', 'visible', 'important');
+        span.style.setProperty('color', '#1a1a1a', 'important');
+        span.style.setProperty('font-size', '12px', 'important');
+      }
+    }
+  }
+  // DRGEM
+  for (let i = 1; i <= drgemRowCount; i++) {
+    const dInp = document.getElementById('drgem-item-' + i);
+    const mInp = document.getElementById('drgem-mitem-' + i);
+    const span = document.getElementById('drgem-print-item-' + i);
+    if (span) {
+      const val = (dInp && dInp.value.trim()) ? dInp.value.trim()
+                : (mInp && mInp.value.trim()) ? mInp.value.trim() : '';
+      if (val) {
+        span.textContent = val;
+        span.style.setProperty('display', 'block', 'important');
+        span.style.setProperty('visibility', 'visible', 'important');
+        span.style.setProperty('color', '#1a1a1a', 'important');
+        span.style.setProperty('font-size', '12px', 'important');
+      }
+    }
+  }
 });
+
 window.addEventListener('afterprint', () => {
+  // Restore currency buttons
   document.querySelectorAll('.currency-btn').forEach(b => {
     b.style.display = b.getAttribute('data-display') || '';
   });
+  // Restore print spans to hidden on screen
+  document.querySelectorAll('.agfa-print-item, .drgem-print-item').forEach(span => {
+    span.style.removeProperty('display');
+    span.style.removeProperty('visibility');
+  });
 });
+
 
 function triggerPrint() {
   markEmptyRows();
