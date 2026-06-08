@@ -2037,69 +2037,77 @@ function clearDetectorsForm() {
 
 // ── PRINT ──
 // Handle currency button hiding for ALL print methods (button click, Ctrl+P, mobile share)
+// Shared injectPrintText function (used by both beforeprint and triggerPrint)
+function injectPrintText(prefix, count, getDesktopId, getMobileId) {
+  for (let i = 1; i <= count; i++) {
+    const dInp = document.getElementById(getDesktopId(i));
+    const mInp = document.getElementById(getMobileId(i));
+    const val = (dInp && dInp.value.trim()) ? dInp.value.trim()
+              : (mInp && mInp.value.trim()) ? mInp.value.trim() : '';
+    if (dInp) {
+      const wrap = dInp.closest('.item-search-wrap') || dInp.parentElement;
+      if (wrap) {
+        wrap.style.setProperty('display', 'none', 'important');
+        let printDiv = wrap.parentElement.querySelector('.injected-print-text');
+        if (!printDiv) {
+          printDiv = document.createElement('div');
+          printDiv.className = 'injected-print-text';
+          printDiv.style.cssText = 'font-size:12px;color:#1a1a1a;font-weight:500;';
+          wrap.parentElement.insertBefore(printDiv, wrap);
+        }
+        printDiv.textContent = val;
+      }
+    }
+  }
+}
+
 window.addEventListener('beforeprint', () => {
+  preparePrint();
+});
+
+window.addEventListener('afterprint', () => {
+  restoreAfterPrint();
+});
+
+
+function preparePrint() {
   // Hide currency buttons
   document.querySelectorAll('.currency-btn').forEach(b => {
     b.setAttribute('data-display', b.style.display);
     b.style.setProperty('display', 'none', 'important');
   });
 
-  // NUCLEAR FIX: force all item name print spans to be visible and populated
-  // We do this by injecting an inline style directly on each span element
-  // This bypasses all CSS class conflicts completely
+  // Inject plain text divs for item names (Agfa Equipment)
+  injectPrintText('agfa', agfaRowCount, i => 'agfa-item-'+i, i => 'agfa-mitem-'+i);
+  // Inject plain text divs for item names (DRGEM)
+  injectPrintText('drgem', drgemRowCount, i => 'drgem-item-'+i, i => 'drgem-mitem-'+i);
+  // Inject plain text divs for item names (Agfa Equipment تجريبي)
+  injectPrintText('detectors', detectorsRowsData.length, i => 'detectors-item-'+detectorsRowsData[i-1]?.id, i => 'detectors-mitem-'+detectorsRowsData[i-1]?.id);
+}
 
-  // Agfa Equipment
-  for (let i = 1; i <= agfaRowCount; i++) {
-    const dInp = document.getElementById('agfa-item-' + i);
-    const mInp = document.getElementById('agfa-mitem-' + i);
-    const span = document.getElementById('agfa-print-item-' + i);
-    if (span) {
-      const val = (dInp && dInp.value.trim()) ? dInp.value.trim()
-                : (mInp && mInp.value.trim()) ? mInp.value.trim() : '';
-      if (val) {
-        span.textContent = val;
-        span.style.setProperty('display', 'block', 'important');
-        span.style.setProperty('visibility', 'visible', 'important');
-        span.style.setProperty('color', '#1a1a1a', 'important');
-        span.style.setProperty('font-size', '12px', 'important');
-      }
-    }
-  }
-  // DRGEM
-  for (let i = 1; i <= drgemRowCount; i++) {
-    const dInp = document.getElementById('drgem-item-' + i);
-    const mInp = document.getElementById('drgem-mitem-' + i);
-    const span = document.getElementById('drgem-print-item-' + i);
-    if (span) {
-      const val = (dInp && dInp.value.trim()) ? dInp.value.trim()
-                : (mInp && mInp.value.trim()) ? mInp.value.trim() : '';
-      if (val) {
-        span.textContent = val;
-        span.style.setProperty('display', 'block', 'important');
-        span.style.setProperty('visibility', 'visible', 'important');
-        span.style.setProperty('color', '#1a1a1a', 'important');
-        span.style.setProperty('font-size', '12px', 'important');
-      }
-    }
-  }
-});
-
-window.addEventListener('afterprint', () => {
+function restoreAfterPrint() {
   // Restore currency buttons
   document.querySelectorAll('.currency-btn').forEach(b => {
     b.style.display = b.getAttribute('data-display') || '';
   });
-  // Restore print spans to hidden on screen
-  document.querySelectorAll('.agfa-print-item, .drgem-print-item').forEach(span => {
-    span.style.removeProperty('display');
-    span.style.removeProperty('visibility');
+  // Restore search wraps and remove injected print text divs
+  document.querySelectorAll('.item-search-wrap').forEach(wrap => {
+    wrap.style.removeProperty('display');
   });
-});
-
+  document.querySelectorAll('.injected-print-text').forEach(div => div.remove());
+  // Restore add-row buttons (warranty condition etc.)
+  document.querySelectorAll('.add-accessories-btn, .add-warranty-btn').forEach(b => {
+    b.style.removeProperty('display');
+  });
+}
 
 function triggerPrint() {
   markEmptyRows();
-  setTimeout(() => { window.print(); }, 80);
+  preparePrint(); // prepare synchronously before print dialog
+  setTimeout(() => {
+    window.print();
+    setTimeout(restoreAfterPrint, 500);
+  }, 80);
 }
 
 // ── INIT ──
