@@ -34,24 +34,14 @@
   .menu-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.10); border-color: #bbb; transform: translateY(-2px); }
 
   #detectors-home-card {
-    background: linear-gradient(135deg, #ffd6d6 0%, #ffb3b3 100%);
-    border-color: #ff9b9b;
+    background: linear-gradient(135deg, #ffe259 0%, #ffa751 100%);
+    border-color: #f5c518;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
   #detectors-home-card .card-title { color: #1a1a1a; }
-  #detectors-home-card .card-sub { color: #8a3b3b; }
-  #detectors-home-card:hover { box-shadow: 0 4px 18px rgba(255, 107, 107, 0.35); border-color: #ff7a7a; transform: translateY(-2px); }
-
-  #drgem-home-card {
-    background: linear-gradient(135deg, #d6eaff 0%, #b3d9ff 100%);
-    border-color: #9bc8ff;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  #drgem-home-card .card-title { color: #1a1a1a; }
-  #drgem-home-card .card-sub { color: #2c5c8a; }
-  #drgem-home-card:hover { box-shadow: 0 4px 18px rgba(107, 169, 255, 0.35); border-color: #6ba9ff; transform: translateY(-2px); }
+  #detectors-home-card .card-sub { color: #7a5500; }
+  #detectors-home-card:hover { box-shadow: 0 4px 18px rgba(255, 167, 81, 0.45); border-color: #f5a000; transform: translateY(-2px); }
 
   .menu-card.inactive { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
   .card-body { flex: 1; }
@@ -62,7 +52,7 @@
   .coming-soon { font-size: 10px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.07em; border: 1px solid #ddd; border-radius: 4px; padding: 2px 7px; margin-left: auto; margin-right: 8px; }
 
   /* ── SHARED FORM STYLES ── */
-  #form-screen, #drgem-form-screen, #detectors-form-screen { display: none; width: 100%; max-width: 720px; }
+  #form-screen, #agfa-form-screen, #drgem-form-screen, #detectors-form-screen { display: none; width: 100%; max-width: 720px; }
   .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 1.25rem; background: none; border: none; padding: 0; font-family: inherit; }
   .back-btn:hover { color: #1a1a1a; }
   .page { background: #fff; width: 100%; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.10); padding: 2.5rem 2.5rem 2rem; }
@@ -483,14 +473,21 @@
       </div>
       <div class="card-arrow">›</div>
     </div>
-    <div class="menu-card" id="detectors-home-card" onclick="showScreen('detectors-form-screen')">
+    <div class="menu-card" onclick="showScreen('agfa-form-screen')">
       <div class="card-body">
         <div class="card-title">Agfa Equipment</div>
+        <div class="card-sub">Equipment release form</div>
+      </div>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="menu-card" id="detectors-home-card" onclick="showScreen('detectors-form-screen')">
+      <div class="card-body">
+        <div class="card-title">Agfa Equipment تجريبي</div>
         <div class="card-sub">Equipment Release Form</div>
       </div>
       <div class="card-arrow">›</div>
     </div>
-    <div class="menu-card" id="drgem-home-card" onclick="showScreen('drgem-form-screen')">
+    <div class="menu-card" onclick="showScreen('drgem-form-screen')">
       <div class="card-body">
         <div class="card-title">DRGEM</div>
         <div class="card-sub">DRGEM release form</div>
@@ -558,6 +555,76 @@
 
     <div class="btn-row">
       <button class="btn-clear" onclick="clearFilmsForm()">Clear</button>
+      <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- AGFA EQUIPMENT FORM SCREEN -->
+<div id="agfa-form-screen">
+  <button class="back-btn" onclick="showHome()">← Back</button>
+  <div class="page">
+    <div class="header">
+      <h1>Stock Release Form — Agfa Equipment</h1>
+      <p>Fill in all fields then print / save as PDF</p>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group" id="salesman-top-agfa" style="grid-column:1/-1">
+        <label>Salesman name</label>
+        <input type="text" id="agfa-salesman-name" placeholder="Enter your name" oninput="updateSalesmanAgfa()" />
+        <span class="print-val-field" id="agfa-print-salesman-name"></span>
+      </div>
+      <div class="field-group" id="customer-group-agfa" style="grid-column:1/-1">
+        <label>Customer</label>
+        <input type="text" id="agfa-customer" placeholder="Enter customer name" oninput="updateCustomerCombinedAgfa()" />
+        <span class="print-val-field" id="agfa-print-customer"></span>
+      </div>
+      <div class="field-group" id="province-group-agfa">
+        <label>City</label>
+        <div class="city-search-wrap">
+          <input type="text" class="city-search-input" id="agfa-province" placeholder="Search city..." oninput="filterCityDropdown('agfa')" onfocus="openCityDropdown('agfa')" onkeydown="cityHandleKeydown(event,'agfa')" autocomplete="off" />
+          <div class="city-dropdown" id="city-dd-agfa"></div>
+        </div>
+        <span class="print-val-field" id="agfa-print-province"></span>
+      </div>
+      <div class="field-group" id="date-group-agfa">
+        <label>Date</label>
+        <input type="date" id="agfa-date" oninput="updateDateAgfa()" />
+        <span class="print-val-field" id="agfa-print-date"></span>
+      </div>
+    </div>
+    <div class="print-header-bar"><div class="phb-customer"><span class="phb-label">Customer</span><span class="phb-name" id="pcc-agfa"></span></div><div class="phb-date"><span class="phb-date-label">Date:</span> <span id="phd-agfa"></span></div></div>
+
+    <!-- Agfa desktop table -->
+    <table class="agfa-table agfa-desktop-table">
+      <colgroup><col /><col /><col /><col /><col /></colgroup>
+      <thead><tr><th class="left">#</th><th class="left">Item</th><th>Quantity</th><th>Unit price</th><th>Total price</th></tr></thead>
+      <tbody id="agfa-tbody"></tbody>
+    </table>
+
+    <!-- Agfa mobile cards -->
+    <div class="agfa-mobile-items" id="agfa-mobile-body"></div>
+
+    <button class="add-row-btn" id="add-row-btn" onclick="addAgfaRow()" style="display:none">+ Add item</button>
+
+    <div class="value-row">
+      <span class="value-label">Value of sale</span>
+      <span class="value-amount" id="agfa-grand-total">0</span>
+    </div>
+
+    <div class="field-group remarks-group" style="margin-bottom: 1.25rem;">
+      <label>Remarks</label>
+      <textarea id="remarks-agfa" class="remarks-input" placeholder="Type any notes here..." rows="2" oninput="updateRemarksAgfa()"></textarea>
+      <span class="print-val-field remarks-print" id="print-remarks-agfa"></span>
+    </div>
+
+    <div class="print-salesman-bottom">
+      <span class="ps-label">Salesman name</span>
+      <span class="ps-name" id="ps-name-agfa"></span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-clear" onclick="clearAgfaForm()">Clear</button>
       <button class="btn-print" onclick="triggerPrint()">Print / Save as PDF</button>
     </div>
   </div>
@@ -854,12 +921,14 @@ let activeDropdown = null;
 function showScreen(id) {
   document.getElementById('home-screen').style.display = 'none';
   document.getElementById('form-screen').style.display = 'none';
+  document.getElementById('agfa-form-screen').style.display = 'none';
   document.getElementById('drgem-form-screen').style.display = 'none';
   document.getElementById('detectors-form-screen').style.display = 'none';
   document.getElementById(id).style.display = 'block';
 }
 function showHome() {
   document.getElementById('form-screen').style.display = 'none';
+  document.getElementById('agfa-form-screen').style.display = 'none';
   document.getElementById('drgem-form-screen').style.display = 'none';
   document.getElementById('detectors-form-screen').style.display = 'none';
   document.getElementById('home-screen').style.display = 'block';
